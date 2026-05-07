@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps Móviles — H. Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --white: #ffffff; --acid-yellow: #C8FF00; --concrete-gray: #8C8C7A; --transition: 0.4s ease; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background-color: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.6; overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; right: 0; background-color: var(--black); border-bottom: 1px solid var(--acid-yellow); z-index: 1000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--acid-yellow); letter-spacing: 0.2em; font-weight: bold; text-decoration: none; }
+        .logo img { height: 40px; width: auto; }
+        nav { display: flex; gap: 3rem; align-items: center; }
+        nav a { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--white); text-decoration: none; transition: color var(--transition); }
+        nav a:hover { color: var(--acid-yellow); }
+        .cta-btn { background-color: var(--black); border: 2px solid var(--acid-yellow); color: var(--acid-yellow); padding: 0.75rem 1.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; cursor: pointer; transition: all var(--transition); font-family: 'DM Mono', monospace; text-decoration: none; }
+        .cta-btn:hover { background-color: var(--acid-yellow); color: var(--black); }
+        .back-link { position: fixed; top: 80px; left: 2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--concrete-gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color var(--transition); z-index: 100; }
+        .back-link:hover { color: var(--acid-yellow); }
+        .service-hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; background-color: var(--black); padding: 120px 2rem 4rem; position: relative; }
+        .service-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 8vw, 5rem); letter-spacing: -0.02em; line-height: 1; color: var(--white); text-transform: uppercase; font-weight: bold; max-width: 900px; margin-bottom: 2rem; }
+        .service-hero p { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--concrete-gray); max-width: 700px; line-height: 1.8; }
+        .service-section { padding: 6rem 2rem; border-top: 1px solid var(--acid-yellow); }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 5vw, 3rem); letter-spacing: -0.02em; margin-bottom: 3rem; color: var(--white); text-transform: uppercase; font-weight: bold; }
+        .section-title .accent { color: var(--acid-yellow); }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; }
+        .content-item { background-color: transparent; border-left: 2px solid var(--acid-yellow); padding: 2rem; position: relative; }
+        .content-item-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--white); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .content-item-desc { font-family: 'DM Mono', monospace; font-size: 0.875rem; color: var(--concrete-gray); line-height: 1.6; }
+        .features-list { max-width: 800px; margin: 0 auto; }
+        .feature { display: flex; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(200, 255, 0, 0.2); }
+        .feature:last-child { border-bottom: none; }
+        .feature-icon { font-size: 2rem; color: var(--acid-yellow); min-width: 30px; text-align: center; }
+        .feature-content { flex: 1; }
+        .feature-title { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--white); margin-bottom: 0.5rem; text-transform: uppercase; }
+        .feature-desc { font-family: 'DM Mono', monospace; font-size: 0.875rem; color: var(--concrete-gray); }
+        .service-cta { padding: 8rem 2rem; background-color: var(--black); border-top: 1px solid var(--acid-yellow); text-align: center; }
+        .service-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 6vw, 3.5rem); letter-spacing: -0.02em; margin-bottom: 3rem; color: var(--white); text-transform: uppercase; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary { padding: 1rem 2.5rem; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.15em; cursor: pointer; transition: all var(--transition); font-family: 'DM Mono', monospace; text-decoration: none; display: inline-block; font-weight: bold; }
+        .btn-primary { background-color: var(--acid-yellow); color: var(--black); border: 2px solid var(--acid-yellow); }
+        .btn-primary:hover { background-color: var(--black); color: var(--acid-yellow); }
+        .btn-secondary { background-color: var(--black); color: var(--acid-yellow); border: 2px solid var(--acid-yellow); }
+        .btn-secondary:hover { background-color: var(--acid-yellow); color: var(--black); }
+        footer { background-color: var(--black); border-top: 1px solid var(--acid-yellow); padding: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-left, .footer-right { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--concrete-gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        @media (max-width: 768px) { nav { display: none; } .service-hero { padding: 80px 1.5rem 2rem; } .content-grid { grid-template-columns: 1fr; } .cta-buttons { flex-direction: column; } .btn-primary, .btn-secondary { width: 100%; } footer { flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo"><img src="logopng.png" alt="H. Logo"></a>
+        <nav>
+            <a href="index.html#servicios">SERVICIOS</a>
+            <a href="index.html#legal">LEGAL</a>
+            <a href="index.html#software">SOFTWARE</a>
+            <a href="index.html#ia">IA</a>
+            <a href="index.html#contacto">CONTACTO</a>
+        </nav>
+        <a href="index.html" class="cta-btn">VOLVER</a>
+    </header>
+
+    <a href="index.html" class="back-link">← VOLVER A INICIO</a>
+
+    <section class="service-hero">
+        <h1>APPS MÓVILES</h1>
+        <p>Aplicaciones nativas e híbridas de alto rendimiento que tus usuarios aman usar. iOS, Android o ambas — nos encargamos de todo.</p>
+    </section>
+
+    <!-- PRICING TOP -->
+    <section class="service-section" style="background:#060608;">
+        <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
+        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Tu negocio en el bolsillo de tus clientes. Una app bien hecha multiplica la retención y el ticket medio.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1200px;width:100%;">
+
+            <!-- BÁSICO -->
+            <div style="background:#0d0d10;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.06),transparent);"></div>
+                <div style="font-size:.6rem;color:#8C8C7A;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">BÁSICO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP SIMPLE</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para validar tu idea con una app funcional de 3 pantallas.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">1.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>App híbrida básica</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 3 pantallas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño desde plantilla</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Publicación en stores</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Login de usuario</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Push notifications</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid rgba(200,255,0,.4);color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">EMPEZAR →</a>
+            </div>
+
+            <!-- STARTER -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP BÁSICA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">App híbrida para validar tu producto en iOS y Android.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">3.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>App híbrida (iOS + Android)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 5 pantallas principales</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Login + perfil de usuario</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Push notifications básicas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Publicación en App Store y Play Store</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Pagos in-app</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
+            </div>
+
+            <!-- PRO (popular) -->
+            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
+                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP COMPLETA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La app que tu negocio necesita para dominar en móvil.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">7.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Básico</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pantallas ilimitadas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pagos in-app (Stripe)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + heatmaps</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Biometría + Face ID</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte post-lanzamiento 3 meses</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
+            </div>
+
+            <!-- VIP -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">ENTERPRISE</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP NATIVA VIP</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Apps nativas de alto rendimiento para mercados exigentes.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">15.000</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>iOS y Android nativo (Swift/Kotlin)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>IA integrada en la app</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Arquitectura escalable</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Offline first + sync cloud</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Mantenimiento 12 meses incluido</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">CONSULTAR PRECIO</a>
+            </div>
+        </div>
+        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Primera reunión técnica siempre gratuita. <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Reserva la tuya.</a></p>
+    </section>
+
+    <section class="service-section">
+        <h2 class="section-title">¿POR QUÉ TENER UNA <span class="accent">APP</span>?</h2>
+        <div class="content-grid">
+            <div class="content-item">
+                <div class="content-item-title">Engagement 10x</div>
+                <div class="content-item-desc">Apps generan más retención y engagement que cualquier web.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Acceso Offline</div>
+                <div class="content-item-desc">Funcionalidad incluso sin conexión a internet.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Notificaciones Push</div>
+                <div class="content-item-desc">Comunica directamente con tus usuarios cuando quieras.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-section">
+        <h2 class="section-title">TIPOS DE APPS</h2>
+        <div class="features-list">
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <div class="feature-content">
+                    <div class="feature-title">Apps Nativas iOS</div>
+                    <div class="feature-desc">Swift con máximo rendimiento, acceso a APIs exclusivas del sistema.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-content">
+                    <div class="feature-title">Apps Nativas Android</div>
+                    <div class="feature-desc">Kotlin, integración con Google Play, funcionalidades avanzadas.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-content">
+                    <div class="feature-title">Apps Híbridas</div>
+                    <div class="feature-desc">React Native o Flutter para iOS y Android desde un código.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛒</div>
+                <div class="feature-content">
+                    <div class="feature-title">E-Commerce Apps</div>
+                    <div class="feature-desc">Compra, pago seguro, carrito, historial y recomendaciones.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏥</div>
+                <div class="feature-content">
+                    <div class="feature-title">Apps de Salud & Fitness</div>
+                    <div class="feature-desc">Integración con sensores, HealthKit, wearables.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <div class="feature-content">
+                    <div class="feature-title">Aplicaciones Social</div>
+                    <div class="feature-desc">Chat, redes, comunidades con sincronización en tiempo real.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-section">
+        <h2 class="section-title">CARACTERÍSTICAS PREMIUM</h2>
+        <div class="content-grid">
+            <div class="content-item">
+                <div class="content-item-title">Notificaciones Push</div>
+                <div class="content-item-desc">Sistema de alertas personalizado y segmentado.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Sincronización Cloud</div>
+                <div class="content-item-desc">Datos sincronizados en múltiples dispositivos en tiempo real.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Autenticación Biométrica</div>
+                <div class="content-item-desc">Face ID, Touch ID para acceso seguro.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Analytics Integrado</div>
+                <div class="content-item-desc">Seguimiento de comportamiento, funnel de conversión.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Integración de Pagos</div>
+                <div class="content-item-desc">Apple Pay, Google Pay, tarjetas de crédito.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Offline First</div>
+                <div class="content-item-desc">Funcionalidad completa incluso sin internet.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="service-section" style="background:#060608;">
+        <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
+        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Tu negocio en el bolsillo de tus clientes. Una app bien hecha multiplica la retención y el ticket medio.</p>
+        <div style="display:none;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;width:100%;">
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP BÁSICA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">App híbrida para validar tu producto en iOS y Android.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">3.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>App híbrida (iOS + Android)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 5 pantallas principales</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Login + perfil de usuario</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Push notifications básicas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Publicación en App Store y Play Store</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Pagos in-app</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
+            </div>
+            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
+                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP COMPLETA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La app que tu negocio necesita para dominar en móvil.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">7.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Básico</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pantallas ilimitadas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pagos in-app (Stripe)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + heatmaps</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Biometría + Face ID</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte post-lanzamiento 3 meses</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
+            </div>
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">ENTERPRISE</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">APP NATIVA VIP</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Apps nativas de alto rendimiento para mercados exigentes.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">15.000</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">desde</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>iOS y Android nativo (Swift/Kotlin)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>IA integrada en la app</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Arquitectura escalable</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Offline first + sync cloud</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Mantenimiento 12 meses incluido</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">CONSULTAR PRECIO</a>
+            </div>
+        </div>
+        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Primera reunión técnica siempre gratuita. <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Reserva la tuya.</a></p>
+    </section>
+
+    <section class="service-cta">
+        <h2>¿LISTO PARA TU APP?</h2>
+        <div class="cta-buttons">
+            <a href="index.html#contacto" class="btn-primary">PROPUESTA APP</a>
+            <a href="index.html#contacto" class="btn-secondary">CONSULTA GRATIS</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-left">H. © 2025</div>
+        <div class="footer-right">HECHO EN MADRID</div>
+    </footer>
+</body>
+</html>

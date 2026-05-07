@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Páginas Web — H. Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #080808;
+            --white: #ffffff;
+            --acid-yellow: #C8FF00;
+            --concrete-gray: #8C8C7A;
+            --transition: 0.4s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'DM Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--black);
+            border-bottom: 1px solid var(--acid-yellow);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--acid-yellow);
+            letter-spacing: 0.2em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            transition: color var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--acid-yellow);
+        }
+
+        .cta-btn {
+            background-color: var(--black);
+            border: 2px solid var(--acid-yellow);
+            color: var(--acid-yellow);
+            padding: 0.75rem 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'DM Mono', monospace;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--acid-yellow);
+            color: var(--black);
+        }
+
+        /* ============ BACK LINK ============ */
+        .back-link {
+            position: fixed;
+            top: 80px;
+            left: 2rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--concrete-gray);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color var(--transition);
+            z-index: 100;
+        }
+
+        .back-link:hover {
+            color: var(--acid-yellow);
+        }
+
+        /* ============ HERO SECTION ============ */
+        .service-hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: var(--black);
+            padding: 120px 2rem 4rem;
+            position: relative;
+        }
+
+        .service-hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 8vw, 5rem);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: bold;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+
+        .service-hero p {
+            font-family: 'DM Mono', monospace;
+            font-size: 1rem;
+            color: var(--concrete-gray);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        /* ============ CONTENT SECTIONS ============ */
+        .service-section {
+            padding: 6rem 2rem;
+            border-top: 1px solid var(--acid-yellow);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .section-title .accent {
+            color: var(--acid-yellow);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .content-item {
+            background-color: transparent;
+            border-left: 2px solid var(--acid-yellow);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .content-item-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .content-item-desc {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--concrete-gray);
+            line-height: 1.6;
+        }
+
+        /* ============ FEATURES SECTION ============ */
+        .features-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(200, 255, 0, 0.2);
+        }
+
+        .feature:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--acid-yellow);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .feature-desc {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--concrete-gray);
+        }
+
+        /* ============ CTA SECTION ============ */
+        .service-cta {
+            padding: 8rem 2rem;
+            background-color: var(--black);
+            border-top: 1px solid var(--acid-yellow);
+            text-align: center;
+        }
+
+        .service-cta h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--acid-yellow);
+            color: var(--black);
+            border: 2px solid var(--acid-yellow);
+            padding: 1rem 2.5rem;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'DM Mono', monospace;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--black);
+            color: var(--acid-yellow);
+        }
+
+        .btn-secondary {
+            background-color: var(--black);
+            color: var(--acid-yellow);
+            border: 2px solid var(--acid-yellow);
+            padding: 1rem 2.5rem;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'DM Mono', monospace;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--acid-yellow);
+            color: var(--black);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background-color: var(--black);
+            border-top: 1px solid var(--acid-yellow);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-left,
+        .footer-right {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--concrete-gray);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .back-link {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .service-hero {
+                padding: 80px 1.5rem 2rem;
+            }
+
+            .service-hero h1 {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.25rem, 4vw, 2rem);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-left,
+            .footer-right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo"><img src="logopng.png" alt="H. Logo"></a>
+        <nav>
+            <a href="index.html#servicios">SERVICIOS</a>
+            <a href="index.html#legal">LEGAL</a>
+            <a href="index.html#software">SOFTWARE</a>
+            <a href="index.html#ia">IA</a>
+            <a href="index.html#contacto">CONTACTO</a>
+        </nav>
+        <a href="index.html" class="cta-btn">VOLVER</a>
+    </header>
+
+    <!-- BACK LINK -->
+    <a href="index.html" class="back-link">← VOLVER A INICIO</a>
+
+    <!-- HERO SECTION -->
+    <section class="service-hero">
+        <h1>PÁGINAS WEB</h1>
+        <p>Diseñamos y desarrollamos sitios web de alto rendimiento que atraen clientes y generan resultados. Desde landing pages hasta e-commerce complejos, construimos la presencia digital que tu negocio merece.</p>
+    </section>
+
+    <!-- PRICING TOP -->
+    <section class="service-section" style="background:#060608;">
+        <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
+        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Sin sorpresas. Sin letra pequeña. Elige el plan que encaja con tu proyecto y empieza hoy.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1200px;width:100%;">
+
+            <!-- BÁSICO -->
+            <div style="background:#0d0d10;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.06),transparent);"></div>
+                <div style="font-size:.6rem;color:#8C8C7A;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">BÁSICO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB BÁSICA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Tu primera presencia online en menos de una semana.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">500</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>1-2 secciones</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño responsive</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Entrega en 7 días</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>SSL + Hosting incluido</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS / panel de edición</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid rgba(200,255,0,.4);color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">EMPEZAR →</a>
+            </div>
+
+            <!-- STARTER -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">LANDING PRO</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para validar tu negocio con una presencia web de impacto.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">799</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño landing page a medida</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Responsive móvil y desktop</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO básico integrado</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SSL + Hosting 1 año</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS para edición propia</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>E-Commerce</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
+            </div>
+
+            <!-- PRO (popular) -->
+            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
+                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB COMPLETA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La solución más elegida para negocios que quieren crecer.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">1.499</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Starter</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>CMS para edición propia</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 10 páginas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Blog integrado</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + Google Search Console</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte técnico 3 meses</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Tienda online / E-Commerce</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
+            </div>
+
+            <!-- VIP -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">VIP</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">E-COMMERCE TOTAL</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para vender online con una tienda potente y estrategia SEO.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">2.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Tienda online completa</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pasarela de pago (Stripe/PayPal)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Gestión de inventario</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO avanzado + contenido</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte prioritario 6 meses</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Integración con ERP/CRM</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">QUIERO EL VIP</a>
+            </div>
+        </div>
+        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Todos los planes incluyen IVA. Pago en 2 plazos disponible. ¿Necesitas algo diferente? <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Hablemos.</a></p>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="service-section">
+        <h2 class="section-title">¿POR QUÉ ELEGIR <span class="accent">NUESTRO</span> DISEÑO?</h2>
+        <div class="content-grid">
+            <div class="content-item">
+                <div class="content-item-title">Responsive & Rápido</div>
+                <div class="content-item-desc">Sitios que se ven perfectos en cualquier dispositivo y cargan en milisegundos. Optimización de velocidad garantizada.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">SEO Integrado</div>
+                <div class="content-item-desc">Posicionamiento desde cero. Estructura semántica, metadata, sitemap y velocidad optimizada para Google.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Conversión Enfocada</div>
+                <div class="content-item-desc">Cada sección está diseñada para convertir visitantes en clientes. Estrategia UX/UI comprobada.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="service-section">
+        <h2 class="section-title">CARACTERÍSTICAS <span class="accent">PRINCIPALES</span></h2>
+        <div class="features-list">
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">CMS Integrado</div>
+                    <div class="feature-desc">Administra tu contenido sin necesidad de código. Actualizaciones sencillas y seguras.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">Integración E-Commerce</div>
+                    <div class="feature-desc">Tienda online con pasarelas de pago, inventario automático y gestión de pedidos.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">Analytics & Reportes</div>
+                    <div class="feature-desc">Dashboard en tiempo real con métricas de tráfico, conversiones y comportamiento.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">Formularios Avanzados</div>
+                    <div class="feature-desc">Capturas de datos, automatización de emails y integración con CRM.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">Seguridad SSL & Backups</div>
+                    <div class="feature-desc">Certificado SSL, encriptación de datos y copias de seguridad automáticas.</div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <div class="feature-title">Soporte 24/7</div>
+                    <div class="feature-desc">Asistencia técnica continua y mantenimiento proactivo de tu sitio.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASES -->
+    <section class="service-section">
+        <h2 class="section-title">CASOS DE <span class="accent">USO</span></h2>
+        <div class="content-grid">
+            <div class="content-item">
+                <div class="content-item-title">Landing Pages</div>
+                <div class="content-item-desc">Campañas de conversión de alto impacto para lanzamientos, promociones y lead generation.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Portafolios Profesionales</div>
+                <div class="content-item-desc">Showcases visuales que destacan tu trabajo y generan confianza con clientes potenciales.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">E-Commerce</div>
+                <div class="content-item-desc">Tiendas online con gestión de inventario, pagos seguros y experiencia de compra optimizada.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Sitios Corporativos</div>
+                <div class="content-item-desc">Presencia profesional que refleja la identidad y valores de tu empresa.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Blogs & Contenidos</div>
+                <div class="content-item-desc">Plataformas de publicación escalables con SEO integrado y distribución de contenido.</div>
+            </div>
+            <div class="content-item">
+                <div class="content-item-title">Aplicaciones Web</div>
+                <div class="content-item-desc">Herramientas interactivas que simplifican procesos internos o externos.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="service-section" style="background:#060608;display:none;">
+        <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
+        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Sin sorpresas. Sin letra pequeña. Elige el plan que encaja con tu proyecto y empieza hoy.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;width:100%;">
+
+            <!-- STARTER -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">LANDING PRO</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para validar tu negocio con una presencia web de impacto.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">799</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño landing page a medida</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Responsive móvil y desktop</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO básico integrado</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SSL + Hosting 1 año</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS para edición propia</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>E-Commerce</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
+            </div>
+
+            <!-- PRO (popular) -->
+            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
+                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB COMPLETA</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La solución más elegida para negocios que quieren crecer.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">1.499</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Starter</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>CMS para edición propia</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 10 páginas</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Blog integrado</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + Google Search Console</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte técnico 3 meses</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Tienda online / E-Commerce</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
+            </div>
+
+            <!-- VIP -->
+            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
+                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">VIP</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">E-COMMERCE TOTAL</div>
+                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para vender online con una tienda potente y estrategia SEO.</div>
+                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">2.999</span>
+                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
+                </div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Tienda online completa</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pasarela de pago (Stripe/PayPal)</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Gestión de inventario</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO avanzado + contenido</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte prioritario 6 meses</li>
+                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Integración con ERP/CRM</li>
+                </ul>
+                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">QUIERO EL VIP</a>
+            </div>
+        </div>
+        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Todos los planes incluyen IVA. Pago en 2 plazos disponible. ¿Necesitas algo diferente? <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Hablemos.</a></p>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="service-cta">
+        <h2>¿LISTO PARA CONSTRUIR?</h2>
+        <div class="cta-buttons">
+            <a href="index.html#contacto" class="btn-primary">COMENCEMOS</a>
+            <a href="index.html#contacto" class="btn-secondary">CONTÁCTANOS</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">H. © 2025</div>
+        <div class="footer-right">HECHO EN MADRID</div>
+    </footer>
+</body>
+</html>

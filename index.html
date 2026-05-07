@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H. — Agencia Digital Madrid</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <meta name="description" content="H. — Agencia digital especializada en diseño web, desarrollo de software, automatización con IA, cumplimiento legal RGPD, apps móviles y SEO. Construimos lo digital.">
+    <meta name="keywords" content="diseño web, desarrollo software, IA, RGPD, apps móviles, SEO, agencia digital, Madrid">
+    <meta name="author" content="H. Digital Agency">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="loading">
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">H.</div>
+        <div class="preloader-line">
+            <div class="preloader-line-fill" id="preloaderFill"></div>
+        </div>
+        <div class="preloader-label">CARGANDO SISTEMA</div>
+        <div class="preloader-counter" id="preloaderCounter">0%</div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">H.</div>
+        <nav id="mainNav">
+            <a href="#servicios">SERVICIOS</a>
+            <a href="#portfolio">PORTFOLIO</a>
+            <a href="#proceso">PROCESO</a>
+            <a href="#blog">BLOG</a>
+            <a href="#contacto">CONTACTO</a>
+        </nav>
+        <button class="header-cta" id="headerCta"><span>EMPEZAR</span></button>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <nav>
+            <a href="#servicios" class="mobile-nav-link">SERVICIOS</a>
+            <a href="#portfolio" class="mobile-nav-link">PORTFOLIO</a>
+            <a href="#proceso" class="mobile-nav-link">PROCESO</a>
+            <a href="#blog" class="mobile-nav-link">BLOG</a>
+            <a href="#contacto" class="mobile-nav-link">CONTACTO</a>
+        </nav>
+        <div class="mobile-menu-cta">
+            <button onclick="document.getElementById('mobileMenu').classList.remove('active');document.getElementById('hamburger').classList.remove('active');document.querySelector('#contacto').scrollIntoView({behavior:'smooth'})">EMPEZAR PROYECTO</button>
+        </div>
+        <div class="mobile-menu-corner">MADRID, ESPAÑA — 2025</div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <video autoplay loop muted playsinline class="hero-video-bg" id="heroVideo">
+            <source src="hanimacion.mp4" type="video/mp4">
+        </video>
+        <div class="hero-grid"></div>
+        <div class="hero-noise"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-glow"></div>
+
+        <div class="hero-content" id="heroContent">
+            <div class="hero-eyebrow">AGENCIA DIGITAL — MADRID</div>
+            <h1 class="hero-title">
+                <span class="hero-word">CONSTRUIMOS</span><br>
+                <span class="hero-word">LO</span> <span class="hero-word highlight">DIGITAL.</span>
+            </h1>
+            <div class="subline">
+                <span class="subline-word">webs</span>
+                <span class="subline-separator">—</span>
+                <span class="subline-word">software</span>
+                <span class="subline-separator">—</span>
+                <span class="subline-word">ia</span>
+                <span class="subline-separator">—</span>
+                <span class="subline-word">legal</span>
+                <span class="subline-separator">—</span>
+                <span class="subline-word">apps</span>
+                <span class="subline-separator">—</span>
+                <span class="subline-word">seo</span>
+            </div>
+            <div class="hero-cta-group">
+                <button class="btn-primary" onclick="document.querySelector('#servicios').scrollIntoView({behavior:'smooth'})">
+                    <span>VER SERVICIOS</span>
+                </button>
+                <button class="btn-secondary" onclick="document.querySelector('#portfolio').scrollIntoView({behavior:'smooth'})">
+                    <span>NUESTRO TRABAJO</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-text">SCROLL</div>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- TICKER MARQUEE -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+            <span class="ticker-item">DISEÑO WEB</span>
+            <span class="ticker-item">SOFTWARE A MEDIDA</span>
+            <span class="ticker-item">AUTOMATIZACIÓN IA</span>
+            <span class="ticker-item">CUMPLIMIENTO RGPD</span>
+            <span class="ticker-item">APPS MÓVILES</span>
+            <span class="ticker-item">SEO &amp; MARKETING</span>
+            <span class="ticker-item">DISEÑO WEB</span>
+            <span class="ticker-item">SOFTWARE A MEDIDA</span>
+            <span class="ticker-item">AUTOMATIZACIÓN IA</span>
+            <span class="ticker-item">CUMPLIMIENTO RGPD</span>
+            <span class="ticker-item">APPS MÓVILES</span>
+            <span class="ticker-item">SEO &amp; MARKETING</span>
+        </div>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="servicios">
+        <div class="section-header reveal">
+            <span class="section-number">01</span>
+            <h2 class="section-title">LO QUE HACEMOS.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="services-grid">
+            <a href="paginas-web.html" class="service-card" data-delay="0">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">01</div>
+                    <div class="service-name">Páginas Web</div>
+                    <div class="service-desc">Diseño y desarrollo de sitios web modernos, rápidos y orientados a conversión.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+            <a href="legal-rgpd.html" class="service-card" data-delay="80">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">02</div>
+                    <div class="service-name">Cumplimiento Legal RGPD</div>
+                    <div class="service-desc">Garantizamos que tu web cumple con RGPD, cookies y normativa europea vigente.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+            <a href="software-medida.html" class="service-card" data-delay="160">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">03</div>
+                    <div class="service-name">Software a Medida</div>
+                    <div class="service-desc">Soluciones personalizadas construidas exactamente para tus necesidades.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+            <a href="ia-automation.html" class="service-card" data-delay="240">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">04</div>
+                    <div class="service-name">Automatización con IA</div>
+                    <div class="service-desc">Procesos inteligentes que liberan tiempo y escalan tu operación.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+            <a href="apps-moviles.html" class="service-card" data-delay="320">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">05</div>
+                    <div class="service-name">Apps Móviles</div>
+                    <div class="service-desc">Aplicaciones nativas e híbridas de alto rendimiento para iOS y Android.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+            <a href="seo-marketing.html" class="service-card" data-delay="400">
+                <div class="service-card-bg"></div>
+                <div class="service-card-arrow">↗</div>
+                <div class="service-card-content">
+                    <div class="service-number">06</div>
+                    <div class="service-name">SEO & Marketing Digital</div>
+                    <div class="service-desc">Estrategias de visibilidad que generan tráfico cualificado y ventas.</div>
+                </div>
+                <div class="service-card-line"></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-header reveal">
+            <span class="section-number">02</span>
+            <h2 class="section-title">NUESTRO TRABAJO.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card" data-url="" data-href="https://angunavarro.com" target="_blank">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="Angú Navarro" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">AN</div>
+                        <div class="portfolio-placeholder-name">Angú Navarro</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">VER PROYECTO ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">DISEÑO WEB</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">Portafolio Artístico Angú Navarro</div>
+                </div>
+            </div>
+            <div class="portfolio-card" data-url="" data-href="https://bmglobalcapital.info" target="_blank">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="BM Global Capital" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">BM</div>
+                        <div class="portfolio-placeholder-name">BM Global Capital</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">VER PROYECTO ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">WEB CORPORATIVA</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">BM Global Capital</div>
+                </div>
+            </div>
+            <div class="portfolio-card" data-url="" data-href="https://instalacionbateriasmadrid.com" target="_blank">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="Instalación Baterías Madrid" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">IB</div>
+                        <div class="portfolio-placeholder-name">Instalación Baterías Madrid</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">VER PROYECTO ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">SEO & WEB</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">Instalación Baterías Madrid</div>
+                </div>
+            </div>
+            <div class="portfolio-card" data-url="" data-href="https://ddexcellence.es" target="_blank">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="DD Excellence" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">DD</div>
+                        <div class="portfolio-placeholder-name">DD Excellence</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">VER PROYECTO ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">CONSULTORÍA WEB</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">DD Excellence</div>
+                </div>
+            </div>
+            <div class="portfolio-card" data-url="" data-href="https://www.dashlioapp.com" target="_blank">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="Dashlio App" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">DL</div>
+                        <div class="portfolio-placeholder-name">Dashlio App</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">VER PROYECTO ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">SOFTWARE / SAAS</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">Dashlio — App de Gestión</div>
+                </div>
+            </div>
+            <div class="portfolio-card" data-url="" data-href="#contacto">
+                <div class="portfolio-img-wrap">
+                    <img class="portfolio-img" src="" alt="Tu Proyecto" loading="lazy">
+                    <div class="portfolio-placeholder">
+                        <div class="portfolio-placeholder-letter">?</div>
+                        <div class="portfolio-placeholder-name">Tu proyecto aquí</div>
+                    </div>
+                    <div class="portfolio-hover"><span class="portfolio-hover-cta">HABLEMOS ↗</span></div>
+                </div>
+                <div class="portfolio-info">
+                    <div class="portfolio-meta"><span class="portfolio-cat">TU SERVICIO</span><span class="portfolio-year">2025</span></div>
+                    <div class="portfolio-name">¿El próximo somos tú?</div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-footer reveal">
+            <p class="portfolio-footer-text">¿Tienes un proyecto en mente?</p>
+            <button class="btn-primary" onclick="document.querySelector('#contacto').scrollIntoView({behavior:'smooth'})"><span>HABLEMOS</span></button>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item" data-delay="0">
+                <span class="stat-number" data-target="48">0</span>
+                <span class="stat-suffix">h</span>
+                <span class="stat-label">Tiempo de respuesta</span>
+            </div>
+            <div class="stat-item" data-delay="100">
+                <span class="stat-number" data-target="100">0</span>
+                <span class="stat-suffix">%</span>
+                <span class="stat-label">RGPD compliant</span>
+            </div>
+            <div class="stat-item" data-delay="200">
+                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-suffix">+</span>
+                <span class="stat-label">Proyectos entregados</span>
+            </div>
+            <div class="stat-item" data-delay="300">
+                <span class="stat-number" data-target="1">0</span>
+                <span class="stat-suffix">er</span>
+                <span class="stat-label">IA nativa desde origen</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- IDENTITY SECTION -->
+    <section class="identity" id="identidad">
+        <div class="identity-inner">
+            <div class="identity-block" data-delay="0">
+                <div class="identity-block-content">
+                    <div class="identity-block-title">FULL STACK</div>
+                    <div class="identity-block-label">Desarrollo Completo</div>
+                </div>
+            </div>
+            <div class="identity-block" data-delay="100">
+                <div class="identity-block-content">
+                    <div class="identity-block-title">100% LEGAL</div>
+                    <div class="identity-block-label">RGPD y Cookies</div>
+                </div>
+            </div>
+            <div class="identity-block" data-delay="200">
+                <div class="identity-block-content">
+                    <div class="identity-block-title">IA FIRST</div>
+                    <div class="identity-block-label">Automatización Real</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process" id="proceso">
+        <div class="section-header reveal">
+            <span class="section-number">03</span>
+            <h2 class="section-title">CÓMO TRABAJAMOS.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="process-steps">
+            <div class="process-step" data-delay="0">
+                <div class="process-step-dot"></div>
+                <div class="process-number">01</div>
+                <div class="process-name">BRIEF</div>
+                <div class="process-desc">Entendemos tus objetivos, audiencia y métricas de éxito antes de escribir una línea de código.</div>
+            </div>
+            <div class="process-step" data-delay="100">
+                <div class="process-step-dot"></div>
+                <div class="process-number">02</div>
+                <div class="process-name">DISEÑO</div>
+                <div class="process-desc">Creamos la estrategia técnica y visual. Prototipamos y validamos contigo antes de ejecutar.</div>
+            </div>
+            <div class="process-step" data-delay="200">
+                <div class="process-step-dot"></div>
+                <div class="process-number">03</div>
+                <div class="process-name">DESARROLLO</div>
+                <div class="process-desc">Ejecutamos con precisión. Sprints cortos, entregas parciales y visibilidad total del progreso.</div>
+            </div>
+            <div class="process-step" data-delay="300">
+                <div class="process-step-dot"></div>
+                <div class="process-number">04</div>
+                <div class="process-name">ENTREGA</div>
+                <div class="process-desc">Desplegamos en producción, formamos a tu equipo y ofrecemos soporte post-lanzamiento.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials" id="testimonios">
+        <div class="section-header reveal">
+            <span class="section-number">04</span>
+            <h2 class="section-title">LO QUE DICEN.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"El resultado superó todas nuestras expectativas. El diseño captura perfectamente la esencia artística de la marca. Proceso impecable y comunicación excelente desde el primer día."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AN</div>
+                    <div>
+                        <div class="testimonial-name">Angú Navarro</div>
+                        <div class="testimonial-role">Directora Creativa · angunavarro.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"La web transmite exactamente la solidez y profesionalidad que buscábamos para nuestros inversores. ROI visible desde el primer mes de lanzamiento. Totalmente recomendable."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">BM</div>
+                    <div>
+                        <div class="testimonial-name">BM Global Capital</div>
+                        <div class="testimonial-role">Equipo Directivo · bmglobalcapital.info</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"Aumentamos nuestras consultas online un 180% en los primeros 60 días. La inversión se amortizó sola en menos de un mes. Un equipo serio, rápido y con resultados reales."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DD</div>
+                    <div>
+                        <div class="testimonial-name">DD Excellence</div>
+                        <div class="testimonial-role">Director General · ddexcellence.es</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CLIENTS BAR -->
+        <div class="clients-bar reveal">
+            <div class="clients-label">HAN CONFIADO EN NOSOTROS</div>
+            <div class="clients-logos">
+                <a href="https://angunavarro.com" target="_blank" rel="noopener" class="client-logo-link">
+                    <div class="client-logo-mark">AN</div>
+                    <div class="client-logo-name">Angú Navarro</div>
+                </a>
+                <a href="https://bmglobalcapital.info" target="_blank" rel="noopener" class="client-logo-link">
+                    <div class="client-logo-mark">BM</div>
+                    <div class="client-logo-name">BM Global Capital</div>
+                </a>
+                <a href="https://instalacionbateriasmadrid.com" target="_blank" rel="noopener" class="client-logo-link">
+                    <div class="client-logo-mark">IBM</div>
+                    <div class="client-logo-name">Instalación Baterías Madrid</div>
+                </a>
+                <a href="https://ddexcellence.es" target="_blank" rel="noopener" class="client-logo-link">
+                    <div class="client-logo-mark">DD</div>
+                    <div class="client-logo-name">DD Excellence</div>
+                </a>
+                <a href="https://www.dashlioapp.com" target="_blank" rel="noopener" class="client-logo-link">
+                    <div class="client-logo-mark">DL</div>
+                    <div class="client-logo-name">Dashlio App</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="blog" id="blog">
+        <div class="section-header reveal">
+            <span class="section-number">05</span>
+            <h2 class="section-title">IDEAS Y RECURSOS.</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="blog-slider-wrapper">
+            <div class="blog-slider-container" id="blogSliderContainer">
+                <div class="blog-track" id="blogTrack">
+                    <article class="blog-card">
+                        <a href="#" class="blog-img-wrap">
+                            <div class="blog-img-bg"></div>
+                            <span class="blog-cat">IA</span>
+                        </a>
+                        <div class="blog-body">
+                            <div class="blog-meta">15 ENE 2025 · 5 MIN LECTURA</div>
+                            <h3 class="blog-title">Cómo la IA está transformando el desarrollo web en 2025</h3>
+                            <p class="blog-excerpt">Las nuevas herramientas de IA no son solo asistentes de código. Están redefiniendo el flujo completo de diseño, testing y despliegue.</p>
+                            <a href="#" class="blog-link">LEER ARTÍCULO ↗</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <a href="#" class="blog-img-wrap">
+                            <div class="blog-img-bg"></div>
+                            <span class="blog-cat">LEGAL &amp; RGPD</span>
+                        </a>
+                        <div class="blog-body">
+                            <div class="blog-meta">03 ENE 2025 · 7 MIN LECTURA</div>
+                            <h3 class="blog-title">RGPD 2025: Los cambios que tu web necesita implementar ya</h3>
+                            <p class="blog-excerpt">La AEPD ha incrementado las inspecciones un 34% este año. Conoce los elementos ahora obligatorios y cómo evitar multas.</p>
+                            <a href="#" class="blog-link">LEER ARTÍCULO ↗</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <a href="#" class="blog-img-wrap">
+                            <div class="blog-img-bg"></div>
+                            <span class="blog-cat">SEO</span>
+                        </a>
+                        <div class="blog-body">
+                            <div class="blog-meta">20 DIC 2024 · 6 MIN LECTURA</div>
+                            <h3 class="blog-title">Por qué el 60% de las webs nuevas fracasan en SEO</h3>
+                            <p class="blog-excerpt">Cometemos los mismos errores una y otra vez. Los 5 fallos técnicos que sabotean el posicionamiento orgánico.</p>
+                            <a href="#" class="blog-link">LEER ARTÍCULO ↗</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <a href="#" class="blog-img-wrap">
+                            <div class="blog-img-bg"></div>
+                            <span class="blog-cat">SOFTWARE</span>
+                        </a>
+                        <div class="blog-body">
+                            <div class="blog-meta">05 DIC 2024 · 8 MIN LECTURA</div>
+                            <h3 class="blog-title">Software a medida vs. soluciones genéricas: cuándo elegir cada una</h3>
+                            <p class="blog-excerpt">No todo negocio necesita un software personalizado. Pero cuando lo necesitas, la diferencia en ROI es abismal.</p>
+                            <a href="#" class="blog-link">LEER ARTÍCULO ↗</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <a href="#" class="blog-img-wrap">
+                            <div class="blog-img-bg"></div>
+                            <span class="blog-cat">APPS</span>
+                        </a>
+                        <div class="blog-body">
+                            <div class="blog-meta">18 NOV 2024 · 6 MIN LECTURA</div>
+                            <h3 class="blog-title">Nativa vs híbrida: la guía definitiva para elegir tu app móvil</h3>
+                            <p class="blog-excerpt">React Native, Flutter o Swift/Kotlin. Una comparativa honesta sin tecnicismos para que tomes la mejor decisión.</p>
+                            <a href="#" class="blog-link">LEER ARTÍCULO ↗</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-nav">
+            <div class="blog-arrows">
+                <button class="blog-arrow" id="blogPrev" aria-label="Anterior">←</button>
+                <button class="blog-arrow" id="blogNext" aria-label="Siguiente">→</button>
+            </div>
+            <div class="blog-dots" id="blogDots"></div>
+        </div>
+
+        <div class="blog-footer reveal" style="margin-top:2.5rem;">
+            <a href="#" class="btn-secondary">VER TODOS LOS ARTÍCULOS ↗</a>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contacto">
+        <div class="contact-inner">
+            <div class="contact-left" id="contactLeft">
+                <div class="section-header" style="margin-bottom:2rem;">
+                    <span class="section-number">06</span>
+                    <h2 class="section-title">¿TIENES UN PROYECTO?</h2>
+                </div>
+                <p class="contact-desc">Cuéntanos tu idea, presupuesto y timeline. Te respondemos en 24h con una propuesta personalizada y sin compromiso.</p>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <span class="contact-info-label">Email</span>
+                        <span class="contact-info-value"><a href="mailto:Hodeione41@gmail.com">Hodeione41@gmail.com</a></span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-info-label">Teléfono</span>
+                        <span class="contact-info-value"><a href="tel:+34668524968">+34 668 524 968</a></span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-info-label">Horario</span>
+                        <span class="contact-info-value">Lun–Vie, 09:00–18:00</span>
+                    </div>
+                </div>
+                <div class="contact-coords">MADRID, ESPAÑA — 40.4168° N, 3.7038° W</div>
+            </div>
+            <div class="contact-right" id="contactRight">
+                <form class="contact-form" id="contactForm" onsubmit="handleContact(event)" novalidate>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label class="form-label" for="inputName">Nombre</label>
+                            <input type="text" id="inputName" class="contact-input" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="inputEmail">Email</label>
+                            <input type="email" id="inputEmail" class="contact-input" placeholder="tu@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label class="form-label" for="inputPhone">Teléfono</label>
+                            <input type="tel" id="inputPhone" class="contact-input" placeholder="(opcional)">
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="inputCompany">Empresa</label>
+                            <input type="text" id="inputCompany" class="contact-input" placeholder="(opcional)">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field form-field-full">
+                            <label class="form-label" for="inputMessage">Proyecto</label>
+                            <textarea id="inputMessage" class="contact-input" placeholder="Cuéntanos tu proyecto..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="contact-submit" id="submitBtn">
+                        <span>ENVIAR PROPUESTA</span>
+                    </button>
+                    <div class="form-feedback" id="formFeedback"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+        <div class="newsletter-inner">
+            <div class="newsletter-text">
+                <h3>NEWSLETTER</h3>
+                <p>Tendencias digitales y ofertas exclusivas cada mes.</p>
+            </div>
+            <div>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)" novalidate>
+                    <input type="email" class="newsletter-input" placeholder="tu@email.com" required>
+                    <button type="submit" class="newsletter-btn">SUSCRIBIR</button>
+                </form>
+                <div class="newsletter-feedback" id="newsletterFeedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">
+            <div class="footer-copy">H. © 2025</div>
+            <div class="footer-socials">
+                <a href="#" aria-label="LinkedIn">LINKEDIN</a>
+                <a href="#" aria-label="Twitter">TWITTER</a>
+                <a href="#" aria-label="Instagram">INSTAGRAM</a>
+            </div>
+        </div>
+        <div class="footer-right">HECHO EN MADRID</div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
+
+    <script src="anime.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
