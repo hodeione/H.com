@@ -1,7 +1,7 @@
 'use strict';
 
 // ============ CONFIG ============
-const FORMSPREE = 'https://formspree.io/f/CHANGE_ME';
+const FORMSPREE = 'https://formsubmit.co/ajax/hodeione41@gmail.com';
 
 // ============ PRELOADER ============
 (function () {
@@ -249,17 +249,14 @@ async function handleContact(event) {
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
 
-    const useFormspree = !FORMSPREE.includes('CHANGE_ME');
     try {
-        if (useFormspree) {
+        {
             const res = await fetch(FORMSPREE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({ name, email, message, phone, company }),
+                body: JSON.stringify({ name, email, _subject: `Nuevo proyecto de ${name}`, message, phone, company }),
             });
             if (!res.ok) throw new Error('server');
-        } else {
-            await new Promise(r => setTimeout(r, 1500));
         }
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
@@ -360,12 +357,9 @@ document.querySelectorAll('.portfolio-card').forEach(card => {
     const imgUrl = (card.dataset.url  || '').trim();
     const href   = (card.dataset.href || '').trim();
 
-    if (imgUrl) {
-        const img         = card.querySelector('.portfolio-img');
-        const placeholder = card.querySelector('.portfolio-placeholder');
-        img.src = imgUrl;
-        img.addEventListener('load',  () => { img.classList.add('loaded'); if (placeholder) placeholder.style.display = 'none'; });
-        img.addEventListener('error', () => {});
+    if (imgUrl && !card.querySelector('.portfolio-img')?.src?.includes(imgUrl)) {
+        const img = card.querySelector('.portfolio-img');
+        if (img && !img.src) img.src = imgUrl;
     }
 
     if (href && href !== '#') {
