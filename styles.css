@@ -1088,6 +1088,19 @@ footer {
     margin-bottom: 2.5rem;
 }
 
+.blog-progress-bar {
+    height: 2px;
+    background: var(--border);
+    overflow: hidden;
+}
+.blog-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--acid-yellow), #88dd00);
+    box-shadow: var(--glow-sm);
+    will-change: width;
+}
+
 .blog-slider-container {
     overflow: hidden; border: 1px solid var(--border);
 }
@@ -1118,20 +1131,44 @@ footer {
     position: absolute; inset: 0;
     transition: transform .65s var(--expo);
 }
-.blog-card:nth-child(1) .blog-img-bg { background: linear-gradient(135deg, #0d1f0d 0%, rgba(200,255,0,.05) 100%); }
-.blog-card:nth-child(2) .blog-img-bg { background: linear-gradient(135deg, #1a160a 0%, rgba(255,180,0,.04) 100%); }
-.blog-card:nth-child(3) .blog-img-bg { background: linear-gradient(135deg, #0d0d1f 0%, rgba(100,100,255,.04) 100%); }
-.blog-card:nth-child(4) .blog-img-bg { background: linear-gradient(135deg, #1a0d0d 0%, rgba(255,80,80,.04) 100%); }
-.blog-card:nth-child(5) .blog-img-bg { background: linear-gradient(135deg, #0a1a1a 0%, rgba(0,200,200,.04) 100%); }
+.blog-card:nth-child(1) .blog-img-bg { background: linear-gradient(135deg, #0a1f00 0%, #152e00 55%, rgba(200,255,0,.22) 100%); }
+.blog-card:nth-child(2) .blog-img-bg { background: linear-gradient(135deg, #1a1000 0%, #332000 55%, rgba(255,160,0,.22) 100%); }
+.blog-card:nth-child(3) .blog-img-bg { background: linear-gradient(135deg, #05051e 0%, #0e0e38 55%, rgba(100,80,255,.22) 100%); }
+.blog-card:nth-child(4) .blog-img-bg { background: linear-gradient(135deg, #1a0500 0%, #330a00 55%, rgba(255,70,20,.22) 100%); }
+.blog-card:nth-child(5) .blog-img-bg { background: linear-gradient(135deg, #001a18 0%, #003230 55%, rgba(0,200,190,.22) 100%); }
 .blog-card:hover .blog-img-bg { transform: scale(1.06); }
+.blog-img-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+}
 
 .blog-cat {
     position: absolute; bottom: 1rem; left: 1rem;
     font-size: .57rem; color: var(--black);
     background: var(--acid-yellow);
     padding: .3rem .9rem; letter-spacing: .22em;
-    text-transform: uppercase; z-index: 1;
+    text-transform: uppercase; z-index: 2;
 }
+
+.blog-img-deco {
+    position: absolute; right: .8rem; bottom: .4rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem; line-height: 1;
+    pointer-events: none; user-select: none;
+    letter-spacing: -.04em; z-index: 1;
+    transition: opacity .45s ease;
+}
+.blog-card:nth-child(1) .blog-img-deco { color: rgba(200,255,0,.22); }
+.blog-card:nth-child(2) .blog-img-deco { color: rgba(255,160,0,.22); }
+.blog-card:nth-child(3) .blog-img-deco { color: rgba(100,80,255,.25); }
+.blog-card:nth-child(4) .blog-img-deco { color: rgba(255,70,20,.22); }
+.blog-card:nth-child(5) .blog-img-deco { color: rgba(0,200,190,.25); }
+.blog-card:hover .blog-img-deco { opacity: .45; }
 
 .blog-body { padding: 2rem; display: flex; flex-direction: column; gap: .9rem; }
 .blog-meta {
@@ -1181,6 +1218,28 @@ footer {
 .blog-dot.active {
     background: var(--acid-yellow); box-shadow: var(--glow-sm);
     width: 22px; border-radius: 3px;
+}
+
+.blog-counter {
+    display: flex; align-items: baseline; gap: .15rem; line-height: 1;
+}
+.blog-count-current {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.1rem; color: var(--acid-yellow);
+    letter-spacing: .03em;
+    text-shadow: var(--glow-sm);
+}
+.blog-count-sep {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: .85rem; color: rgba(255,255,255,.18);
+    padding: 0 .1rem;
+    align-self: flex-end; padding-bottom: .25rem;
+}
+.blog-count-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: .85rem; color: rgba(255,255,255,.28);
+    letter-spacing: .03em;
+    align-self: flex-end; padding-bottom: .25rem;
 }
 
 .blog-footer { width: 100%; max-width: 1200px; }

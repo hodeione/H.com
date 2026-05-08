@@ -213,11 +213,12 @@ onEnter('.clients-bar', el => {
 }, { threshold: 0.1 });
 
 onEnter('.blog-slider-wrapper', el => {
-    anime({
-        targets: el.querySelectorAll('.blog-card'),
-        opacity: [0, 1], translateY: [30, 0],
-        delay: anime.stagger(90), duration: 850, easing: 'easeOutExpo',
-    });
+    // Only animate the visible originals (centre group in the infinite clone layout)
+    const all = el.querySelectorAll('.blog-card');
+    const n   = Math.round(all.length / 3); // total originals
+    const vis = Array.from(all).slice(n, n + n);
+    anime({ targets: vis, opacity: [0, 1], translateY: [30, 0],
+            delay: anime.stagger(90), duration: 850, easing: 'easeOutExpo' });
 }, { threshold: 0.04 });
 
 // ============ BACK TO TOP ============
@@ -368,129 +369,218 @@ document.querySelectorAll('.portfolio-card').forEach(card => {
     }
 });
 
-// ============ BLOG SLIDER ============
+// ============ BLOG SLIDER — INFINITE LOOP ============
 (function () {
-    const track     = document.getElementById('blogTrack');
-    const container = document.getElementById('blogSliderContainer');
-    const prevBtn   = document.getElementById('blogPrev');
-    const nextBtn   = document.getElementById('blogNext');
-    const dotsWrap  = document.getElementById('blogDots');
+    const track        = document.getElementById('blogTrack');
+    const container    = document.getElementById('blogSliderContainer');
+    const prevBtn      = document.getElementById('blogPrev');
+    const nextBtn      = document.getElementById('blogNext');
+    const dotsWrap     = document.getElementById('blogDots');
+    const progressFill = document.getElementById('blogProgressFill');
+    const countCurrent = document.getElementById('blogCountCurrent');
+    const countTotal   = document.getElementById('blogCountTotal');
     if (!track || !container) return;
 
-    const cards      = track.querySelectorAll('.blog-card');
-    const total      = cards.length;
-    let current      = 0;
-    let visibleCount = getVisible();
-    let maxIndex     = Math.max(0, total - visibleCount);
+    const AUTOPLAY_MS = 5000;
 
-    function getVisible() {
-        const w = window.innerWidth;
-        if (w <= 480) return 1;
-        if (w <= 768) return 1;
-        if (w <= 1024) return 2;
-        return 3;
+    // ── Clone cards for infinite loop ──────────────────────────────────────
+    // Result: [clone_0..n-1]  [orig_0..n-1]  [clone_0..n-1]
+    const origCards = Array.from(track.querySelectorAll('.blog-card'));
+    const total     = origCards.length;
+    origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+    for (let i = total - 1; i >= 0; i--) {
+        track.insertBefore(origCards[i].cloneNode(true), track.firstChild);
     }
+    const allCards = Array.from(track.querySelectorAll('.blog-card'));
 
+    // domPos: index into allCards at left edge of viewport (starts at first original)
+    // real:   logical index 0..total-1 shown to the user
+    let real      = 0;
+    let domPos    = total;
+    let autoTimer = null;
+    let isPaused  = false;
+
+    if (countTotal) countTotal.textContent = String(total).padStart(2, '0');
+
+    function getCardWidth() { return allCards[0]?.getBoundingClientRect().width || 0; }
+    function getVisible()   { const w = window.innerWidth; return w <= 768 ? 1 : w <= 1024 ? 2 : 3; }
+
+    // ── Dots ────────────────────────────────────────────────────────────────
     function buildDots() {
         dotsWrap.innerHTML = '';
-        maxIndex = Math.max(0, total - getVisible());
-        for (let i = 0; i <= maxIndex; i++) {
+        for (let i = 0; i < total; i++) {
             const d = document.createElement('button');
-            d.className = 'blog-dot' + (i === current ? ' active' : '');
+            d.className = 'blog-dot' + (i === real ? ' active' : '');
             d.setAttribute('aria-label', `Ir a artículo ${i + 1}`);
-            d.addEventListener('click', () => goTo(i));
+            d.addEventListener('click', () => move(i - real));
             dotsWrap.appendChild(d);
         }
     }
-
     function updateDots() {
-        dotsWrap.querySelectorAll('.blog-dot').forEach((d, i) => {
-            d.classList.toggle('active', i === current);
-        });
+        dotsWrap.querySelectorAll('.blog-dot').forEach((d, i) => d.classList.toggle('active', i === real));
     }
 
-    function getCardWidth() {
-        return cards[0]?.getBoundingClientRect().width || 0;
+    // ── Counter ─────────────────────────────────────────────────────────────
+    function updateCounter() {
+        if (!countCurrent) return;
+        const txt = String(real + 1).padStart(2, '0');
+        anime({ targets: countCurrent, opacity: [0, 1], translateY: [-10, 0],
+                duration: 350, easing: 'easeOutExpo',
+                begin() { countCurrent.textContent = txt; } });
     }
 
-    function goTo(idx) {
-        visibleCount = getVisible();
-        maxIndex     = Math.max(0, total - visibleCount);
-        current      = Math.max(0, Math.min(idx, maxIndex));
-        const offset = current * getCardWidth();
-        track.style.transform = `translateX(-${offset}px)`;
+    // ── Incoming card content animation ─────────────────────────────────────
+    function animateIncoming(fromDomPos, steps) {
+        const vis  = getVisible();
+        const newEls = [];
+        const range = steps > 0
+            ? { s: fromDomPos + vis,         e: fromDomPos + vis + steps }
+            : { s: fromDomPos + steps,       e: fromDomPos              };
+        for (let i = range.s; i < range.e; i++) {
+            allCards[i]?.querySelectorAll('.blog-meta,.blog-title,.blog-excerpt,.blog-link')
+                .forEach(el => newEls.push(el));
+        }
+        if (!newEls.length) return;
+        anime({ targets: newEls, opacity: [0, 1], translateY: [16, 0],
+                duration: 520, delay: anime.stagger(50), easing: 'easeOutExpo' });
+    }
+
+    // ── Silent DOM reset after wrap (fires after CSS transition) ───────────
+    track.addEventListener('transitionend', e => {
+        if (e.propertyName !== 'transform' || e.target !== track) return;
+        if (domPos < total || domPos >= 2 * total) {
+            domPos = domPos < total ? domPos + total : domPos - total;
+            track.style.transition = 'none';
+            track.style.transform  = `translateX(-${domPos * getCardWidth()}px)`;
+            void track.offsetHeight;
+            track.style.transition = '';
+        }
+    });
+
+    // ── Core slide ──────────────────────────────────────────────────────────
+    function move(steps, fromInit) {
+        const oldDomPos = domPos;
+        domPos += steps;
+        real = ((real + steps) % total + total) % total;
+        track.style.transition = '';
+        track.style.transform  = `translateX(-${domPos * getCardWidth()}px)`;
         updateDots();
+        if (!fromInit) { updateCounter(); if (steps) animateIncoming(oldDomPos, steps); }
+        if (!isPaused) startAutoplay(); else resetProgress();
     }
 
-    prevBtn?.addEventListener('click', () => goTo(current - 1));
-    nextBtn?.addEventListener('click', () => goTo(current + 1));
+    // ── Progress bar ────────────────────────────────────────────────────────
+    function startProgress() {
+        if (!progressFill) return;
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+        void progressFill.offsetHeight;
+        progressFill.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+        progressFill.style.width = '100%';
+    }
+    function stopProgress() {
+        if (!progressFill) return;
+        const w = progressFill.getBoundingClientRect().width;
+        const p = progressFill.parentElement.getBoundingClientRect().width;
+        progressFill.style.transition = 'none';
+        progressFill.style.width = (p > 0 ? w / p * 100 : 0) + '%';
+    }
+    function resetProgress() {
+        if (!progressFill) return;
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+    }
+    function startAutoplay() {
+        clearTimeout(autoTimer);
+        startProgress();
+        autoTimer = setTimeout(() => move(1), AUTOPLAY_MS);
+    }
 
-    // Keyboard
+    // ── Hover pause ─────────────────────────────────────────────────────────
+    const wrapper = document.querySelector('.blog-slider-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('mouseenter', () => { isPaused = true;  clearTimeout(autoTimer); stopProgress(); });
+        wrapper.addEventListener('mouseleave', () => { isPaused = false; startAutoplay(); });
+    }
+
+    prevBtn?.addEventListener('click', () => move(-1));
+    nextBtn?.addEventListener('click', () => move( 1));
     document.addEventListener('keydown', e => {
         if (!container.closest('section')?.matches(':hover')) return;
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'ArrowLeft')  move(-1);
+        if (e.key === 'ArrowRight') move( 1);
     });
 
-    // Touch / drag
-    let startX = 0, startY = 0, isDragging = false, dragStarted = false;
+    // ── Drag (mouse + touch) — live follow, infinite ────────────────────────
+    let startX = 0, startY = 0, isDrag = false, moved = false, isHoriz = false;
+
+    function dragBase()        { return domPos * getCardWidth(); }
+    function applyLive(dx)     { track.style.transform = `translateX(${-(dragBase() - dx)}px)`; }
+    function settle(dx) {
+        track.classList.remove('dragging');
+        track.style.transition = '';
+        const threshold = Math.max(40, getCardWidth() * 0.15);
+        if (Math.abs(dx) >= threshold) {
+            const steps = Math.max(1, Math.round(Math.abs(dx) / getCardWidth()));
+            move(dx < 0 ? steps : -steps);
+        } else {
+            track.style.transform = `translateX(-${dragBase()}px)`;
+            if (!isPaused) startAutoplay();
+        }
+    }
 
     track.addEventListener('mousedown', e => {
-        startX = e.clientX; startY = e.clientY;
-        isDragging = true; dragStarted = false;
+        startX = e.clientX; isDrag = true; moved = false;
         track.classList.add('dragging');
+        clearTimeout(autoTimer); stopProgress();
     });
-
     document.addEventListener('mousemove', e => {
-        if (!isDragging) return;
+        if (!isDrag) return;
         const dx = e.clientX - startX;
-        if (!dragStarted && Math.abs(dx) > 5) dragStarted = true;
+        if (!moved && Math.abs(dx) > 4) moved = true;
+        if (moved) applyLive(dx);
     });
-
     document.addEventListener('mouseup', e => {
-        if (!isDragging) return;
-        isDragging = false;
-        track.classList.remove('dragging');
-        const dx = e.clientX - startX;
-        if (Math.abs(dx) > 50) { dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+        if (!isDrag) return; isDrag = false;
+        if (moved) settle(e.clientX - startX);
+        else { track.classList.remove('dragging'); if (!isPaused) startAutoplay(); }
     });
 
     track.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        dragStarted = false;
+        startX = e.touches[0].clientX; startY = e.touches[0].clientY;
+        isDrag = true; moved = false; isHoriz = false;
+        clearTimeout(autoTimer); stopProgress();
     }, { passive: true });
-
     track.addEventListener('touchmove', e => {
+        if (!isDrag) return;
         const dx = e.touches[0].clientX - startX;
         const dy = e.touches[0].clientY - startY;
-        if (!dragStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-            dragStarted = true;
-            if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+        if (!moved) {
+            if (Math.abs(dx) < 4 && Math.abs(dy) < 4) return;
+            moved = true; isHoriz = Math.abs(dx) >= Math.abs(dy);
         }
+        if (isHoriz) { e.preventDefault(); applyLive(dx); }
     }, { passive: false });
-
     track.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 50) { dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+        if (!isDrag) return; isDrag = false;
+        if (isHoriz && moved) settle(e.changedTouches[0].clientX - startX);
+        else { track.classList.remove('dragging'); if (!isPaused) startAutoplay(); }
     });
+    track.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
 
-    // Prevent link clicks on drag
-    track.addEventListener('click', e => {
-        if (dragStarted) { e.preventDefault(); e.stopPropagation(); }
-    }, true);
-
-    // Resize
+    // ── Resize ──────────────────────────────────────────────────────────────
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+            track.style.transition = 'none';
+            track.style.transform  = `translateX(-${domPos * getCardWidth()}px)`;
+            void track.offsetHeight;
+            track.style.transition = '';
             buildDots();
-            goTo(Math.min(current, Math.max(0, total - getVisible())));
-        }, 200);
+        }, 150);
     });
 
-    // Init
     buildDots();
-    goTo(0);
+    move(0, true);
 })();
