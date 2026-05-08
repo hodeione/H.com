@@ -945,6 +945,25 @@ footer {
     opacity: 0; transition: opacity var(--transition);
 }
 .portfolio-card:hover .portfolio-hover { opacity: 1; }
+
+/* CTA card — "Tu Proyecto" */
+.portfolio-cta-wrap {
+    background: linear-gradient(135deg, #0d0d10 0%, #111116 100%);
+    border: 1px dashed rgba(200,255,0,0.25);
+    display: flex; align-items: center; justify-content: center;
+}
+.portfolio-cta-inner { text-align: center; pointer-events: none; }
+.portfolio-cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem; color: var(--acid-yellow);
+    letter-spacing: .05em; line-height: 1;
+    margin-bottom: .5rem;
+}
+.portfolio-cta-sub {
+    font-size: .65rem; color: rgba(255,255,255,.35);
+    letter-spacing: .2em; text-transform: uppercase;
+}
+.portfolio-card--cta:hover .portfolio-cta-wrap { border-color: rgba(200,255,0,.5); }
 .portfolio-hover-cta {
     font-size: .7rem; color: var(--acid-yellow); letter-spacing: .25em;
     text-transform: uppercase; border: 1px solid var(--acid-yellow);
