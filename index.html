@@ -16,6 +16,10 @@
 
 <body class="loading">
 
+    <!-- AMBIENT ORBS -->
+    <div class="ambient-orb orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb orb-2" aria-hidden="true"></div>
+
     <!-- CUSTOM CURSOR -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -384,10 +388,69 @@
         </div>
     </section>
 
+    <!-- TECH STACK SECTION -->
+    <section class="tech-section" id="tecnologia">
+        <div class="section-header reveal">
+            <span class="section-number">04</span>
+            <h2 class="section-title">NUESTRO STACK.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="tech-grid" id="techGrid">
+            <div class="tech-item">
+                <div class="tech-label">React</div>
+                <div class="tech-cat">Frontend</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Next.js</div>
+                <div class="tech-cat">Framework</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Node.js</div>
+                <div class="tech-cat">Backend</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Python</div>
+                <div class="tech-cat">Scripts / IA</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">TypeScript</div>
+                <div class="tech-cat">Tipado</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">PostgreSQL</div>
+                <div class="tech-cat">Base de Datos</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Claude AI</div>
+                <div class="tech-cat">IA Generativa</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">OpenAI</div>
+                <div class="tech-cat">LLM API</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Figma</div>
+                <div class="tech-cat">Diseño UI</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">AWS</div>
+                <div class="tech-cat">Cloud</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Docker</div>
+                <div class="tech-cat">Contenedores</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Vercel</div>
+                <div class="tech-cat">Deploy</div>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS SECTION -->
     <section class="testimonials" id="testimonios">
         <div class="section-header reveal">
-            <span class="section-number">04</span>
+            <span class="section-number">05</span>
             <h2 class="section-title">LO QUE DICEN.</h2>
             <div class="section-line"></div>
         </div>
@@ -458,7 +521,7 @@
     <!-- BLOG SECTION -->
     <section class="blog" id="blog">
         <div class="section-header reveal">
-            <span class="section-number">05</span>
+            <span class="section-number">06</span>
             <h2 class="section-title">IDEAS Y RECURSOS.</h2>
             <div class="section-line"></div>
         </div>
@@ -543,12 +606,86 @@
         </div>
     </section>
 
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <div class="section-header reveal">
+            <span class="section-number">07</span>
+            <h2 class="section-title">PREGUNTAS FRECUENTES.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="faq-list" id="faqList">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Cuánto cuesta un proyecto web?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Los precios varían según complejidad. Una web básica parte desde 500€, proyectos completos desde 2.000€. Siempre enviamos presupuesto detallado y sin compromiso antes de comenzar.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Cuánto tiempo tarda en estar lista la web?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Depende del alcance. Una landing page puede estar lista en 7 días. Una web corporativa completa suele llevar entre 3 y 6 semanas. En proyectos complejos trabajamos por sprints con entregas parciales.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Trabajáis con clientes de toda España?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Sí, trabajamos 100% en remoto con clientes de toda España y también de Latinoamérica. Todo el proceso se gestiona por videollamada, email y herramientas de gestión de proyectos.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Necesito tener un diseño previo para empezar?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">No. Partimos desde cero contigo. Realizamos un briefing inicial para entender tu marca, objetivos y audiencia, y desde ahí construimos la estrategia visual y técnica completa.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Qué incluye el soporte post-lanzamiento?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Todos nuestros proyectos incluyen un periodo de garantía de 30 días tras el lanzamiento. Ofrecemos también planes de mantenimiento mensual que cubren actualizaciones, seguridad y cambios menores.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Gestionáis el hosting y el dominio?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Sí. Podemos gestionar todo el ciclo: registro de dominio, configuración de hosting, SSL, despliegue y DNS. Si ya tienes proveedor propio, también trabajamos con él sin problema.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">¿Qué me diferencia de contratar a un freelance?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">Con H. obtienes diseño, desarrollo, legal (RGPD), SEO e IA integrados en un solo equipo. Sin dependencia de un único perfil, con mayor fiabilidad, y con visión de negocio detrás de cada decisión técnica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT SECTION -->
     <section class="contact" id="contacto">
         <div class="contact-inner">
             <div class="contact-left" id="contactLeft">
                 <div class="section-header" style="margin-bottom:2rem;">
-                    <span class="section-number">06</span>
+                    <span class="section-number">08</span>
                     <h2 class="section-title">¿TIENES UN PROYECTO?</h2>
                 </div>
                 <p class="contact-desc">Cuéntanos tu idea, presupuesto y timeline. Te respondemos en 24h con una propuesta personalizada y sin compromiso.</p>
@@ -634,6 +771,17 @@
         </div>
         <div class="footer-right">HECHO EN MADRID</div>
     </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/34668524968?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20mi%20proyecto"
+       class="whatsapp-float" id="whatsappFloat"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="whatsapp-tooltip">WHATSAPP</span>
+    </a>
 
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>

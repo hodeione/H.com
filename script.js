@@ -77,7 +77,7 @@ function runHeroTimeline() {
         requestAnimationFrame(loop);
     })();
 
-    const hoverTargets = 'a, button, .service-card, .identity-block, .portfolio-card, .testimonial-card, .blog-card, .pricing-card, .client-logo-link';
+    const hoverTargets = 'a, button, .service-card, .identity-block, .portfolio-card, .testimonial-card, .blog-card, .pricing-card, .client-logo-link, .tech-item, .faq-question';
     document.querySelectorAll(hoverTargets).forEach(el => {
         el.addEventListener('mouseenter', () => { dot.classList.add('hover');  ring.classList.add('hover'); });
         el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
@@ -305,6 +305,42 @@ function handleNewsletter(event) {
 
 // ============ VIDEO FALLBACK ============
 document.getElementById('heroVideo')?.addEventListener('error', function () { this.style.display = 'none'; });
+
+// ============ FAQ ACCORDION ============
+document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+    });
+});
+
+// ============ WHATSAPP FLOAT ============
+const whatsappFloat = document.getElementById('whatsappFloat');
+if (whatsappFloat) {
+    window.addEventListener('scroll', () => {
+        whatsappFloat.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+}
+
+// ============ TECH GRID ANIMATION ============
+onEnter('#techGrid', el => {
+    anime({
+        targets: el.querySelectorAll('.tech-item'),
+        opacity: [0, 1], translateY: [20, 0],
+        delay: anime.stagger(35), duration: 700, easing: 'easeOutExpo',
+    });
+}, { threshold: 0.04 });
+
+// ============ FAQ REVEAL ============
+onEnter('#faqList', el => {
+    anime({
+        targets: el.querySelectorAll('.faq-item'),
+        opacity: [0, 1], translateY: [20, 0],
+        delay: anime.stagger(60), duration: 700, easing: 'easeOutExpo',
+    });
+}, { threshold: 0.04 });
 
 // ============ MAGNETIC BUTTONS ============
 document.querySelectorAll('.btn-primary, .btn-secondary, .header-cta').forEach(btn => {
