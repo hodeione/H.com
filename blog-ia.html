@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo la IA está transformando el desarrollo web en 2025 — H. Blog</title>
+    <meta name="description" content="Las nuevas herramientas de IA no son solo asistentes de código. Están redefiniendo el flujo completo de diseño, testing y despliegue.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #080808;
+            --white: #ffffff;
+            --acid: #C8FF00;
+            --gray: #8C8C7A;
+            --surface: #111111;
+        }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(8,8,8,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,255,0,0.2);
+            z-index: 100; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+
+        .article-hero {
+            padding: 120px 2rem 5rem;
+            max-width: 860px; margin: 0 auto;
+            border-bottom: 1px solid rgba(200,255,0,0.15);
+        }
+        .article-cat {
+            display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em;
+            color: var(--acid); text-transform: uppercase;
+            border: 1px solid var(--acid); padding: 0.3rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05; letter-spacing: -0.01em;
+            color: var(--white); margin-bottom: 1.5rem;
+        }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+
+        .article-body {
+            max-width: 860px; margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--white); margin: 3rem 0 1.2rem;
+            letter-spacing: 0.02em;
+        }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li {
+            font-size: 0.9rem; color: #ccc; padding: 0.6rem 0;
+            padding-left: 1.4rem; position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box {
+            border-left: 3px solid var(--acid);
+            background: rgba(200,255,0,0.04);
+            padding: 1.5rem 2rem; margin: 2.5rem 0;
+        }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .article-cta {
+            border-top: 1px solid rgba(200,255,0,0.2);
+            padding: 4rem 2rem; text-align: center;
+            background: var(--surface);
+        }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn {
+            display: inline-block; background: var(--acid); color: var(--black);
+            padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+            font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+            text-decoration: none; font-weight: 500; transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.85; }
+
+        .blog-nav-bottom {
+            max-width: 860px; margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+
+        @media (max-width: 640px) {
+            header { padding: 1rem; }
+            .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">H.</a>
+    <a href="blog.html" class="back-link">← Volver al blog</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">IA</div>
+        <h1 class="article-title">Cómo la IA está transformando el desarrollo web en 2025</h1>
+        <div class="article-meta">15 ENERO 2025 &nbsp;·&nbsp; 5 MIN LECTURA &nbsp;·&nbsp; <span>H. DIGITAL</span></div>
+    </div>
+
+    <div class="article-body">
+        <p>Durante años, la inteligencia artificial en el desarrollo web fue poco más que autocompletado de código. En 2025 eso ha cambiado radicalmente. Las herramientas de IA ya no sugieren la siguiente línea: diseñan componentes, escriben tests, detectan vulnerabilidades y despliegan en producción. El flujo de trabajo completo está siendo reescrito.</p>
+
+        <div class="highlight-box">
+            <p>"La IA no viene a reemplazar al desarrollador. Viene a eliminar las partes aburridas para que puedas centrarte en lo que importa: la lógica de negocio y la experiencia del usuario."</p>
+        </div>
+
+        <h2>01. <span class="accent">GENERACIÓN DE UI</span> — del prototipo al código en minutos</h2>
+        <p>Herramientas como V0 de Vercel o Galileo AI permiten convertir un boceto o una descripción en texto en componentes React completamente funcionales. Lo que antes llevaba días de maquetación, hoy se resuelve en minutos. El diseñador describe; la IA construye; el desarrollador refina.</p>
+        <p>Esto no es prestidigitación tecnológica. En proyectos reales estamos viendo reducciones del 40-60% en el tiempo de prototipado. El cuello de botella se desplaza del "hacer" al "decidir".</p>
+
+        <h2>02. <span class="accent">TESTING AUTOMATIZADO</span> — cobertura sin dolor</h2>
+        <p>Uno de los cuellos de botella históricos del desarrollo web ha sido la escritura de tests. La IA cambia esto. Herramientas como Copilot, Cursor o Codeium generan suites de tests unitarios e integración a partir del código existente, analizan los casos límite más probables y sugieren escenarios de edge case que el desarrollador humano tiende a omitir.</p>
+        <ul>
+            <li>Tests unitarios generados automáticamente al guardar un archivo</li>
+            <li>Detección de regresiones antes de que lleguen al PR</li>
+            <li>Cobertura de código sugerida con base en el historial de bugs del proyecto</li>
+            <li>E2E tests desde descripciones en lenguaje natural</li>
+        </ul>
+
+        <h2>03. <span class="accent">REVISIÓN DE CÓDIGO</span> — el senior que nunca duerme</h2>
+        <p>Los code reviews impulsados por IA analizan no solo la sintaxis o el estilo, sino también la seguridad, el rendimiento y la coherencia arquitectónica. Herramientas como CodeRabbit o las capacidades de revisión de GitHub Copilot actúan como un revisor senior disponible 24/7, que señala problemas antes de que el humano empiece a leer el diff.</p>
+        <p>El impacto real se ve en equipos pequeños: una startup con dos desarrolladores puede ahora mantener estándares de calidad que antes requerían un equipo de cinco.</p>
+
+        <h2>04. <span class="accent">SEO TÉCNICO</span> — auditorías en tiempo real</h2>
+        <p>La IA no solo escribe código: también lo analiza en contexto. Modelos entrenados en millones de webs pueden auditar Core Web Vitals, detectar problemas de accesibilidad, sugerir mejoras en estructura semántica y generar metadatos optimizados, todo de forma automatizada y continua, no como un proceso puntual.</p>
+
+        <h2>05. <span class="accent">DESPLIEGUE INTELIGENTE</span> — CI/CD con cerebro</h2>
+        <p>Los pipelines de CI/CD tradicionales son deterministas: si pasan los tests, se despliega. Los pipelines con IA integrada van más lejos: analizan el impacto potencial de los cambios, comparan el comportamiento esperado con métricas históricas y pueden recomendar un rollback antes de que los usuarios noten el problema.</p>
+        <ul>
+            <li>Predicción de impacto de cada commit sobre métricas de negocio</li>
+            <li>Rollback automático basado en anomalías de rendimiento</li>
+            <li>Optimización del orden de despliegue en arquitecturas de microservicios</li>
+        </ul>
+
+        <h2>Conclusión: <span class="accent">¿QUÉ CAMBIA PARA TU NEGOCIO?</span></h2>
+        <p>La adopción de IA en el stack de desarrollo no es opcional en 2025, es una ventaja competitiva medible. Los proyectos que integran estas herramientas desde el inicio llegan al mercado más rápido, con menor tasa de bugs y con una capacidad de iteración que los proyectos tradicionales no pueden igualar.</p>
+        <p>En H. llevamos la IA integrada en cada fase de nuestros proyectos: desde el diseño hasta el despliegue. No como un add-on, sino como parte nativa del proceso. Si quieres saber cómo esto se traduce en tiempo y coste para tu proyecto concreto, cuéntanos.</p>
+    </div>
+</article>
+
+<div class="article-cta">
+    <h3>¿QUIERES IA EN TU PROYECTO?</h3>
+    <p>Cuéntanos qué estás construyendo. Te explicamos cómo integrar automatización inteligente desde el primer sprint.</p>
+    <a href="index.html#contacto" class="btn">HABLEMOS ↗</a>
+</div>
+
+<div class="blog-nav-bottom">
+    <a href="blog.html">← TODOS LOS ARTÍCULOS</a>
+    <a href="blog-rgpd.html">SIGUIENTE: RGPD 2025 →</a>
+</div>
+
+<footer>H. © 2025 — MADRID, ESPAÑA</footer>
+
+</body>
+</html>

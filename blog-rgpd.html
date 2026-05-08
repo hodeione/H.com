@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGPD 2025: Los cambios que tu web necesita implementar ya — H. Blog</title>
+    <meta name="description" content="La AEPD ha incrementado las inspecciones un 34% este año. Conoce los elementos ahora obligatorios y cómo evitar multas.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --white: #ffffff; --acid: #C8FF00; --gray: #8C8C7A; --surface: #111111; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,255,0,0.2); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+        .article-hero { padding: 120px 2rem 5rem; max-width: 860px; margin: 0 auto; border-bottom: 1px solid rgba(200,255,0,0.15); }
+        .article-cat { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--acid); text-transform: uppercase; border: 1px solid var(--acid); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+        .article-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem; }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+        .article-body { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--white); margin: 3rem 0 1.2rem; letter-spacing: 0.02em; }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li { font-size: 0.9rem; color: #ccc; padding: 0.6rem 0; padding-left: 1.4rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box { border-left: 3px solid var(--acid); background: rgba(200,255,0,0.04); padding: 1.5rem 2rem; margin: 2.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .warning-box { border-left: 3px solid #ff5555; background: rgba(255,85,85,0.05); padding: 1.5rem 2rem; margin: 2.5rem 0; }
+        .warning-box p { margin-bottom: 0; color: #ddd; }
+        .warning-box strong { color: #ff5555; }
+        .article-cta { border-top: 1px solid rgba(200,255,0,0.2); padding: 4rem 2rem; text-align: center; background: var(--surface); }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn { display: inline-block; background: var(--acid); color: var(--black); padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.85; }
+        .blog-nav-bottom { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+        @media (max-width: 640px) { header { padding: 1rem; } .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">H.</a>
+    <a href="blog.html" class="back-link">← Volver al blog</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">LEGAL &amp; RGPD</div>
+        <h1 class="article-title">RGPD 2025: Los cambios que tu web necesita implementar ya</h1>
+        <div class="article-meta">03 ENERO 2025 &nbsp;·&nbsp; 7 MIN LECTURA &nbsp;·&nbsp; <span>H. DIGITAL</span></div>
+    </div>
+
+    <div class="article-body">
+        <p>En 2025 la Agencia Española de Protección de Datos (AEPD) ha intensificado su actividad sancionadora un 34% respecto al año anterior. Ya no se trata de grandes corporaciones: pymes y autónomos con presencia online están recibiendo requerimientos y multas por incumplimientos que llevan años en sus webs sin que nadie los haya corregido. Este artículo detalla los cinco cambios más críticos que debes revisar hoy.</p>
+
+        <div class="warning-box">
+            <p><strong>ATENCIÓN:</strong> Una web sin política de privacidad actualizada, sin banner de cookies conforme o sin registro de tratamientos puede suponer multas de hasta 20.000.000€ o el 4% de la facturación anual global según el artículo 83 del RGPD.</p>
+        </div>
+
+        <h2>01. <span class="accent">BANNER DE COOKIES</span> — el problema que casi nadie tiene bien</h2>
+        <p>El error más frecuente que encontramos auditando webs es el banner de cookies. La mayoría de los sitios tienen un banner, pero no uno conforme. Los requisitos que la AEPD exige y que se incumplen sistemáticamente son:</p>
+        <ul>
+            <li>El botón "Rechazar" debe ser igual de prominente que el de "Aceptar"</li>
+            <li>No se pueden instalar cookies no esenciales antes de obtener el consentimiento</li>
+            <li>El usuario debe poder retirar el consentimiento con la misma facilidad con que lo dio</li>
+            <li>El banner no puede oscurecer el contenido de la web para forzar la aceptación</li>
+            <li>Las cookies de analytics (Google Analytics, etc.) requieren consentimiento explícito</li>
+        </ul>
+        <p>Un banner que dice "Usamos cookies para mejorar tu experiencia. Aceptar / Más info" incumple la normativa en varios puntos. Si el tuyo se parece a eso, necesita una revisión urgente.</p>
+
+        <h2>02. <span class="accent">POLÍTICA DE PRIVACIDAD</span> — actualizada con los nuevos requisitos</h2>
+        <p>La política de privacidad no es un documento estático que se escribe una vez y se olvida. Debe reflejar en todo momento qué datos recopilas, con qué base legal, durante cuánto tiempo, con quién los compartes y cómo puede el usuario ejercer sus derechos.</p>
+        <p>En 2025 hay nuevas obligaciones derivadas de la aplicación de la Directiva NIS2 y de las guías actualizadas del Comité Europeo de Protección de Datos (CEPD) que afectan especialmente a:</p>
+        <ul>
+            <li>Webs con formularios de contacto o captación de leads</li>
+            <li>Tiendas online (e-commerce)</li>
+            <li>Webs que integran herramientas de terceros (chatbots, mapas, vídeos embebidos)</li>
+            <li>Cualquier web que use Google Analytics 4 u otras plataformas de medición</li>
+        </ul>
+
+        <h2>03. <span class="accent">TRANSFERENCIAS INTERNACIONALES</span> — el impacto del Data Privacy Framework</h2>
+        <p>El Marco de Privacidad de Datos UE-EE.UU. (Data Privacy Framework), adoptado en 2023 y consolidado en 2024, simplifica las transferencias de datos a empresas certificadas en EE.UU. Sin embargo, no elimina la obligación de informar sobre estas transferencias en tu política de privacidad.</p>
+
+        <div class="highlight-box">
+            <p>"Si usas herramientas como Google Analytics, HubSpot, Mailchimp o cualquier SaaS americano, estás realizando transferencias internacionales de datos de tus usuarios. Tienes que documentarlo."</p>
+        </div>
+
+        <h2>04. <span class="accent">REGISTRO DE ACTIVIDADES DE TRATAMIENTO</span> — obligatorio para todos</h2>
+        <p>El artículo 30 del RGPD obliga a mantener un registro interno de todas las actividades de tratamiento de datos. Muchas pymes desconocen esta obligación porque el reglamento incluye una excepción para empresas con menos de 250 trabajadores, pero esa excepción no aplica cuando el tratamiento puede entrañar riesgos para los derechos de las personas, lo que incluye prácticamente cualquier web con formularios o analytics.</p>
+        <ul>
+            <li>Qué datos tratas y con qué finalidad</li>
+            <li>Quiénes son los responsables y encargados del tratamiento</li>
+            <li>Con qué países o terceros compartes los datos</li>
+            <li>Plazos de conservación de cada categoría de datos</li>
+            <li>Medidas de seguridad aplicadas</li>
+        </ul>
+
+        <h2>05. <span class="accent">FORMULARIOS Y CONSENTIMIENTO</span> — doble opt-in y evidencia</h2>
+        <p>Cada formulario de tu web que recoja datos personales debe tener una casilla de consentimiento explícito y no premarcada. Además, debes poder demostrar que obtuviste ese consentimiento: fecha, IP, versión del texto aceptado. Esto requiere implementación técnica, no basta con añadir un checkbox.</p>
+        <p>Para el envío de comunicaciones comerciales, el doble opt-in (confirmación por email) ya no es solo una buena práctica: es la forma más segura de demostrar el consentimiento ante una inspección.</p>
+
+        <h2>Conclusión: <span class="accent">¿POR DÓNDE EMPEZAR?</span></h2>
+        <p>El cumplimiento RGPD no es un trámite burocrático. Es un proceso continuo que requiere auditoría periódica, actualización de textos legales y ajustes técnicos en la web. Lo más urgente: revisar el banner de cookies y la política de privacidad. Lo más ignorado: el registro de actividades de tratamiento.</p>
+        <p>En H. ofrecemos auditorías completas de cumplimiento RGPD para webs de todos los tamaños. Identificamos los incumplimientos, priorizamos por riesgo y los resolvemos. Sin tecnicismos innecesarios, con documentación incluida.</p>
+    </div>
+</article>
+
+<div class="article-cta">
+    <h3>¿TU WEB CUMPLE EL RGPD?</h3>
+    <p>Auditamos tu web en 48 horas y te entregamos un informe con todos los puntos a corregir.</p>
+    <a href="index.html#contacto" class="btn">PEDIR AUDITORÍA ↗</a>
+</div>
+
+<div class="blog-nav-bottom">
+    <a href="blog-ia.html">← ANTERIOR: IA EN 2025</a>
+    <a href="blog-seo.html">SIGUIENTE: SEO ERRORES →</a>
+</div>
+
+<footer>H. © 2025 — MADRID, ESPAÑA</footer>
+
+</body>
+</html>

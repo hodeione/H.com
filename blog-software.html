@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software a medida vs. soluciones genéricas: cuándo elegir cada una — H. Blog</title>
+    <meta name="description" content="No todo negocio necesita un software personalizado. Pero cuando lo necesitas, la diferencia en ROI es abismal. Guía práctica para decidir.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --white: #ffffff; --acid: #C8FF00; --gray: #8C8C7A; --surface: #111111; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,255,0,0.2); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+        .article-hero { padding: 120px 2rem 5rem; max-width: 860px; margin: 0 auto; border-bottom: 1px solid rgba(200,255,0,0.15); }
+        .article-cat { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--acid); text-transform: uppercase; border: 1px solid var(--acid); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+        .article-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem; }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+        .article-body { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--white); margin: 3rem 0 1.2rem; letter-spacing: 0.02em; }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li { font-size: 0.9rem; color: #ccc; padding: 0.6rem 0; padding-left: 1.4rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box { border-left: 3px solid var(--acid); background: rgba(200,255,0,0.04); padding: 1.5rem 2rem; margin: 2.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(200,255,0,0.15); margin: 2.5rem 0; }
+        .compare-col { background: var(--surface); padding: 2rem; }
+        .compare-col-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; margin-bottom: 1.2rem; }
+        .compare-col-title.generico { color: var(--gray); }
+        .compare-col-title.medida { color: var(--acid); }
+        .compare-item { font-size: 0.83rem; color: #aaa; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5; }
+        .compare-item:last-child { border-bottom: none; }
+        .article-cta { border-top: 1px solid rgba(200,255,0,0.2); padding: 4rem 2rem; text-align: center; background: var(--surface); }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn { display: inline-block; background: var(--acid); color: var(--black); padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.85; }
+        .blog-nav-bottom { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+        @media (max-width: 640px) { header { padding: 1rem; } .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; } .compare-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">H.</a>
+    <a href="blog.html" class="back-link">← Volver al blog</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">SOFTWARE</div>
+        <h1 class="article-title">Software a medida vs. soluciones genéricas: cuándo elegir cada una</h1>
+        <div class="article-meta">05 DICIEMBRE 2024 &nbsp;·&nbsp; 8 MIN LECTURA &nbsp;·&nbsp; <span>H. DIGITAL</span></div>
+    </div>
+
+    <div class="article-body">
+        <p>La pregunta más habitual en la primera reunión con un cliente que quiere digitalizar su operación: "¿Empezamos con algo existente o construimos desde cero?" No hay una respuesta universal. Pero sí hay criterios claros que permiten tomar la decisión correcta sin depender de lo que le interesa vender al proveedor.</p>
+
+        <div class="highlight-box">
+            <p>"Usar un software genérico cuando necesitas uno a medida es como alquilar un local de otro negocio y esperar que se adapte al tuyo. Puedes sobrevivir, pero nunca estarás cómodo del todo."</p>
+        </div>
+
+        <h2>¿QUÉ ES <span class="accent">SOFTWARE A MEDIDA</span>?</h2>
+        <p>Software a medida es cualquier aplicación diseñada y construida específicamente para las necesidades de un negocio concreto. No es una plantilla adaptada. Es arquitectura, base de datos, lógica de negocio y UX diseñadas desde cero para resolver exactamente el problema que tienes, con los flujos que tu equipo ya usa o quiere usar.</p>
+        <p>Esto incluye desde un CRM propio con integraciones específicas hasta una herramienta interna de gestión de inventario, pasando por plataformas SaaS propias, portales de clientes o sistemas de automatización de procesos.</p>
+
+        <h2>LA <span class="accent">TABLA COMPARATIVA</span> QUE NADIE TE MUESTRA</h2>
+
+        <div class="compare-grid">
+            <div class="compare-col">
+                <div class="compare-col-title generico">SOLUCIÓN GENÉRICA</div>
+                <div class="compare-item">Coste inicial bajo (0–200€/mes)</div>
+                <div class="compare-item">Listo en horas o días</div>
+                <div class="compare-item">Soporte y actualizaciones del proveedor</div>
+                <div class="compare-item">Funcionalidades estándar para la mayoría</div>
+                <div class="compare-item">Dependencia del roadmap del proveedor</div>
+                <div class="compare-item">Datos en servidores de terceros</div>
+                <div class="compare-item">Escalabilidad limitada por el plan contratado</div>
+                <div class="compare-item">Costes crecen con el uso (usuarios, almacenamiento)</div>
+            </div>
+            <div class="compare-col">
+                <div class="compare-col-title medida">SOFTWARE A MEDIDA</div>
+                <div class="compare-item">Inversión inicial alta (5.000–100.000€+)</div>
+                <div class="compare-item">Tiempo de desarrollo: semanas o meses</div>
+                <div class="compare-item">Mantenimiento propio o externalizado</div>
+                <div class="compare-item">Funcionalidades exactas a tus necesidades</div>
+                <div class="compare-item">Control total sobre el producto</div>
+                <div class="compare-item">Datos en tu infraestructura</div>
+                <div class="compare-item">Escala según tu arquitectura</div>
+                <div class="compare-item">Coste marginal bajo a largo plazo</div>
+            </div>
+        </div>
+
+        <h2>SEÑALES DE QUE <span class="accent">NECESITAS SOFTWARE A MEDIDA</span></h2>
+        <ul>
+            <li>Tu proceso de negocio no encaja en ningún software estándar sin comprometer la forma de trabajar</li>
+            <li>Llevas más de 6 meses usando workarounds en una herramienta genérica</li>
+            <li>Tu ventaja competitiva depende de un flujo operativo que no puedes replicar con herramientas de terceros</li>
+            <li>Manejas datos sensibles que no puedes alojar en servidores de proveedores externos</li>
+            <li>Las licencias mensuales de las herramientas actuales superarán la inversión en desarrollo en 2-3 años</li>
+            <li>Necesitas integraciones complejas entre múltiples sistemas que ninguna plataforma soporta de forma nativa</li>
+        </ul>
+
+        <h2>SEÑALES DE QUE <span class="accent">UNA SOLUCIÓN GENÉRICA ES SUFICIENTE</span></h2>
+        <ul>
+            <li>Tu operación es estándar y los procesos son similares a los de tu sector</li>
+            <li>Estás en fase de validación y todavía no sabes exactamente qué necesitas</li>
+            <li>El presupuesto no permite el desarrollo pero sí las licencias</li>
+            <li>Necesitas algo funcionando en semanas, no en meses</li>
+            <li>La herramienta cubre el 80% de tus necesidades y el 20% restante no es crítico</li>
+        </ul>
+
+        <h2>EL <span class="accent">ESCENARIO HÍBRIDO</span> — la opción más inteligente para muchas pymes</h2>
+        <p>La decisión no siempre es binaria. Una estrategia habitual en proyectos que construimos es el enfoque híbrido: comenzar con herramientas genéricas (Notion, Airtable, HubSpot) para validar los procesos, y una vez que el flujo está consolidado, construir el módulo crítico a medida que se conecta con las herramientas existentes vía API.</p>
+        <p>Este enfoque reduce el riesgo inicial, acorta el tiempo al primer valor y asegura que el software a medida que construyes tiene requisitos bien definidos y probados en producción real.</p>
+
+        <h2>EL <span class="accent">CÁLCULO DEL ROI</span> — la matemática que importa</h2>
+        <p>Para evaluar si el software a medida tiene sentido económico, el cálculo básico es: sumar el coste anual de las licencias actuales más el coste del tiempo perdido en procesos manuales o ineficientes. Si esa cifra supera el coste de desarrollo en un plazo de 3-5 años, el software a medida es la opción racional. En nuestra experiencia, el punto de equilibrio suele alcanzarse antes de lo que los clientes estiman.</p>
+    </div>
+</article>
+
+<div class="article-cta">
+    <h3>¿NECESITAS SOFTWARE A MEDIDA?</h3>
+    <p>Analizamos tu operación y te decimos honestamente si necesitas desarrollo propio o si una solución existente es mejor opción.</p>
+    <a href="index.html#contacto" class="btn">HABLAR CON UN EXPERTO ↗</a>
+</div>
+
+<div class="blog-nav-bottom">
+    <a href="blog-seo.html">← ANTERIOR: SEO ERRORES</a>
+    <a href="blog-apps.html">SIGUIENTE: APPS MÓVILES →</a>
+</div>
+
+<footer>H. © 2025 — MADRID, ESPAÑA</footer>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nativa vs híbrida: la guía definitiva para elegir tu app móvil — H. Blog</title>
+    <meta name="description" content="React Native, Flutter o Swift/Kotlin. Una comparativa honesta sin tecnicismos para que tomes la mejor decisión para tu app.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --white: #ffffff; --acid: #C8FF00; --gray: #8C8C7A; --surface: #111111; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,255,0,0.2); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+        .article-hero { padding: 120px 2rem 5rem; max-width: 860px; margin: 0 auto; border-bottom: 1px solid rgba(200,255,0,0.15); }
+        .article-cat { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--acid); text-transform: uppercase; border: 1px solid var(--acid); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+        .article-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem; }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+        .article-body { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--white); margin: 3rem 0 1.2rem; letter-spacing: 0.02em; }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li { font-size: 0.9rem; color: #ccc; padding: 0.6rem 0; padding-left: 1.4rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box { border-left: 3px solid var(--acid); background: rgba(200,255,0,0.04); padding: 1.5rem 2rem; margin: 2.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .tech-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .tech-card { background: var(--surface); border: 1px solid rgba(200,255,0,0.12); padding: 1.8rem; }
+        .tech-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--acid); margin-bottom: 0.3rem; }
+        .tech-card-type { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+        .tech-card-pro { font-size: 0.82rem; color: #bbb; line-height: 1.6; margin-bottom: 0.5rem; }
+        .tech-card-pro strong { color: #C8FF00; font-weight: 400; }
+        .tech-card-con { font-size: 0.82rem; color: #888; line-height: 1.6; }
+        .decision-matrix { background: var(--surface); border: 1px solid rgba(200,255,0,0.15); padding: 2rem; margin: 2.5rem 0; }
+        .decision-row { display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: flex-start; }
+        .decision-row:last-child { border-bottom: none; }
+        .decision-scenario { font-size: 0.82rem; color: #ccc; flex: 2; }
+        .decision-answer { font-size: 0.82rem; color: var(--acid); flex: 1; font-weight: 500; text-align: right; }
+        .article-cta { border-top: 1px solid rgba(200,255,0,0.2); padding: 4rem 2rem; text-align: center; background: var(--surface); }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn { display: inline-block; background: var(--acid); color: var(--black); padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.85; }
+        .blog-nav-bottom { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+        @media (max-width: 640px) { header { padding: 1rem; } .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; } .decision-answer { text-align: left; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">H.</a>
+    <a href="blog.html" class="back-link">← Volver al blog</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">APPS MÓVILES</div>
+        <h1 class="article-title">Nativa vs híbrida: la guía definitiva para elegir tu app móvil</h1>
+        <div class="article-meta">18 NOVIEMBRE 2024 &nbsp;·&nbsp; 6 MIN LECTURA &nbsp;·&nbsp; <span>H. DIGITAL</span></div>
+    </div>
+
+    <div class="article-body">
+        <p>Cuando alguien nos dice "quiero hacer una app", la siguiente pregunta siempre es la misma: ¿nativa o híbrida? La respuesta correcta depende de cuatro variables: presupuesto, audiencia, funcionalidades requeridas y velocidad de lanzamiento. En este artículo desmontan los mitos de ambas opciones y ofrecemos un criterio de decisión claro.</p>
+
+        <div class="highlight-box">
+            <p>"La pregunta no es qué tecnología es mejor en abstracto. La pregunta es qué tecnología es correcta para tu caso concreto. En el 70% de los proyectos que recibimos, el cliente llega con una tecnología ya decidida que no es la óptima para sus necesidades."</p>
+        </div>
+
+        <h2>¿QUÉ SIGNIFICA <span class="accent">NATIVA</span>?</h2>
+        <p>Una app nativa se desarrolla específicamente para una plataforma: Swift o SwiftUI para iOS, Kotlin o Java para Android. Usa directamente las APIs del sistema operativo, accede al hardware sin intermediarios y ofrece la experiencia de usuario más fluida posible en cada plataforma. El precio: dos bases de código separadas, dos equipos (o uno que domina ambos), y el doble de tiempo de mantenimiento.</p>
+
+        <h2>¿QUÉ SIGNIFICA <span class="accent">HÍBRIDA</span>?</h2>
+        <p>Una app híbrida o cross-platform usa una única base de código para generar aplicaciones para iOS y Android. Los frameworks más populares en 2025 son React Native (Meta) y Flutter (Google). Comparten código, pero no son WebApps: se compilan a código nativo y tienen acceso a las funcionalidades del dispositivo.</p>
+
+        <h2>LAS <span class="accent">TRES OPCIONES</span> QUE EXISTEN HOY</h2>
+
+        <div class="tech-cards">
+            <div class="tech-card">
+                <div class="tech-card-name">SWIFT / KOTLIN</div>
+                <div class="tech-card-type">Nativa — iOS / Android</div>
+                <div class="tech-card-pro"><strong>+</strong> Máximo rendimiento y fluidez</div>
+                <div class="tech-card-pro"><strong>+</strong> Acceso completo a APIs del SO</div>
+                <div class="tech-card-pro"><strong>+</strong> Mejor experiencia en hardware avanzado</div>
+                <div class="tech-card-con">— Dos bases de código separadas</div>
+                <div class="tech-card-con">— Mayor coste de desarrollo y mantenimiento</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-name">REACT NATIVE</div>
+                <div class="tech-card-type">Híbrida / Cross-platform</div>
+                <div class="tech-card-pro"><strong>+</strong> Una base de código para iOS y Android</div>
+                <div class="tech-card-pro"><strong>+</strong> Ecosistema enorme, fácil de encontrar devs</div>
+                <div class="tech-card-pro"><strong>+</strong> Ideal si ya tienes web en React</div>
+                <div class="tech-card-con">— Puente JS puede crear cuellos de botella</div>
+                <div class="tech-card-con">— Dependencia de librerías de terceros</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-name">FLUTTER</div>
+                <div class="tech-card-type">Híbrida / Cross-platform</div>
+                <div class="tech-card-pro"><strong>+</strong> Rendimiento cercano al nativo</div>
+                <div class="tech-card-pro"><strong>+</strong> UI consistente en todas las plataformas</div>
+                <div class="tech-card-pro"><strong>+</strong> También para web y desktop</div>
+                <div class="tech-card-con">— Tamaño de app mayor</div>
+                <div class="tech-card-con">— Ecosistema más joven que React Native</div>
+            </div>
+        </div>
+
+        <h2>MATRIZ DE <span class="accent">DECISIÓN</span> — tu caso, tu respuesta</h2>
+
+        <div class="decision-matrix">
+            <div class="decision-row">
+                <div class="decision-scenario">Necesito lanzar en iOS y Android con presupuesto ajustado</div>
+                <div class="decision-answer">React Native / Flutter</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">La app hace uso intensivo de la cámara, GPS o sensores del dispositivo</div>
+                <div class="decision-answer">Nativa o Flutter</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">Animaciones complejas y experiencia muy fluida son críticas</div>
+                <div class="decision-answer">Nativa o Flutter</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">Tengo equipo de React en mi empresa</div>
+                <div class="decision-answer">React Native</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">Solo necesito iOS (o solo Android)</div>
+                <div class="decision-answer">Nativa</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">Quiero lanzar una MVP rápida y validar antes de invertir más</div>
+                <div class="decision-answer">React Native / Flutter</div>
+            </div>
+            <div class="decision-row">
+                <div class="decision-scenario">La app es una extensión de una app bancaria, médica o con requisitos de seguridad muy altos</div>
+                <div class="decision-answer">Nativa</div>
+            </div>
+        </div>
+
+        <h2>EL <span class="accent">MITO DEL RENDIMIENTO</span> — ya no es lo que era</h2>
+        <p>En 2019, la brecha de rendimiento entre apps nativas e híbridas era evidente. En 2025, con la arquitectura nueva de React Native (JSI) y las capacidades de Flutter, la diferencia es imperceptible para el 90% de los casos de uso. A menos que estés construyendo un juego 3D de alta gama o una aplicación de realidad aumentada compleja, el rendimiento no debería ser el factor decisivo.</p>
+
+        <h2>¿Y LAS <span class="accent">PROGRESSIVE WEB APPS</span> (PWA)?</h2>
+        <p>Existe una tercera opción que muchos olvidan: la Progressive Web App. Una web que se comporta como una app, instalable desde el navegador, con soporte offline y notificaciones push. No está en los stores (aunque esto está cambiando), pero para muchos casos de uso —especialmente negocios con base de clientes existente— es la opción más rápida y económica. Si tu audiencia es tech-savvy y no necesitas funcionalidades de hardware avanzadas, una PWA puede ser el punto de entrada correcto antes de invertir en desarrollo nativo.</p>
+
+        <h2>NUESTRA <span class="accent">RECOMENDACIÓN</span> GENERAL</h2>
+        <ul>
+            <li>Startups con presupuesto limitado y necesidad de validar: React Native o Flutter</li>
+            <li>Proyectos con UX diferencial como ventaja competitiva: nativa o Flutter</li>
+            <li>Empresas con equipo JS existente: React Native</li>
+            <li>Apps multi-plataforma (móvil + web + desktop): Flutter</li>
+            <li>Casos de uso simples o con audiencia tech: considera PWA primero</li>
+        </ul>
+    </div>
+</article>
+
+<div class="article-cta">
+    <h3>¿TIENES UN PROYECTO DE APP?</h3>
+    <p>Te ayudamos a elegir la tecnología correcta y a construir la app que tu negocio necesita.</p>
+    <a href="index.html#contacto" class="btn">HABLEMOS DE TU APP ↗</a>
+</div>
+
+<div class="blog-nav-bottom">
+    <a href="blog-software.html">← ANTERIOR: SOFTWARE A MEDIDA</a>
+    <a href="blog.html">← TODOS LOS ARTÍCULOS</a>
+</div>
+
+<footer>H. © 2025 — MADRID, ESPAÑA</footer>
+
+</body>
+</html>

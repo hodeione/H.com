@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Por qué el 60% de las webs nuevas fracasan en SEO — H. Blog</title>
+    <meta name="description" content="Los 5 fallos técnicos que sabotean el posicionamiento orgánico de webs nuevas. Errores reales con soluciones concretas.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --white: #ffffff; --acid: #C8FF00; --gray: #8C8C7A; --surface: #111111; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,255,0,0.2); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+        .article-hero { padding: 120px 2rem 5rem; max-width: 860px; margin: 0 auto; border-bottom: 1px solid rgba(200,255,0,0.15); }
+        .article-cat { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--acid); text-transform: uppercase; border: 1px solid var(--acid); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+        .article-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--white); margin-bottom: 1.5rem; }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+        .article-body { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--white); margin: 3rem 0 1.2rem; letter-spacing: 0.02em; }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li { font-size: 0.9rem; color: #ccc; padding: 0.6rem 0; padding-left: 1.4rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box { border-left: 3px solid var(--acid); background: rgba(200,255,0,0.04); padding: 1.5rem 2rem; margin: 2.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .fallo-box { background: var(--surface); border: 1px solid rgba(200,255,0,0.15); padding: 1.8rem; margin-bottom: 1rem; }
+        .fallo-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: rgba(200,255,0,0.15); line-height: 1; margin-bottom: 0.5rem; }
+        .fallo-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--acid); margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .fallo-desc { font-size: 0.88rem; color: #bbb; line-height: 1.7; margin-bottom: 0; }
+        .article-cta { border-top: 1px solid rgba(200,255,0,0.2); padding: 4rem 2rem; text-align: center; background: var(--surface); }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn { display: inline-block; background: var(--acid); color: var(--black); padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.85; }
+        .blog-nav-bottom { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+        @media (max-width: 640px) { header { padding: 1rem; } .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">H.</a>
+    <a href="blog.html" class="back-link">← Volver al blog</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">SEO</div>
+        <h1 class="article-title">Por qué el 60% de las webs nuevas fracasan en SEO</h1>
+        <div class="article-meta">20 DICIEMBRE 2024 &nbsp;·&nbsp; 6 MIN LECTURA &nbsp;·&nbsp; <span>H. DIGITAL</span></div>
+    </div>
+
+    <div class="article-body">
+        <p>Lanzas tu web, tienes buen diseño, buen contenido, incluso has pagado por fotos profesionales. Pasan tres meses y Google ni te conoce. La frustración es real y el diagnóstico casi siempre apunta a los mismos cinco fallos técnicos. No son secretos del sector: son errores básicos que se repiten porque nadie avisa de ellos antes del lanzamiento.</p>
+
+        <div class="highlight-box">
+            <p>"El SEO no empieza cuando publicas la web. Empieza cuando la diseñas. Una web construida sin tener en cuenta el posicionamiento técnico necesita el doble de tiempo para recuperar el terreno perdido."</p>
+        </div>
+
+        <h2>LOS 5 <span class="accent">FALLOS TÉCNICOS</span> MÁS FRECUENTES</h2>
+
+        <div class="fallo-box">
+            <div class="fallo-num">01</div>
+            <div class="fallo-title">CORE WEB VITALS POR DEBAJO DEL UMBRAL</div>
+            <p class="fallo-desc">Desde 2021, Google usa los Core Web Vitals (LCP, INP, CLS) como factores de ranking. Una web con imágenes sin comprimir, JavaScript bloqueante o fuentes que provocan layout shifts puede estar perdiendo posiciones incluso con buen contenido. El problema: PageSpeed Insights lo detecta en cinco minutos, pero pocos lo revisan antes del lanzamiento. El LCP (tiempo hasta que el elemento principal es visible) debe ser inferior a 2,5 segundos. La mayoría de webs nuevas están entre 4 y 8 segundos.</p>
+        </div>
+
+        <div class="fallo-box">
+            <div class="fallo-num">02</div>
+            <div class="fallo-title">ARQUITECTURA DE URLs SIN PLANIFICAR</div>
+            <p class="fallo-desc">Las URLs son la primera señal de estructura que Google recibe. URLs como /page?id=342 o /category/subcategory/sub-subcategory/product-name-very-long no transmiten jerarquía ni relevancia. Una arquitectura URL bien diseñada—plana, descriptiva, con palabras clave naturales—facilita el rastreo e indexación desde el primer día. Migrar la estructura de URLs después del lanzamiento implica gestionar redirecciones y puede costar meses de posicionamiento perdido.</p>
+        </div>
+
+        <div class="fallo-box">
+            <div class="fallo-num">03</div>
+            <div class="fallo-title">CONTENIDO DUPLICADO INTERNO</div>
+            <p class="fallo-desc">El contenido duplicado no es solo copiar texto de otro sitio. Dentro de tu propia web puedes generar duplicados con: versiones HTTP y HTTPS sin redirigir, la misma página accesible con y sin www, parámetros de URL que crean versiones distintas de la misma página (/?sort=price, /?sort=name), y páginas de tags o categorías sin contenido original. Google no sanciona el duplicado interno, pero sí desaprovecha el presupuesto de rastreo y puede confundirse sobre qué versión indexar.</p>
+        </div>
+
+        <div class="fallo-box">
+            <div class="fallo-num">04</div>
+            <div class="fallo-title">ESTRUCTURA DE ENCABEZADOS CAÓTICA</div>
+            <p class="fallo-desc">Los H1, H2 y H3 no son solo decisiones de diseño: son la jerarquía semántica que Google usa para entender de qué trata tu página. El error más frecuente es tener múltiples H1 por página, o usar los encabezados para dar estilo en lugar de para estructurar el contenido. Una página bien estructurada tiene un único H1 con la palabra clave principal, H2 para secciones temáticas y H3 para subsecciones. La mayoría de webs construidas con builders como Wix o Squarespace generan estructuras de encabezados que el editor nunca ve pero Google sí.</p>
+        </div>
+
+        <div class="fallo-box">
+            <div class="fallo-num">05</div>
+            <div class="fallo-title">AUSENCIA DE ESTRATEGIA DE ENLAZADO INTERNO</div>
+            <p class="fallo-desc">El enlazado interno distribuye la autoridad entre las páginas de tu sitio y ayuda a Google a entender qué contenido consideras más relevante. Una web que no enlaza internamente desde las páginas con más tráfico hacia las páginas que quiere posicionar está dejando link juice sobre la mesa. La solución no es compleja: un mapa de enlaces internos prioritarios que se implementa durante el desarrollo, no después.</p>
+        </div>
+
+        <h2>BONUS: <span class="accent">EL SITEMAP Y EL ROBOTS.TXT</span></h2>
+        <p>Dos archivos que existen en todas las webs pero que pocas revisan antes de publicar. Un sitemap.xml desactualizado puede incluir páginas 404 o excluir páginas importantes. Un robots.txt mal configurado puede bloquear accidentalmente el rastreo de secciones enteras de la web — hemos visto webs con el directorio /blog bloqueado en producción durante meses sin que nadie lo notara.</p>
+
+        <h2>¿<span class="accent">QUÉ HACER</span> SI YA HAS LANZADO?</h2>
+        <p>Una auditoría técnica SEO identifica en qué punto estás y qué correcciones son prioritarias. No todo requiere rehacer la web: muchos de estos problemas se solucionan con cambios de configuración, compresión de assets y ajustes en el CMS. Lo importante es tener el diagnóstico correcto antes de invertir en contenido.</p>
+        <ul>
+            <li>Audita Core Web Vitals con PageSpeed Insights y Lighthouse</li>
+            <li>Revisa duplicados con Search Console y herramientas como Screaming Frog</li>
+            <li>Valida la estructura de encabezados página a página</li>
+            <li>Comprueba el robots.txt en producción (nunca asumir que está bien)</li>
+            <li>Genera un sitemap dinámico que se actualice con cada publicación</li>
+        </ul>
+    </div>
+</article>
+
+<div class="article-cta">
+    <h3>¿QUIERES SABER DÓNDE FALLA TU SEO?</h3>
+    <p>Realizamos auditorías técnicas SEO que identifican los bloqueos reales y los priorizan por impacto.</p>
+    <a href="index.html#contacto" class="btn">SOLICITAR AUDITORÍA ↗</a>
+</div>
+
+<div class="blog-nav-bottom">
+    <a href="blog-rgpd.html">← ANTERIOR: RGPD 2025</a>
+    <a href="blog-software.html">SIGUIENTE: SOFTWARE A MEDIDA →</a>
+</div>
+
+<footer>H. © 2025 — MADRID, ESPAÑA</footer>
+
+</body>
+</html>
