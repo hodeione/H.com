@@ -8,10 +8,31 @@
     <meta name="description" content="H. — Agencia digital especializada en diseño web, desarrollo de software, automatización con IA, cumplimiento legal RGPD, apps móviles y SEO. Construimos lo digital.">
     <meta name="keywords" content="diseño web, desarrollo software, IA, RGPD, apps móviles, SEO, agencia digital, Madrid">
     <meta name="author" content="H. Digital Agency">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="H. — Agencia Digital Madrid">
+    <meta property="og:description" content="Diseño web, software a medida, automatización con IA, RGPD, apps móviles y SEO. Construimos lo digital.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="H. — Agencia Digital Madrid">
+    <meta name="twitter:description" content="Diseño web, software a medida, automatización con IA, RGPD, apps móviles y SEO.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "H. Digital Agency",
+        "description": "Agencia digital especializada en diseño web, software a medida, automatización con IA, cumplimiento RGPD, apps móviles y SEO.",
+        "email": "hodeione41@gmail.com",
+        "telephone": "+34668524968",
+        "address": { "@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES" },
+        "areaServed": "ES",
+        "priceRange": "€€"
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="claude-widgets.css">
 </head>
 
 <body class="loading">
@@ -44,6 +65,7 @@
             <a href="#servicios">SERVICIOS</a>
             <a href="#portfolio">PORTFOLIO</a>
             <a href="#proceso">PROCESO</a>
+            <a href="#ia-lab">IA LAB</a>
             <a href="#blog">BLOG</a>
             <a href="#contacto">CONTACTO</a>
         </nav>
@@ -61,6 +83,7 @@
             <a href="#servicios" class="mobile-nav-link">SERVICIOS</a>
             <a href="#portfolio" class="mobile-nav-link">PORTFOLIO</a>
             <a href="#proceso" class="mobile-nav-link">PROCESO</a>
+            <a href="#ia-lab" class="mobile-nav-link">IA LAB</a>
             <a href="#blog" class="mobile-nav-link">BLOG</a>
             <a href="#contacto" class="mobile-nav-link">CONTACTO</a>
         </nav>
@@ -458,10 +481,44 @@
         </div>
     </section>
 
+    <!-- IA LAB SECTION -->
+    <section class="ai-lab" id="ia-lab">
+        <div class="section-header reveal">
+            <span class="section-number">05</span>
+            <h2 class="section-title">IA EN VIVO.</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="ai-lab-inner">
+            <div class="ai-lab-intro reveal">
+                <div class="ai-lab-badge">POWERED BY CLAUDE FABLE 5</div>
+                <h3 class="ai-lab-title">GENERA EL BRIEF DE TU PROYECTO EN 30 SEGUNDOS.</h3>
+                <p class="ai-lab-desc">No vendemos humo con la IA: la usamos delante de ti. Describe tu idea y nuestra IA genera un brief profesional con servicios, stack, fases, plazo y presupuesto orientativo.</p>
+                <ul class="ai-lab-points">
+                    <li>Análisis instantáneo de tu idea de negocio</li>
+                    <li>Servicios y tecnologías recomendados para tu caso</li>
+                    <li>Fases, plazos y rango de presupuesto realistas</li>
+                    <li>Envíalo al formulario con un clic y te respondemos en 24h</li>
+                </ul>
+            </div>
+            <div class="ai-lab-console reveal">
+                <div class="ai-console-bar">
+                    <span class="ai-console-dot active"></span>
+                    <span class="ai-console-dot"></span>
+                    <span class="ai-console-dot"></span>
+                    <span>H.BRIEF — TERMINAL IA</span>
+                </div>
+                <textarea id="aiBriefInput" maxlength="4000" placeholder="Ej: Tengo una clínica dental en Madrid y quiero una web con reservas online, que cumpla RGPD y aparezca en Google cuando busquen 'dentista Madrid centro'..."></textarea>
+                <button class="ai-brief-btn" id="aiBriefBtn"><span>GENERAR BRIEF CON IA →</span></button>
+                <div class="ai-brief-status" id="aiBriefStatus"></div>
+                <div class="ai-brief-result" id="aiBriefResult"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS SECTION -->
     <section class="testimonials" id="testimonios">
         <div class="section-header reveal">
-            <span class="section-number">05</span>
+            <span class="section-number">06</span>
             <h2 class="section-title">LO QUE DICEN.</h2>
             <div class="section-line"></div>
         </div>
@@ -532,7 +589,7 @@
     <!-- BLOG SECTION -->
     <section class="blog" id="blog">
         <div class="section-header reveal">
-            <span class="section-number">06</span>
+            <span class="section-number">07</span>
             <h2 class="section-title">IDEAS Y RECURSOS.</h2>
             <div class="section-line"></div>
         </div>
@@ -631,7 +688,7 @@
     <!-- FAQ SECTION -->
     <section class="faq-section" id="faq">
         <div class="section-header reveal">
-            <span class="section-number">07</span>
+            <span class="section-number">08</span>
             <h2 class="section-title">PREGUNTAS FRECUENTES.</h2>
             <div class="section-line"></div>
         </div>
@@ -707,7 +764,7 @@
         <div class="contact-inner">
             <div class="contact-left" id="contactLeft">
                 <div class="section-header" style="margin-bottom:2rem;">
-                    <span class="section-number">08</span>
+                    <span class="section-number">09</span>
                     <h2 class="section-title">¿TIENES UN PROYECTO?</h2>
                 </div>
                 <p class="contact-desc">Cuéntanos tu idea, presupuesto y timeline. Te respondemos en 24h con una propuesta personalizada y sin compromiso.</p>
@@ -810,5 +867,6 @@
 
     <script src="anime.min.js"></script>
     <script src="script.js"></script>
+    <script src="claude-widgets.js"></script>
 </body>
 </html>

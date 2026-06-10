@@ -3,6 +3,64 @@
 ## 📋 Descripción
 Sitio web de una agencia digital española con estética brutalista, diseñado para presentar servicios de web design, software, IA, legal compliance, apps móviles y SEO/marketing digital.
 
+## 🤖 Integraciones de IA (Claude Fable 5)
+
+El sitio incluye dos integraciones reales con la API de Claude, usando el modelo `claude-fable-5` con fallback automático del servidor a `claude-opus-4-8`:
+
+1. **H.BOT** — Chat flotante con streaming en tiempo real. Conoce los servicios, precios y procesos de la agencia y orienta a los visitantes hacia el contacto.
+2. **H.BRIEF** — Generador de brief de proyecto (sección "IA EN VIVO"). El visitante describe su idea y la IA devuelve un brief estructurado (salida JSON con schema garantizado): servicios recomendados, stack, fases, plazo y rango de presupuesto. Un clic lo lleva al formulario de contacto.
+
+### Arquitectura
+
+```
+Navegador (claude-widgets.js)
+   │  POST /api/claude  { mode: "chat" | "brief" }
+   ▼
+Función serverless (api/claude.js, Vercel)   ← ANTHROPIC_API_KEY solo aquí
+   │  @anthropic-ai/sdk · streaming SSE · structured outputs · server-side fallbacks
+   ▼
+API de Claude (claude-fable-5 → fallback claude-opus-4-8)
+```
+
+- La clave de API **nunca llega al navegador**: vive en las variables de entorno del servidor.
+- Las respuestas de chat llegan por **streaming SSE** (texto token a token).
+- El brief usa **structured outputs** (`output_config.format` con JSON Schema), por lo que el JSON siempre es válido.
+- Si los clasificadores de seguridad de Fable 5 declinan una petición (`stop_reason: "refusal"`), el servidor reintenta automáticamente con Opus 4.8 en el mismo round-trip (beta `server-side-fallback-2026-06-01`).
+
+### Modo demo
+
+Si el sitio se sirve **sin backend** (p. ej. GitHub Pages o doble clic en `index.html`), los widgets detectan que `/api/claude` no existe y entran en **modo demo**: respuestas locales simuladas claramente etiquetadas como "MODO DEMO". El sitio nunca se rompe.
+
+### Activar la IA real — solo falta la API key
+
+Todo está ya configurado. El único paso pendiente es añadir tu clave de API:
+
+1. Consigue tu clave en **https://platform.claude.com** → API Keys (empieza por `sk-ant-...`).
+2. En el panel de **Vercel** → tu proyecto → **Settings → Environment Variables** → añade:
+   - Name: `ANTHROPIC_API_KEY`
+   - Value: *tu clave*
+   - Environments: Production (y Preview si quieres)
+3. **Redeploy** (Deployments → ⋯ → Redeploy).
+
+Listo: H.BOT y H.BRIEF dejarán el modo demo y responderán con Claude Fable 5 en tiempo real.
+
+<details>
+<summary>Alternativa por terminal (Vercel CLI)</summary>
+
+```bash
+npm install
+npx vercel link
+npx vercel env add ANTHROPIC_API_KEY
+npx vercel --prod
+```
+</details>
+
+Si el backend vive en otro dominio, define el endpoint antes de cargar `claude-widgets.js`:
+
+```html
+<script>window.H_AI_ENDPOINT = 'https://tu-backend.vercel.app/api/claude';</script>
+```
+
 ## 📁 Archivos Incluidos
 
 ### Página Principal
