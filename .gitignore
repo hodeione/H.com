@@ -1,4 +1,7 @@
 node_modules/
 take-screenshots.js
 fix-service-pages.js
-package*.json
+package-lock.json
+.env
+.env.local
+.vercel
