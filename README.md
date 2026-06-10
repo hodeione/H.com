@@ -31,14 +31,29 @@ API de Claude (claude-fable-5 → fallback claude-opus-4-8)
 
 Si el sitio se sirve **sin backend** (p. ej. GitHub Pages o doble clic en `index.html`), los widgets detectan que `/api/claude` no existe y entran en **modo demo**: respuestas locales simuladas claramente etiquetadas como "MODO DEMO". El sitio nunca se rompe.
 
-### Desplegar con IA real (Vercel)
+### Activar la IA real — solo falta la API key
+
+Todo está ya configurado. El único paso pendiente es añadir tu clave de API:
+
+1. Consigue tu clave en **https://platform.claude.com** → API Keys (empieza por `sk-ant-...`).
+2. En el panel de **Vercel** → tu proyecto → **Settings → Environment Variables** → añade:
+   - Name: `ANTHROPIC_API_KEY`
+   - Value: *tu clave*
+   - Environments: Production (y Preview si quieres)
+3. **Redeploy** (Deployments → ⋯ → Redeploy).
+
+Listo: H.BOT y H.BRIEF dejarán el modo demo y responderán con Claude Fable 5 en tiempo real.
+
+<details>
+<summary>Alternativa por terminal (Vercel CLI)</summary>
 
 ```bash
 npm install
-npx vercel            # vincula el proyecto
-npx vercel env add ANTHROPIC_API_KEY   # pega tu clave de https://platform.claude.com
+npx vercel link
+npx vercel env add ANTHROPIC_API_KEY
 npx vercel --prod
 ```
+</details>
 
 Si el backend vive en otro dominio, define el endpoint antes de cargar `claude-widgets.js`:
 
