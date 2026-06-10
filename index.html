@@ -96,8 +96,8 @@
 
     <!-- HERO SECTION -->
     <section class="hero" id="inicio">
-        <video autoplay loop muted playsinline class="hero-video-bg" id="heroVideo">
-            <source src="hanimacion.mp4" type="video/mp4">
+        <video loop muted playsinline preload="none" class="hero-video-bg" id="heroVideo">
+            <source data-src="hanimacion.mp4" type="video/mp4">
         </video>
         <div class="hero-grid"></div>
         <div class="hero-noise"></div>
@@ -513,6 +513,36 @@
                 <div class="ai-brief-status" id="aiBriefStatus"></div>
                 <div class="ai-brief-result" id="aiBriefResult"></div>
             </div>
+        </div>
+
+        <!-- H.SCAN — auditoría web + revisión de diseño con visión -->
+        <div class="ai-scan reveal">
+            <div class="ai-console-bar">
+                <span class="ai-console-dot active"></span>
+                <span class="ai-console-dot"></span>
+                <span class="ai-console-dot"></span>
+                <span>H.SCAN — AUDITORÍA EXPRESS CON IA</span>
+            </div>
+            <div class="ai-scan-tabs">
+                <button class="ai-scan-tab active" data-pane="aiScanPaneUrl">AUDITAR MI WEB (URL)</button>
+                <button class="ai-scan-tab" data-pane="aiScanPaneVision">ANALIZAR MI DISEÑO (CAPTURA)</button>
+            </div>
+            <div class="ai-scan-pane" id="aiScanPaneUrl">
+                <div class="ai-scan-row">
+                    <input type="url" id="aiScanUrl" class="ai-scan-input" placeholder="https://tuweb.com" maxlength="500">
+                    <button class="ai-brief-btn ai-scan-btn" id="aiScanBtn"><span>AUDITAR CON IA →</span></button>
+                </div>
+                <p class="ai-scan-hint">La IA visita tu web y puntúa SEO, RGPD, contenido y técnica — con hallazgos concretos y quick wins.</p>
+            </div>
+            <div class="ai-scan-pane hidden" id="aiScanPaneVision">
+                <div class="ai-drop" id="aiDrop">
+                    <input type="file" id="aiDropInput" accept="image/jpeg,image/png,image/webp" hidden>
+                    <span class="ai-drop-text">Arrastra aquí una captura de tu web<br>o <u>haz clic para subirla</u></span>
+                </div>
+                <p class="ai-scan-hint">Claude "ve" tu diseño como un director de arte: puntuación, fortalezas y mejoras accionables.</p>
+            </div>
+            <div class="ai-brief-status" id="aiScanStatus"></div>
+            <div class="ai-scan-result" id="aiScanResult"></div>
         </div>
     </section>
 
