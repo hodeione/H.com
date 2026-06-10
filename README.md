@@ -5,10 +5,12 @@ Sitio web de una agencia digital española con estética brutalista, diseñado p
 
 ## 🤖 Integraciones de IA (Claude Fable 5)
 
-El sitio incluye dos integraciones reales con la API de Claude, usando el modelo `claude-fable-5` con fallback automático del servidor a `claude-opus-4-8`:
+El sitio incluye cuatro integraciones reales con la API de Claude, usando el modelo `claude-fable-5` con fallback automático del servidor a `claude-opus-4-8`:
 
-1. **H.BOT** — Chat flotante con streaming en tiempo real. Conoce los servicios, precios y procesos de la agencia y orienta a los visitantes hacia el contacto.
+1. **H.BOT** — Chat flotante con streaming en tiempo real, disponible en **todas las páginas**. Conoce los servicios, precios y procesos de la agencia y orienta a los visitantes hacia el contacto.
 2. **H.BRIEF** — Generador de brief de proyecto (sección "IA EN VIVO"). El visitante describe su idea y la IA devuelve un brief estructurado (salida JSON con schema garantizado): servicios recomendados, stack, fases, plazo y rango de presupuesto. Un clic lo lleva al formulario de contacto.
+3. **H.SCAN / Auditoría URL** — El visitante pega la URL de su web; el servidor la visita, recorta el HTML y Claude la audita: puntuaciones 0-100 de SEO, RGPD, contenido y técnica, hallazgos con severidad y quick wins.
+4. **H.SCAN / Revisión de diseño (visión)** — El visitante arrastra una captura de su web; Claude la analiza con visión como un director de arte: puntuación, fortalezas, mejoras accionables y un consejo pro. La imagen se redimensiona en el navegador antes de enviarse.
 
 ### Arquitectura
 

@@ -14,6 +14,23 @@
 // usuario tiene prefers-reduced-motion.
 // ============================================================================
 
+// ── Carga diferida del vídeo del hero (81MB): primero pinta la página, luego
+//    descarga el vídeo. Independiente de prefers-reduced-motion.
+(function () {
+    const video = document.getElementById('heroVideo');
+    if (!video) return;
+    function loadVideo() {
+        const source = video.querySelector('source[data-src]');
+        if (!source) return;
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+        video.load();
+        video.play().catch(() => {});
+    }
+    if (document.readyState === 'complete') loadVideo();
+    else window.addEventListener('load', loadVideo, { once: true });
+})();
+
 (function () {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) return;

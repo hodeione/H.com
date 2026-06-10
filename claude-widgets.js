@@ -379,11 +379,300 @@
         });
     }
 
+    // ════════════════════════════════════════════════════════════════════════
+    // 3. H.SCAN — AUDITORÍA WEB (URL) + REVISIÓN DE DISEÑO (VISIÓN)
+    // ════════════════════════════════════════════════════════════════════════
+    function demoAudit(url) {
+        // puntuaciones pseudoaleatorias pero estables por URL
+        let h = 0;
+        for (const c of url) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+        const score = base => 45 + ((h = (h * 1103515245 + 12345) >>> 0) % 40) + base;
+        return {
+            resumen: 'Auditoría de demostración generada en local. En producción, Claude Fable 5 visita tu web de verdad y analiza su HTML real: metas, estructura, cookies, contenido y señales técnicas.',
+            puntuaciones: { seo: score(0), rgpd: score(-10), contenido: score(5), tecnico: score(0) },
+            hallazgos: [
+                { area: 'SEO', severidad: 'MEDIA', detalle: 'Ejemplo: la meta description podría estar ausente o ser demasiado corta para destacar en Google.' },
+                { area: 'RGPD', severidad: 'ALTA', detalle: 'Ejemplo: si cargas analítica antes del consentimiento de cookies, la AEPD puede sancionarlo.' },
+                { area: 'CONTENIDO', severidad: 'BAJA', detalle: 'Ejemplo: la propuesta de valor tarda en aparecer; el primer pantallazo debería responder "¿qué gano yo aquí?".' },
+            ],
+            quick_wins: [
+                'Añadir título y meta description únicos por página',
+                'Bloquear scripts de terceros hasta el consentimiento',
+                'Un CTA visible en el primer pantallazo',
+            ],
+            veredicto: 'Con unos ajustes bien dirigidos, esta web puede rendir bastante más. Hablemos.',
+            _demo: true,
+        };
+    }
+
+    const DEMO_VISION = {
+        puntuacion: 68,
+        veredicto: 'Revisión de demostración: en producción, Claude Fable 5 analiza tu captura real como un director de arte.',
+        fortalezas: ['Demo: jerarquía visual razonable', 'Demo: paleta de color coherente'],
+        mejoras: [
+            { titulo: 'Contraste del CTA', detalle: 'Ejemplo: el botón principal debe destacar del fondo para guiar el ojo.' },
+            { titulo: 'Espaciado', detalle: 'Ejemplo: más aire entre secciones mejora la lectura y la sensación premium.' },
+        ],
+        consejo_pro: 'Diseña el primer pantallazo para que se entienda en 3 segundos: quién eres, qué ofreces y qué hacer ahora.',
+        _demo: true,
+    };
+
+    function scoreColor(v) { return v >= 70 ? 'var(--acid-yellow)' : v >= 50 ? '#ffb000' : '#ff5a5a'; }
+
+    function renderAudit(container, audit, url) {
+        container.innerHTML = '';
+        container.classList.add('visible');
+        if (audit._demo) container.appendChild(el('div', 'ai-brief-demo-tag', 'MODO DEMO — en producción la IA audita tu web real'));
+
+        const head = el('div', 'ai-brief-head');
+        head.appendChild(el('div', 'ai-brief-label', '// AUDITORÍA — ' + (url || '').replace(/^https?:\/\//, '')));
+        head.appendChild(el('p', 'ai-brief-summary', audit.resumen));
+        container.appendChild(head);
+
+        // Puntuaciones con barras animadas
+        const scores = el('div', 'ai-scan-scores');
+        const ORDER = [['seo', 'SEO'], ['rgpd', 'RGPD'], ['contenido', 'CONTENIDO'], ['tecnico', 'TÉCNICO']];
+        ORDER.forEach(([key, label]) => {
+            const v = Math.max(0, Math.min(100, audit.puntuaciones[key] | 0));
+            const row = el('div', 'ai-score-row');
+            row.appendChild(el('span', 'ai-score-label', label));
+            const barWrap = el('div', 'ai-score-bar');
+            const fill = el('div', 'ai-score-fill');
+            fill.style.background = scoreColor(v);
+            barWrap.appendChild(fill);
+            row.appendChild(barWrap);
+            row.appendChild(el('span', 'ai-score-value', String(v)));
+            scores.appendChild(row);
+            requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = v + '%'; }));
+        });
+        container.appendChild(scores);
+
+        // Hallazgos
+        const finds = el('div', 'ai-brief-block');
+        finds.appendChild(el('div', 'ai-brief-block-label', 'HALLAZGOS'));
+        (audit.hallazgos || []).forEach(f => {
+            const row = el('div', 'ai-finding');
+            const sev = el('span', 'ai-finding-sev sev-' + f.severidad.toLowerCase(), f.severidad);
+            row.appendChild(sev);
+            const body = el('div', 'ai-finding-body');
+            body.appendChild(el('span', 'ai-finding-area', f.area));
+            body.appendChild(el('p', 'ai-finding-text', f.detalle));
+            row.appendChild(body);
+            finds.appendChild(row);
+        });
+        container.appendChild(finds);
+
+        // Quick wins
+        const wins = el('div', 'ai-brief-block');
+        wins.appendChild(el('div', 'ai-brief-block-label', 'QUICK WINS'));
+        const list = el('ul', 'ai-scan-wins');
+        (audit.quick_wins || []).forEach(w => list.appendChild(el('li', null, w)));
+        wins.appendChild(list);
+        container.appendChild(wins);
+
+        appendScanCta(container, audit.veredicto, `[Auditoría IA de ${url}]\n${audit.resumen}`);
+    }
+
+    function renderVision(container, review) {
+        container.innerHTML = '';
+        container.classList.add('visible');
+        if (review._demo) container.appendChild(el('div', 'ai-brief-demo-tag', 'MODO DEMO — en producción la IA analiza tu captura real'));
+
+        const head = el('div', 'ai-scan-vision-head');
+        const score = el('div', 'ai-scan-bigscore');
+        score.appendChild(el('span', 'ai-scan-bigscore-num', String(review.puntuacion)));
+        score.appendChild(el('span', 'ai-scan-bigscore-label', '/ 100 DISEÑO'));
+        score.querySelector('.ai-scan-bigscore-num').style.color = scoreColor(review.puntuacion);
+        head.appendChild(score);
+        head.appendChild(el('p', 'ai-brief-summary', review.veredicto));
+        container.appendChild(head);
+
+        const fort = el('div', 'ai-brief-block');
+        fort.appendChild(el('div', 'ai-brief-block-label', 'LO QUE FUNCIONA'));
+        const fl = el('ul', 'ai-scan-wins');
+        (review.fortalezas || []).forEach(f => fl.appendChild(el('li', null, f)));
+        fort.appendChild(fl);
+        container.appendChild(fort);
+
+        const mej = el('div', 'ai-brief-block');
+        mej.appendChild(el('div', 'ai-brief-block-label', 'MEJORAS RECOMENDADAS'));
+        (review.mejoras || []).forEach(m => {
+            const row = el('div', 'ai-brief-service');
+            row.appendChild(el('span', 'ai-brief-service-name', m.titulo));
+            row.appendChild(el('span', 'ai-brief-service-why', m.detalle));
+            mej.appendChild(row);
+        });
+        container.appendChild(mej);
+
+        const pro = el('div', 'ai-brief-block');
+        pro.appendChild(el('div', 'ai-brief-block-label', 'CONSEJO PRO'));
+        pro.appendChild(el('p', 'ai-brief-next-text', review.consejo_pro));
+        container.appendChild(pro);
+
+        appendScanCta(container, null, `[Revisión de diseño IA — ${review.puntuacion}/100]\n${review.veredicto}`);
+    }
+
+    function appendScanCta(container, verdict, formText) {
+        const next = el('div', 'ai-brief-next');
+        if (verdict) next.appendChild(el('p', 'ai-brief-next-text', verdict));
+        const cta = el('button', 'ai-brief-cta');
+        cta.innerHTML = '<span>QUIERO MEJORAR ESTO — HABLEMOS ↗</span>';
+        cta.addEventListener('click', () => {
+            const msg = document.getElementById('inputMessage');
+            if (msg) msg.value = formText + '\n\nMe gustaría una propuesta para mejorar estos puntos.';
+            document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
+        });
+        next.appendChild(cta);
+        container.appendChild(next);
+        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resizeImage(file) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            const url = URL.createObjectURL(file);
+            img.onload = () => {
+                URL.revokeObjectURL(url);
+                const MAX = 1400;
+                const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.round(img.width * scale);
+                canvas.height = Math.round(img.height * scale);
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                resolve(canvas.toDataURL('image/jpeg', 0.82));
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('No se pudo leer la imagen.')); };
+            img.src = url;
+        });
+    }
+
+    function initScan() {
+        const tabs = document.querySelectorAll('.ai-scan-tab');
+        const status = document.getElementById('aiScanStatus');
+        const result = document.getElementById('aiScanResult');
+        const urlInput = document.getElementById('aiScanUrl');
+        const scanBtn = document.getElementById('aiScanBtn');
+        const drop = document.getElementById('aiDrop');
+        const dropInput = document.getElementById('aiDropInput');
+        if (!tabs.length || !status || !result) return;
+
+        let busy = false;
+
+        tabs.forEach(tab => tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.toggle('active', t === tab));
+            document.querySelectorAll('.ai-scan-pane').forEach(p => {
+                p.classList.toggle('hidden', p.id !== tab.dataset.pane);
+            });
+            result.classList.remove('visible');
+            status.textContent = '';
+        }));
+
+        function setStatus(text, cls) {
+            status.textContent = text ? '> ' + text : '';
+            status.className = 'ai-brief-status' + (cls ? ' ' + cls : '');
+        }
+
+        // ── Auditoría por URL ────────────────────────────────────────────────
+        async function runAudit() {
+            const url = (urlInput.value || '').trim();
+            if (busy) return;
+            if (url.length < 4) { setStatus('Escribe la URL de tu web.', 'error'); return; }
+            busy = true;
+            scanBtn.classList.add('loading');
+            result.classList.remove('visible');
+            setStatus('VISITANDO TU WEB Y ANALIZANDO EL HTML...', 'working');
+
+            try {
+                let audit, finalUrl = url;
+                if (demoMode) {
+                    await new Promise(r => setTimeout(r, 2200));
+                    audit = demoAudit(url);
+                } else {
+                    const resp = await fetch(AI_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ mode: 'audit', url }),
+                    });
+                    const data = await resp.json().catch(() => null);
+                    if (resp.status === 400 && data && data.error) { setStatus(data.error, 'error'); return; }
+                    if (!resp.ok || !data || (!data.audit && !data.refusal)) throw new Error('endpoint no disponible');
+                    if (data.refusal) { setStatus('No puedo auditar esa web. Prueba con otra URL.', 'error'); return; }
+                    audit = data.audit;
+                    finalUrl = data.url || url;
+                }
+                setStatus('AUDITORÍA COMPLETA ✓' + (audit._demo ? ' (demo)' : ''), 'done');
+                renderAudit(result, audit, finalUrl);
+            } catch (err) {
+                demoMode = true;
+                await new Promise(r => setTimeout(r, 1100));
+                setStatus('AUDITORÍA COMPLETA ✓ (demo)', 'done');
+                renderAudit(result, demoAudit(url), url);
+            } finally {
+                scanBtn.classList.remove('loading');
+                busy = false;
+            }
+        }
+        if (scanBtn) scanBtn.addEventListener('click', runAudit);
+        if (urlInput) urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') runAudit(); });
+
+        // ── Revisión de diseño por captura ───────────────────────────────────
+        async function runVision(file) {
+            if (busy || !file) return;
+            if (!/^image\/(jpeg|png|webp)$/.test(file.type)) { setStatus('Sube una imagen JPG, PNG o WebP.', 'error'); return; }
+            busy = true;
+            result.classList.remove('visible');
+            setStatus('MIRANDO TU DISEÑO CON OJOS DE DIRECTOR DE ARTE...', 'working');
+
+            try {
+                let review;
+                if (demoMode) {
+                    await new Promise(r => setTimeout(r, 2200));
+                    review = DEMO_VISION;
+                } else {
+                    const image = await resizeImage(file);
+                    const resp = await fetch(AI_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ mode: 'vision', image }),
+                    });
+                    const data = await resp.json().catch(() => null);
+                    if (resp.status === 400 && data && data.error) { setStatus(data.error, 'error'); return; }
+                    if (!resp.ok || !data || (!data.review && !data.refusal)) throw new Error('endpoint no disponible');
+                    if (data.refusal) { setStatus('No puedo analizar esa imagen. Prueba con otra captura.', 'error'); return; }
+                    review = data.review;
+                }
+                setStatus('REVISIÓN COMPLETA ✓' + (review._demo ? ' (demo)' : ''), 'done');
+                renderVision(result, review);
+            } catch (err) {
+                demoMode = true;
+                await new Promise(r => setTimeout(r, 1100));
+                setStatus('REVISIÓN COMPLETA ✓ (demo)', 'done');
+                renderVision(result, DEMO_VISION);
+            } finally {
+                busy = false;
+            }
+        }
+
+        if (drop && dropInput) {
+            drop.addEventListener('click', () => dropInput.click());
+            dropInput.addEventListener('change', () => runVision(dropInput.files[0]));
+            ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault();
+                drop.classList.add('over');
+            }));
+            ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault();
+                drop.classList.remove('over');
+            }));
+            drop.addEventListener('drop', e => runVision(e.dataTransfer.files[0]));
+        }
+    }
+
     // ── Init ────────────────────────────────────────────────────────────────
+    function init() { buildChatWidget(); initBriefGenerator(); initScan(); }
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => { buildChatWidget(); initBriefGenerator(); });
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        buildChatWidget();
-        initBriefGenerator();
+        init();
     }
 })();
