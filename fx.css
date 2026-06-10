@@ -1,0 +1,115 @@
+/* ============================================================================
+   H. — FX: estilos y animaciones avanzadas
+   Glitch · scramble · tilt 3D · sparks · canvas neuronal · ticker reactivo
+   Todo se desactiva con prefers-reduced-motion.
+   ========================================================================== */
+
+/* ============ GLITCH (hero + reutilizable) ============ */
+.fx-glitch {
+    animation: fxGlitch .38s steps(2, jitter) 1;
+}
+@keyframes fxGlitch {
+    0% {
+        transform: translate(0, 0) skewX(0);
+        text-shadow: 0 0 transparent;
+    }
+    20% {
+        transform: translate(-4px, 2px) skewX(-4deg);
+        text-shadow: 3px 0 0 rgba(200,255,0,.85), -3px 0 0 rgba(80,60,255,.85);
+    }
+    40% {
+        transform: translate(4px, -2px) skewX(3deg);
+        text-shadow: -4px 0 0 rgba(255,0,90,.7), 4px 0 0 rgba(0,255,230,.7);
+    }
+    60% {
+        transform: translate(-2px, 1px) skewX(-2deg);
+        text-shadow: 2px 0 0 rgba(200,255,0,.85), -2px 0 0 rgba(80,60,255,.85);
+    }
+    80% {
+        transform: translate(2px, -1px) skewX(1deg);
+        text-shadow: -1px 0 0 rgba(255,0,90,.6), 1px 0 0 rgba(0,255,230,.6);
+    }
+    100% {
+        transform: translate(0, 0) skewX(0);
+        text-shadow: 0 0 transparent;
+    }
+}
+
+/* ============ SCRAMBLE / DECODE ============ */
+.fx-scrambling {
+    /* evita saltos de layout mientras se descodifica */
+    font-variant-ligatures: none;
+}
+
+/* ============ TILT 3D + GLARE ============ */
+.fx-tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.fx-tilt > * { transform: translateZ(0); }
+.fx-glare {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background: radial-gradient(420px circle at var(--fx-gx, 50%) var(--fx-gy, 50%),
+        rgba(200,255,0,0.10), transparent 65%);
+    opacity: 0;
+    transition: opacity .35s ease;
+    z-index: 3;
+}
+.fx-tilt:hover .fx-glare { opacity: 1; }
+
+/* ============ MAGNETIC ============ */
+.fx-magnetic { will-change: transform; }
+
+/* ============ CLICK SPARKS ============ */
+.fx-spark {
+    position: fixed;
+    width: 5px; height: 5px;
+    background: var(--acid-yellow, #C8FF00);
+    pointer-events: none;
+    z-index: 99998;
+    box-shadow: 0 0 8px rgba(200,255,0,.9);
+}
+.fx-spark--ring {
+    width: 26px; height: 26px;
+    background: transparent;
+    border: 1px solid var(--acid-yellow, #C8FF00);
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+/* ============ CANVAS NEURONAL (sección IA) ============ */
+.ai-lab { position: relative; overflow: hidden; }
+.fx-neural {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .85;
+}
+.ai-lab .section-header,
+.ai-lab .ai-lab-inner { position: relative; z-index: 1; }
+
+/* ============ TICKER REACTIVO AL SCROLL ============ */
+.ticker { will-change: transform; }
+
+/* ============ SCROLL REVEAL EXTRA: subrayado láser en títulos ============ */
+.section-title { position: relative; }
+.fx-laser::after {
+    content: '';
+    position: absolute; left: 0; bottom: -6px;
+    height: 2px; width: 0;
+    background: linear-gradient(90deg, var(--acid-yellow, #C8FF00), transparent);
+    box-shadow: 0 0 12px rgba(200,255,0,.6);
+    animation: fxLaser 1s cubic-bezier(0.16, 1, 0.3, 1) .35s forwards;
+}
+@keyframes fxLaser { to { width: 100%; } }
+
+/* ============ REDUCED MOTION: TODO APAGADO ============ */
+@media (prefers-reduced-motion: reduce) {
+    .fx-glitch { animation: none; }
+    .fx-glare { display: none; }
+    .fx-spark { display: none; }
+    .fx-neural { display: none; }
+    .fx-laser::after { animation: none; width: 100%; }
+}
