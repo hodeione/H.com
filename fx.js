@@ -20,6 +20,8 @@
     const video = document.getElementById('heroVideo');
     if (!video) return;
     function loadVideo() {
+        // si la escena 3D de partículas está activa, el vídeo no hace falta
+        if (window.__H3D) return;
         const source = video.querySelector('source[data-src]');
         if (!source) return;
         source.src = source.dataset.src;

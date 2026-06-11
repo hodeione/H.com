@@ -113,3 +113,14 @@
     .fx-neural { display: none; }
     .fx-laser::after { animation: none; width: 100%; }
 }
+
+/* ============ HERO 3D (motor de partículas) ============ */
+.hero-3d {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 2;               /* sobre el overlay, bajo el contenido (z3) */
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-3d { display: none; }
+}
