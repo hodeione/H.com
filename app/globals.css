@@ -1,0 +1,26 @@
+/* ================================================================
+   globals.css — Next.js overrides for H. Agency
+   The main styles live in ../styles.css (imported in layout.tsx).
+   This file adds font-variable support and fixes hidden elements.
+   ================================================================ */
+
+/* Make all initially-hidden elements visible (Framer Motion /
+   React components handle the priority animations; the rest
+   appear instantly so content is never stuck at opacity:0). */
+.stat-item,
+.identity-block,
+.process-step,
+.tech-item,
+.faq-item,
+.portfolio-card,
+.reveal,
+.testimonial-card,
+.client-logo-link {
+  opacity: 1;
+}
+
+/* Service cards are handled by ServicesSection (Framer Motion),
+   so keep them at 0 — Framer Motion sets initial inline style. */
+
+/* Hero words are handled by Hero (Framer Motion) — keep at 0. */
+/* header is handled by Header (Framer Motion) — keep at 0. */

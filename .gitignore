@@ -1,4 +1,5 @@
 node_modules/
 take-screenshots.js
 fix-service-pages.js
-package*.json
+.next/
+*.tsbuildinfo

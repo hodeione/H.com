@@ -1,0 +1,559 @@
+/* ============ SERVICE PAGE STYLES ============ */
+
+.service-hero {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--black);
+  padding: 120px 2rem 4rem;
+  position: relative;
+}
+
+.service-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 8vw, 5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: bold;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+.service-hero p {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  color: var(--concrete-gray);
+  max-width: 700px;
+  line-height: 1.8;
+}
+
+.service-section {
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--acid-yellow);
+}
+
+.service-section .section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.service-section .section-title .accent {
+  color: var(--acid-yellow);
+}
+
+.sp-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+}
+
+.sp-content-item {
+  background-color: transparent;
+  border-left: 2px solid var(--acid-yellow);
+  padding: 2rem;
+  position: relative;
+}
+
+.sp-content-item-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sp-content-item-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--concrete-gray);
+  line-height: 1.6;
+}
+
+.sp-features-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sp-feature {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(200, 255, 0, 0.2);
+}
+
+.sp-feature:last-child {
+  border-bottom: none;
+}
+
+.sp-feature-icon {
+  font-size: 2rem;
+  color: var(--acid-yellow);
+  min-width: 30px;
+  text-align: center;
+}
+
+.sp-feature-content {
+  flex: 1;
+}
+
+.sp-feature-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.sp-feature-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--concrete-gray);
+}
+
+/* ============ PRICING GRID ============ */
+.sp-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.sp-plan {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 2.8rem 2.2rem;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.sp-plan:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.sp-plan--basic {
+  background: #0d0d10;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sp-plan--starter {
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sp-plan--pro {
+  background: linear-gradient(180deg, rgba(200, 255, 0, 0.07) 0%, #111115 100%);
+  border: 1px solid rgba(200, 255, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.sp-plan--pro:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.sp-plan--vip {
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sp-plan-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.sp-plan-topbar--basic {
+  background: linear-gradient(90deg, transparent, rgba(200, 255, 0, 0.06), transparent);
+}
+
+.sp-plan-topbar--starter {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.sp-plan-topbar--pro {
+  background: #c8ff00;
+  box-shadow: 0 0 20px rgba(200, 255, 0, 0.5);
+}
+
+.sp-plan-topbar--vip {
+  background: linear-gradient(90deg, transparent, rgba(200, 255, 0, 0.5), transparent);
+}
+
+.sp-plan-badge {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: #c8ff00;
+  color: #060608;
+  padding: 0.3rem 0.85rem;
+  font-family: 'DM Mono', monospace;
+}
+
+.sp-plan-tier {
+  font-size: 0.6rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.sp-plan-tier--basic {
+  color: var(--concrete-gray);
+}
+
+.sp-plan-tier--other {
+  color: var(--acid-yellow);
+}
+
+.sp-plan-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.sp-plan-tagline {
+  font-size: 0.75rem;
+  color: var(--concrete-gray);
+  margin-bottom: 2.2rem;
+  line-height: 1.5;
+}
+
+.sp-plan-price {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 2.2rem;
+  padding-bottom: 2.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sp-plan--pro .sp-plan-price {
+  border-bottom-color: rgba(200, 255, 0, 0.15);
+}
+
+.sp-plan-price-currency {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--acid-yellow);
+  margin-top: 0.5rem;
+}
+
+.sp-plan-price-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.sp-plan-price-period {
+  font-size: 0.6rem;
+  color: var(--concrete-gray);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  align-self: flex-end;
+  padding-bottom: 0.5rem;
+  margin-left: 0.3rem;
+}
+
+.sp-plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+  margin-bottom: 2.2rem;
+}
+
+.sp-plan-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.77rem;
+}
+
+.sp-plan-feature--yes {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.sp-plan-feature--no {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.sp-plan-feature-check--yes {
+  color: var(--acid-yellow);
+  flex-shrink: 0;
+}
+
+.sp-plan-feature-check--no {
+  color: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.sp-plan-cta {
+  display: block;
+  padding: 1.1rem 2rem;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.4s;
+}
+
+.sp-plan-cta--outline-dim {
+  background: transparent;
+  border: 1px solid rgba(200, 255, 0, 0.4);
+  color: var(--acid-yellow);
+}
+
+.sp-plan-cta--outline-dim:hover {
+  background: var(--acid-yellow);
+  color: #060608;
+}
+
+.sp-plan-cta--outline {
+  background: transparent;
+  border: 1px solid var(--acid-yellow);
+  color: var(--acid-yellow);
+}
+
+.sp-plan-cta--outline:hover {
+  background: var(--acid-yellow);
+  color: #060608;
+}
+
+.sp-plan-cta--solid {
+  background: var(--acid-yellow);
+  border: 1px solid var(--acid-yellow);
+  color: #060608;
+  font-weight: 600;
+}
+
+.sp-plan-cta--solid:hover {
+  background: #060608;
+  color: var(--acid-yellow);
+}
+
+.sp-pricing-note {
+  font-size: 0.65rem;
+  color: var(--concrete-gray);
+  letter-spacing: 0.12em;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.sp-pricing-note a {
+  color: var(--acid-yellow);
+  text-decoration: none;
+}
+
+/* ============ RECURRING FEE (mandatory, e.g. IA plans) ============ */
+.sp-plan-recurring {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: -1.6rem;
+  margin-bottom: 2.2rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed rgba(200, 255, 0, 0.25);
+}
+
+.sp-plan-recurring-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  color: var(--acid-yellow);
+}
+
+.sp-plan-recurring-label {
+  font-size: 0.6rem;
+  color: var(--concrete-gray);
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+/* ============ OPTIONAL MAINTENANCE ADD-ON NOTE ============ */
+.sp-maintenance-note {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid var(--acid-yellow);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sp-maintenance-note-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.sp-maintenance-note-title .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--black);
+  background: var(--acid-yellow);
+  padding: 0.2rem 0.6rem;
+  margin-left: 0.6rem;
+  letter-spacing: 0.1em;
+  vertical-align: middle;
+}
+
+.sp-maintenance-note p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--concrete-gray);
+  line-height: 1.8;
+}
+
+/* ============ SERVICE CTA SECTION ============ */
+.service-cta {
+  padding: 8rem 2rem;
+  background-color: var(--black);
+  border-top: 1px solid var(--acid-yellow);
+  text-align: center;
+}
+
+.service-cta h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.sp-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sp-btn-primary {
+  background-color: var(--acid-yellow);
+  color: var(--black);
+  border: 2px solid var(--acid-yellow);
+  padding: 1rem 2.5rem;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: 'DM Mono', monospace;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.sp-btn-primary:hover {
+  background-color: var(--black);
+  color: var(--acid-yellow);
+}
+
+.sp-btn-secondary {
+  background-color: var(--black);
+  color: var(--acid-yellow);
+  border: 2px solid var(--acid-yellow);
+  padding: 1rem 2.5rem;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: 'DM Mono', monospace;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.sp-btn-secondary:hover {
+  background-color: var(--acid-yellow);
+  color: var(--black);
+}
+
+/* ============ SERVICE FOOTER ============ */
+.sp-footer {
+  background-color: var(--black);
+  border-top: 1px solid var(--acid-yellow);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.sp-footer-left,
+.sp-footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--concrete-gray);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .service-hero {
+    padding: 80px 1.5rem 2rem;
+  }
+
+  .service-hero h1 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .service-section .section-title {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .sp-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-plan--pro {
+    transform: none;
+  }
+
+  .sp-cta-buttons {
+    flex-direction: column;
+  }
+
+  .sp-btn-primary,
+  .sp-btn-secondary {
+    width: 100%;
+  }
+
+  .sp-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
