@@ -101,6 +101,9 @@ export default function ServicesSection() {
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+              <div className="service-cta">
+                VER SERVICIO <span>→</span>
+              </div>
             </div>
             <div className="service-card-line" />
           </motion.a>
