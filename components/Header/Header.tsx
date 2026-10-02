@@ -50,7 +50,7 @@ export default function Header() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: isHome ? 1.4 : 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <Link href="/" className="logo">H.</Link>
+        <Link href="/" className="logo">D.H.T</Link>
 
         <nav id="mainNav">
           {NAV_LINKS.map((link) => (

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Páginas Web — H. Digital Agency',
+  title: 'Páginas Web — DH Technology',
   description: 'Diseñamos y desarrollamos sitios web de alto rendimiento que atraen clientes y generan resultados.',
 };
 

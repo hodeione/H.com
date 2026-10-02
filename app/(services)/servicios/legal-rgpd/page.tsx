@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Cumplimiento Legal RGPD — H. Digital Agency',
+  title: 'Cumplimiento Legal RGPD — DH Technology',
   description: 'Garantizamos que tu presencia digital cumple con la normativa europea de protección de datos.',
 };
 

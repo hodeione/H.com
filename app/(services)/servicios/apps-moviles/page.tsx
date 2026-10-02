@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Apps Móviles — H. Digital Agency',
+  title: 'Apps Móviles — DH Technology',
   description: 'Aplicaciones nativas e híbridas de alto rendimiento que tus usuarios aman usar. iOS, Android o ambas.',
 };
 

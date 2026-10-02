@@ -32,7 +32,7 @@ export default function Preloader() {
 
   return (
     <div className={`preloader${exiting ? ' hidden' : ''}`}>
-      <div className="preloader-logo">H.</div>
+      <div className="preloader-logo">D.H.T</div>
       <div className="preloader-line">
         <div
           className="preloader-line-fill"

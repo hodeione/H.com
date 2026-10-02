@@ -6,9 +6,9 @@ import CustomCursor from '@/components/CustomCursor/CustomCursor';
 import ClientEffects from '@/components/ClientEffects/ClientEffects';
 
 export const metadata: Metadata = {
-  title: 'H. — Agencia Digital Madrid',
+  title: 'D.H.T — DH Technology · Agencia Digital Madrid',
   description:
-    'H. — Agencia digital especializada en diseño web, desarrollo de software, automatización con IA, cumplimiento legal RGPD, apps móviles y SEO. Construimos lo digital.',
+    'DH Technology — Agencia digital especializada en diseño web, desarrollo de software, automatización con IA, cumplimiento legal RGPD, apps móviles y SEO. Construimos lo digital.',
   keywords: [
     'diseño web',
     'desarrollo software',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'agencia digital',
     'Madrid',
   ],
-  authors: [{ name: 'H. Digital Agency' }],
+  authors: [{ name: 'DH Technology' }],
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>H.</text></svg>"
+          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='36'>D.H.T</text></svg>"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

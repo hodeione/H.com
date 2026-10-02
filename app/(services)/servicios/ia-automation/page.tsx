@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Automatización con IA — H. Digital Agency',
+  title: 'Automatización con IA — DH Technology',
   description: 'Implementamos inteligencia artificial para automatizar procesos, reducir costos y tomar decisiones más inteligentes.',
 };
 

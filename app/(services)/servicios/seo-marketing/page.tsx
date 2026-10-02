@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'SEO & Marketing Digital — H. Digital Agency',
+  title: 'SEO & Marketing Digital — DH Technology',
   description: 'Posicionamiento en buscadores y estrategias digitales que generan tráfico cualificado.',
 };
 

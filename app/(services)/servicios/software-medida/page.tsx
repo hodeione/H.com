@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Software a Medida — H. Digital Agency',
+  title: 'Software a Medida — DH Technology',
   description: 'Soluciones software escalables y personalizadas que resuelven tus problemas específicos.',
 };
 

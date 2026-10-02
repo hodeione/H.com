@@ -393,7 +393,7 @@ export default function HomePage() {
       {/* ── Footer ───────────────────────────────────────────────── */}
       <footer>
         <div className="footer-left">
-          <div className="footer-copy">H. © 2025</div>
+          <div className="footer-copy">D.H.T © 2025</div>
           <div className="footer-socials">
             <a
               href="https://www.linkedin.com/in/hodei-medina-escribano-9053b130b"

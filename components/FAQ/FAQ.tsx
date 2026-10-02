@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
   },
   {
     q: '¿Qué me diferencia de contratar a un freelance?',
-    a: 'Con H. obtienes diseño, desarrollo, legal (RGPD), SEO e IA integrados en un solo equipo. Sin dependencia de un único perfil, con mayor fiabilidad, y con visión de negocio detrás de cada decisión técnica.',
+    a: 'Con DH Technology obtienes diseño, desarrollo, legal (RGPD), SEO e IA integrados en un solo equipo. Sin dependencia de un único perfil, con mayor fiabilidad, y con visión de negocio detrás de cada decisión técnica.',
   },
 ];
 

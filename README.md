@@ -1,4 +1,4 @@
-# H. Digital Agency — Sitio Web Profesional
+# DH Technology — Sitio Web Profesional
 
 ## 📋 Descripción
 Sitio web de una agencia digital española con estética brutalista, diseñado para presentar servicios de web design, software, IA, legal compliance, apps móviles y SEO/marketing digital.
@@ -17,8 +17,8 @@ Sitio web de una agencia digital española con estética brutalista, diseñado p
 - **seo-marketing.html** — SEO y marketing digital
 
 ### Recursos Multimedia
-- **logopng.png** — Logo de H.
-- **75b658b9-7631-4d36-a604-e0ba8a9c7337_0.mp4** — Video del logo H. rotando
+- **logopng.png** — Logo de D.H.T
+- **75b658b9-7631-4d36-a604-e0ba8a9c7337_0.mp4** — Video del logo D.H.T rotando
 
 ## 🚀 Cómo Ejecutar
 
@@ -142,4 +142,4 @@ H.com/
 
 ---
 
-**H. Digital Agency © 2025 — Hecho en Madrid**
+**DH Technology © 2025 — Hecho en Madrid**
