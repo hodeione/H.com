@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="claude-widgets.css">
     <link rel="stylesheet" href="fx.css">
+    <link rel="stylesheet" href="tech-fx.css">
 </head>
 
 <body class="loading">
@@ -438,52 +439,53 @@
             <h2 class="section-title">NUESTRO STACK.</h2>
             <div class="section-line"></div>
         </div>
+        <p class="tech-hint" id="techHint"><span class="tech-hint-dot" aria-hidden="true"></span><span class="tech-hint-text">Pasa el ratón por una tecnología para ver dónde la hemos usado</span></p>
         <div class="tech-grid" id="techGrid">
-            <div class="tech-item">
+            <div class="tech-item" data-tech="react">
                 <div class="tech-label">React</div>
                 <div class="tech-cat">Frontend</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="nextjs">
                 <div class="tech-label">Next.js</div>
                 <div class="tech-cat">Framework</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="nodejs">
                 <div class="tech-label">Node.js</div>
                 <div class="tech-cat">Backend</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="python">
                 <div class="tech-label">Python</div>
                 <div class="tech-cat">Scripts / IA</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="typescript">
                 <div class="tech-label">TypeScript</div>
                 <div class="tech-cat">Tipado</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="postgresql">
                 <div class="tech-label">PostgreSQL</div>
                 <div class="tech-cat">Base de Datos</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="claude">
                 <div class="tech-label">Claude AI</div>
                 <div class="tech-cat">IA Generativa</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="openai">
                 <div class="tech-label">OpenAI</div>
                 <div class="tech-cat">LLM API</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="figma">
                 <div class="tech-label">Figma</div>
                 <div class="tech-cat">Diseño UI</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="aws">
                 <div class="tech-label">AWS</div>
                 <div class="tech-cat">Cloud</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="docker">
                 <div class="tech-label">Docker</div>
                 <div class="tech-cat">Contenedores</div>
             </div>
-            <div class="tech-item">
+            <div class="tech-item" data-tech="vercel">
                 <div class="tech-label">Vercel</div>
                 <div class="tech-cat">Deploy</div>
             </div>
@@ -906,6 +908,7 @@
 
     <script src="anime.min.js"></script>
     <script src="script.js"></script>
+    <script src="tech-fx.js"></script>
     <script src="claude-widgets.js"></script>
     <script src="hero3d.js"></script>
     <script src="fx.js"></script>

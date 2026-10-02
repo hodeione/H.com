@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   D.H.T — STACK INTERACTIVO (tech-fx.js)
+   Foco que sigue al cursor · inclinación 3D · constelación de tecnologías
+   relacionadas · cuadro de proyectos al pasar por encima
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tech-hint {
+    display: flex; align-items: center; gap: .7rem;
+    width: 100%; max-width: 1200px; margin: -1.6rem auto 1.8rem;
+    font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+}
+.tech-hint-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    background: var(--acid-yellow); box-shadow: 0 0 12px var(--acid-yellow);
+    animation: techPing 1.8s ease-out infinite;
+}
+@keyframes techPing {
+    0%   { box-shadow: 0 0 0 0 rgba(200,255,0,.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(200,255,0,0); }
+    100% { box-shadow: 0 0 0 0 rgba(200,255,0,0); }
+}
+
+/* ── Cuadrícula: las líneas (el hueco de 1px) se iluminan alrededor del cursor ── */
+.tech-grid.tfx {
+    --mx: -999px; --my: -999px;
+    position: relative;
+    background:
+        radial-gradient(260px circle at var(--mx) var(--my), rgba(200,255,0,.9), rgba(200,255,0,.12) 45%, transparent 70%),
+        rgba(255,255,255,.1);
+    isolation: isolate;
+}
+
+/* Barrido de escaneo al entrar en pantalla */
+.tech-grid.tfx::after {
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 120px;
+    background: linear-gradient(180deg, transparent, rgba(200,255,0,.18) 60%, rgba(200,255,0,.6) 98%, transparent);
+    pointer-events: none; z-index: 3; opacity: 0;
+    transform: translateY(-120px);
+}
+.tech-grid.tfx.is-booting::after { animation: techScan 1.3s cubic-bezier(.6,.05,.3,1) forwards; }
+@keyframes techScan {
+    0%   { opacity: 1; transform: translateY(-120px); }
+    90%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(var(--grid-h, 300px)); }
+}
+
+.tfx .tech-item {
+    cursor: pointer; outline: none;
+    perspective: 700px;
+    transition: background var(--transition), filter .35s ease, opacity .35s ease;
+}
+/* brillo interior que sigue al cursor dentro de la celda */
+.tfx .tech-item::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(180px circle at var(--tx, 50%) var(--ty, 50%), rgba(200,255,0,.14), transparent 70%);
+    opacity: 0; transition: opacity .3s ease;
+}
+.tfx .tech-item.is-active::before { opacity: 1; }
+
+.tech-inner {
+    display: flex; flex-direction: column; align-items: center; gap: .9rem;
+    transform-style: preserve-3d;
+    transition: transform .5s cubic-bezier(.16,1,.3,1);
+    will-change: transform;
+}
+.tfx .tech-item.is-active .tech-label {
+    color: var(--acid-yellow);
+    text-shadow: 0 0 18px rgba(200,255,0,.55);
+    transform: translateZ(40px) scale(1.12);
+}
+.tfx .tech-label, .tfx .tech-cat { transition: color .25s ease, transform .5s cubic-bezier(.16,1,.3,1), text-shadow .3s ease; }
+.tfx .tech-item.is-active .tech-cat { transform: translateZ(20px); color: #fff; }
+
+/* Glitch al activar */
+.tfx .tech-item.is-glitch .tech-label { animation: techGlitch .42s steps(2, end) 1; }
+@keyframes techGlitch {
+    0%   { text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8; clip-path: inset(0 0 55% 0); }
+    25%  { text-shadow: -3px 0 #ff2a6d, 3px 0 #05d9e8; clip-path: inset(40% 0 0 0); }
+    50%  { text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8; clip-path: inset(15% 0 30% 0); }
+    75%  { text-shadow: -1px 0 #ff2a6d, 1px 0 #05d9e8; clip-path: inset(0); }
+    100% { text-shadow: 0 0 18px rgba(200,255,0,.55); clip-path: inset(0); }
+}
+
+/* El resto se apaga; las relacionadas se quedan encendidas */
+.tfx.has-active .tech-item:not(.is-active):not(.is-linked) { filter: brightness(.45) saturate(.6); }
+.tfx .tech-item.is-linked { background: #16161c; }
+.tfx .tech-item.is-linked .tech-label { color: #fff; }
+.tfx .tech-item.is-linked .tech-cat { color: var(--acid-yellow); }
+.tfx .tech-item:focus-visible { box-shadow: inset 0 0 0 2px var(--acid-yellow); }
+
+/* Contador de proyectos en la esquina */
+.tech-count {
+    position: absolute; top: .7rem; right: .7rem;
+    font-size: .5rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--black); background: var(--acid-yellow);
+    padding: .2rem .45rem; line-height: 1.2;
+    box-shadow: 0 0 12px rgba(200,255,0,.35);
+    transform: translateZ(0);
+}
+
+/* ── Constelación: líneas entre la activa y sus relacionadas ── */
+.tech-links {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 2; overflow: visible;
+}
+.tech-links line {
+    stroke: var(--acid-yellow); stroke-width: 1.5; stroke-linecap: round;
+    stroke-dasharray: 6 7;
+    filter: drop-shadow(0 0 4px rgba(200,255,0,.8));
+    animation: techDash 1s linear infinite, techDraw .5s cubic-bezier(.16,1,.3,1) both;
+    opacity: .75;
+}
+.tech-links circle { fill: var(--acid-yellow); filter: drop-shadow(0 0 6px rgba(200,255,0,.9)); }
+@keyframes techDash { to { stroke-dashoffset: -26; } }
+@keyframes techDraw { from { opacity: 0; } to { opacity: .75; } }
+
+/* ── Cuadro de proyectos ── */
+.tech-pop {
+    position: fixed; z-index: 9995; top: 0; left: 0;
+    width: min(380px, calc(100vw - 24px));
+    overflow-y: auto; overscroll-behavior: contain;
+    background: rgba(10,10,13,.97);
+    border: 1px solid rgba(200,255,0,.5);
+    box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(200,255,0,.08), 0 0 50px rgba(200,255,0,.12);
+    backdrop-filter: blur(8px);
+    font-family: 'DM Mono', monospace; color: #fff;
+    opacity: 0; pointer-events: none;
+    clip-path: inset(0 0 100% 0);
+    transition: opacity .2s ease, clip-path .45s cubic-bezier(.16,1,.3,1);
+}
+/* cerrado: recogido hacia la celda (arriba si se abre debajo, abajo si se abre encima) */
+.tech-pop.is-below:not(.is-open) { clip-path: inset(0 0 100% 0); }
+.tech-pop.is-above:not(.is-open) { clip-path: inset(100% 0 0 0); }
+.tech-pop.is-open { opacity: 1; pointer-events: auto; clip-path: inset(0 0 0 0); }
+.tech-pop::before { /* línea de escaneo dentro del cuadro */
+    content: ''; position: absolute; left: 0; right: 0; height: 2px; top: 0;
+    background: var(--acid-yellow); box-shadow: 0 0 14px var(--acid-yellow);
+    opacity: 0;
+}
+.tech-pop.is-open::before { animation: popScan .6s cubic-bezier(.16,1,.3,1) 1; }
+@keyframes popScan { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.tech-pop-arrow {
+    position: absolute; width: 12px; height: 12px;
+    background: rgba(10,10,13,.97); border: 1px solid rgba(200,255,0,.5);
+    transform: rotate(45deg);
+}
+.tech-pop.is-above .tech-pop-arrow { bottom: -7px; border-top: 0; border-left: 0; }
+.tech-pop.is-below .tech-pop-arrow { top: -7px; border-bottom: 0; border-right: 0; }
+
+.tech-pop-head {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    padding: 1.1rem 1.2rem .9rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(135deg, rgba(200,255,0,.08), transparent 60%);
+}
+.tech-pop-kicker { font-size: .52rem; letter-spacing: .3em; color: var(--acid-yellow); text-transform: uppercase; }
+.tech-pop-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; line-height: 1; margin-top: .3rem; letter-spacing: .02em; }
+.tech-pop-badge {
+    flex-shrink: 0; text-align: right;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; line-height: 1; color: var(--acid-yellow);
+}
+.tech-pop-badge small { display: block; font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .2em; color: rgba(255,255,255,.5); }
+.tech-pop-body { padding: 1rem 1.2rem 1.2rem; }
+.tech-pop-use { font-size: .7rem; line-height: 1.6; color: rgba(255,255,255,.72); margin-bottom: .9rem; }
+.tech-pop-label { font-size: .52rem; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: .55rem; }
+
+.tech-pop-list { list-style: none; display: grid; gap: .45rem; }
+.tech-pop-list a, .tech-pop-list .tp-item {
+    display: flex; align-items: center; justify-content: space-between; gap: .8rem;
+    padding: .7rem .8rem;
+    border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025);
+    text-decoration: none; color: #fff;
+    opacity: 0; transform: translateY(8px);
+    transition: border-color .2s ease, background .2s ease;
+}
+.tech-pop.is-open .tech-pop-list a, .tech-pop.is-open .tech-pop-list .tp-item { animation: tpIn .45s cubic-bezier(.16,1,.3,1) forwards; animation-delay: calc(var(--i) * 60ms + 120ms); }
+@keyframes tpIn { to { opacity: 1; transform: none; } }
+.tech-pop-list a:hover, .tech-pop-list a:focus-visible { border-color: var(--acid-yellow); background: rgba(200,255,0,.07); outline: none; }
+.tp-name { display: block; font-size: .74rem; }
+.tp-what { display: block; font-size: .6rem; color: rgba(255,255,255,.5); margin-top: .2rem; line-height: 1.45; }
+.tp-go { color: var(--acid-yellow); font-size: .85rem; flex-shrink: 0; transition: transform .25s ease; }
+.tech-pop-list a:hover .tp-go { transform: translate(2px, -2px); }
+
+.tech-pop-skills { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.tech-pop-skills li {
+    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem .6rem; border: 1px solid rgba(200,255,0,.3); color: rgba(255,255,255,.8);
+}
+.tech-pop-cta {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .8rem .9rem; text-decoration: none;
+    background: var(--acid-yellow); color: var(--black);
+    font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600;
+    transition: background .2s ease;
+}
+.tech-pop-cta:hover { background: #d8ff40; }
+
+@media (prefers-reduced-motion: reduce) {
+    .tech-grid.tfx::after, .tech-links line, .tech-pop::before,
+    .tfx .tech-item.is-glitch .tech-label, .tech-hint-dot { animation: none !important; }
+    .tech-inner { transition: none; }
+    .tech-pop, .tech-pop.is-open { transition: opacity .15s ease; clip-path: none; }
+    .tech-pop-list a, .tech-pop-list .tp-item { opacity: 1; transform: none; animation: none !important; }
+}
+@media (hover: none) {
+    .tech-hint-text { font-size: 0; }
+    .tech-hint-text::after { content: 'Toca una tecnología para ver dónde la hemos usado'; font-size: .62rem; }
+}
