@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   D.H.T — CAPA MATRIX (matrix.js)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Lluvia de código superpuesta: muy tenue y en modo "screen" para no tapar texto */
+.mx-rain {
+    position: fixed; inset: 0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 2;
+    opacity: .13; mix-blend-mode: screen;
+}
+@media (max-width: 768px) { .mx-rain { opacity: .1; } }
+
+/* Monitor CRT: líneas de escaneo + viñeta + un parpadeo casi imperceptible */
+.mx-crt {
+    position: fixed; inset: 0; pointer-events: none; z-index: 3;
+    background:
+        repeating-linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.16) 3px, rgba(0,0,0,0) 4px),
+        radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.45) 100%);
+    animation: mxFlicker 6s steps(60) infinite;
+}
+@keyframes mxFlicker {
+    0%, 96%, 100% { opacity: 1; }
+    97% { opacity: .85; }
+    98% { opacity: 1; }
+    99% { opacity: .9; }
+}
+
+/* Comando de terminal sobre cada sección */
+.mx-cmd {
+    display: flex; align-items: center; gap: .55rem;
+    width: 100%; max-width: 1200px; margin: 0 auto 1.1rem;
+    font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .04em;
+    color: var(--acid-yellow, #C8FF00);
+    text-shadow: 0 0 8px rgba(200,255,0,.45);
+    min-height: 1.2em;
+}
+.mx-cmd-prompt { color: rgba(200,255,0,.55); text-shadow: none; }
+.mx-cmd-text { color: #e9ffb0; white-space: pre; }
+.mx-caret, .ck-caret {
+    display: inline-block; width: .55em; height: 1.05em; margin-left: .1em;
+    background: currentColor; vertical-align: text-bottom;
+    animation: mxBlink 1s steps(1) infinite;
+}
+@keyframes mxBlink { 50% { opacity: 0; } }
+
+/* Números de sección como registros: [01] */
+.section-number::before { content: '['; opacity: .55; }
+.section-number::after  { content: ']'; opacity: .55; }
+
+/* Selección y scrollbar de terminal */
+::selection { background: var(--acid-yellow, #C8FF00); color: #060608; }
+html { scrollbar-color: rgba(200,255,0,.55) #060608; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #060608; }
+::-webkit-scrollbar-thumb { background: rgba(200,255,0,.45); border: 2px solid #060608; }
+::-webkit-scrollbar-thumb:hover { background: #C8FF00; }
+
+/* Arranque de sistema en la pantalla de carga */
+.mx-preloader-rain {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: .35; pointer-events: none; z-index: 0;
+}
+.preloader > *:not(.mx-preloader-rain) { position: relative; z-index: 1; }
+.mx-boot {
+    margin-top: 1.6rem; min-height: 7.5em;
+    font-family: 'DM Mono', monospace; font-size: .68rem; line-height: 1.5;
+    color: rgba(200,255,0,.85); text-align: left; white-space: pre;
+    text-shadow: 0 0 8px rgba(200,255,0,.5);
+}
+@media (max-width: 600px) { .mx-boot { font-size: .55rem; } }
+
+/* Brillo fósforo en los títulos ya descifrados */
+.section-title { text-shadow: 0 0 22px rgba(200,255,0,.12); }
+
+@media (prefers-reduced-motion: reduce) {
+    .mx-crt, .mx-caret, .ck-caret { animation: none; }
+}

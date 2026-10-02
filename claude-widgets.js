@@ -669,7 +669,14 @@
     }
 
     // ── Init ────────────────────────────────────────────────────────────────
-    function init() { buildChatWidget(); initBriefGenerator(); initScan(); }
+    // D.H.T BOT oculto hasta integrar Claude en la app: poner a true para mostrarlo.
+    const CHAT_ENABLED = false;
+
+    function init() {
+        if (CHAT_ENABLED) buildChatWidget();
+        initBriefGenerator();
+        initScan();
+    }
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {

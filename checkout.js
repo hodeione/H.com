@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════════════
-// D.H.T — Panel de compra guiado (3 pasos) para las páginas de servicio
+// D.H.T — Compra guiada en un terminal a pantalla completa (3 pasos)
 //
 //   1. Tu plan      → plan elegido + cambiar de plan + extras (total en vivo)
 //   2. Tu proyecto  → 2-3 preguntas rápidas con botones
@@ -192,53 +192,162 @@
         return [money(plan.price), 'pago único'];
     }
 
-    // ── DOM del panel ───────────────────────────────────────────────────────
+    // ── DOM: terminal a pantalla completa ───────────────────────────────────
     const overlay = document.createElement('div');
     overlay.className = 'ck-overlay';
     overlay.hidden = true;
+    overlay.innerHTML = '<canvas class="ck-rain" aria-hidden="true"></canvas>';
 
-    const drawer = document.createElement('aside');
-    drawer.className = 'ck-drawer';
-    drawer.hidden = true;
-    drawer.setAttribute('role', 'dialog');
-    drawer.setAttribute('aria-modal', 'true');
-    drawer.setAttribute('aria-labelledby', 'ckTitle');
-    drawer.innerHTML = `
-        <div class="ck-head">
-            <div class="ck-head-top">
-                <span class="ck-kicker" id="ckKicker"></span>
-                <button type="button" class="ck-close" id="ckClose" aria-label="Cerrar">×</button>
-            </div>
-            <ol class="ck-steps" id="ckSteps" aria-label="Progreso">
-                <li>Tu plan</li><li>Tu proyecto</li><li>Confirmar</li>
-            </ol>
+    const term = document.createElement('div');
+    term.className = 'ck-term';
+    term.hidden = true;
+    term.setAttribute('role', 'dialog');
+    term.setAttribute('aria-modal', 'true');
+    term.setAttribute('aria-labelledby', 'ckTitle');
+    term.innerHTML = `
+        <div class="ck-bar">
+            <span class="ck-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="ck-path" aria-hidden="true">dht@checkout:~/<b id="ckPath"></b>$</span>
+            <button type="button" class="ck-close" id="ckClose" aria-label="Cerrar"><span aria-hidden="true">ESC</span> ×</button>
         </div>
-        <div class="ck-body" id="ckBody"></div>
+        <div class="ck-progress">
+            <ol class="ck-steps" id="ckSteps" aria-label="Progreso">
+                <li><b>01</b> Plan</li><li><b>02</b> Proyecto</li><li><b>03</b> Confirmar</li>
+            </ol>
+            <div class="ck-meter" aria-hidden="true"><div class="ck-meter-fill" id="ckMeter"></div><span id="ckPct">0%</span></div>
+        </div>
+        <div class="ck-main">
+            <div class="ck-body" id="ckBody"></div>
+            <aside class="ck-receipt" id="ckReceipt" aria-label="Resumen del pedido"></aside>
+        </div>
         <div class="ck-foot" id="ckFoot">
-            <div class="ck-total" aria-live="polite">
-                <span class="ck-total-label">Total estimado</span>
-                <span class="ck-total-value" id="ckTotal"></span>
-            </div>
+            <button type="button" class="ck-mobile-total" id="ckMobileTotal" aria-expanded="false" aria-controls="ckReceipt">
+                <span>Total</span><strong id="ckMobileAmount"></strong><em>Ver ticket ▴</em>
+            </button>
             <div class="ck-nav">
-                <button type="button" class="ck-btn ck-btn--ghost" id="ckBack"><span>←</span></button>
+                <button type="button" class="ck-btn ck-btn--ghost" id="ckBack"><span>← Atrás</span></button>
                 <button type="button" class="ck-btn ck-btn--primary" id="ckNext"><span>Siguiente →</span></button>
             </div>
-            <div class="ck-trust"><span>Sin compromiso</span><span>Respuesta en menos de 24 h</span><span>No pagas nada ahora</span></div>
         </div>`;
-    document.body.append(overlay, drawer);
+    document.body.append(overlay, term);
 
-    const body = $('#ckBody', drawer);
-    const foot = $('#ckFoot', drawer);
-    const btnBack = $('#ckBack', drawer);
-    const btnNext = $('#ckNext', drawer);
+    const body = $('#ckBody', term);
+    const receipt = $('#ckReceipt', term);
+    const foot = $('#ckFoot', term);
+    const btnBack = $('#ckBack', term);
+    const btnNext = $('#ckNext', term);
+    const mobileTotal = $('#ckMobileTotal', term);
+
+    const rainFx = window.DHTMatrix ? window.DHTMatrix.rain($('.ck-rain', overlay), { size: 17, density: 0.75, fps: 30, fade: 0.1 }) : null;
+    let ticketId = '';
+    let lastMain = '';
+
+    // ── Efectos ─────────────────────────────────────────────────────────────
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function typeInto(el, text, speed = 22) {
+        if (!el) return;
+        if (reduceMotion) { el.textContent = text; return; }
+        const token = (el._t = (el._t || 0) + 1);
+        let i = 0;
+        el.textContent = '';
+        (function step() {
+            if (token !== el._t) return;
+            el.textContent = text.slice(0, ++i);
+            if (i < text.length) setTimeout(step, speed);
+        })();
+    }
+
+    // Anima el número del total (de 1.499 € a 1.649 €, etc.)
+    function tweenAmount(el, text) {
+        const num = s => { const m = /(\d[\d.]*)/.exec(s); return m ? Number(m[1].replace(/\./g, '')) : null; };
+        const from = num(lastMain), to = num(text);
+        lastMain = text;
+        if (reduceMotion || from == null || to == null || from === to) { el.textContent = text; return; }
+        const [pre, post] = text.split(/\d[\d.]*/);
+        const start = performance.now(), dur = 520;
+        const token = (el._t = (el._t || 0) + 1);
+        (function frame(now) {
+            if (token !== el._t) return;
+            const p = Math.min(1, (now - start) / dur);
+            const v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+            el.textContent = pre + money(v).replace(' €', '') + post;
+            if (p < 1) requestAnimationFrame(frame);
+            else el.textContent = text;
+        })(start);
+        el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump');
+    }
+
+    function barcode(seed) {
+        let s = 0;
+        for (const ch of seed) s = (s * 31 + ch.charCodeAt(0)) >>> 0;
+        let out = '';
+        for (let i = 0; i < 46; i++) {
+            s = (s * 1103515245 + 12345) >>> 0;
+            out += `<i style="width:${1 + (s % 3)}px"></i>`;
+        }
+        return out;
+    }
 
     // ── Render ──────────────────────────────────────────────────────────────
+    function notesFor(plan, cfg, t) {
+        const notes = cfg.notes.slice();
+        if (cfg.installments && t.once && !t.quote) {
+            notes.push(`Pago en 2 plazos: ${money(t.once / 2)} al empezar y ${money(t.once / 2)} a la entrega.`);
+        }
+        if ((t.from || t.quote) && !cfg.notes.some(n => /presupuesto|precio/i.test(n))) {
+            notes.push('El precio final se confirma al revisar tu proyecto.');
+        }
+        return notes;
+    }
+
+    function renderReceipt(animateNew) {
+        const plan = PLANS[state.planId];
+        const cfg = SERVICES[plan.service];
+        const t = totals();
+        const [price] = planPriceLabel(plan);
+        const planPrice = (plan.mode === 'from' ? 'desde ' : '') + price + (plan.mode === 'month' ? '/mes' : '');
+        const [main, extra] = totalParts(t);
+        const prevIds = new Set(Array.from(receipt.querySelectorAll('[data-line]')).map(l => l.dataset.line));
+        const line = (id, name, value) =>
+            `<div class="rc-line${animateNew && !prevIds.has(id) ? ' is-new' : ''}" data-line="${esc(id)}"><span>${esc(name)}</span><i aria-hidden="true"></i><span>${esc(value)}</span></div>`;
+        const extras = cfg.extras.filter(e => state.extras.includes(e.id));
+        const date = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        receipt.innerHTML = `
+            <div class="rc-paper">
+                <div class="rc-head">
+                    <span class="rc-brand">D.H.T</span>
+                    <span class="rc-meta">TICKET #${esc(ticketId)}<br>${date}</span>
+                </div>
+                <div class="rc-service">&gt; ${esc(cfg.name)}</div>
+                <div class="rc-lines">
+                    ${line('plan:' + plan.id, plan.name, planPrice)}
+                    ${extras.map(e => line('x:' + e.id, '+ ' + e.label, money(e.price) + PERIOD[e.period])).join('')}
+                </div>
+                <div class="rc-total">
+                    <span>Total estimado</span>
+                    <strong id="rcMain"></strong>
+                    ${extra ? `<small>${esc(extra)}</small>` : ''}
+                </div>
+                ${notesFor(plan, cfg, t).map(n => `<p class="rc-note">${esc(n)}</p>`).join('')}
+                <ul class="rc-trust"><li>Sin compromiso</li><li>Respuesta en menos de 24 h</li><li>No pagas nada ahora</li></ul>
+                <div class="rc-barcode" aria-hidden="true">${barcode(ticketId)}</div>
+                <div class="rc-id" aria-hidden="true">${esc(ticketId)}</div>
+            </div>`;
+        tweenAmount($('#rcMain', receipt), main);
+        $('#ckMobileAmount', term).textContent = main;
+    }
+
     function render(focus = true) {
         const plan = PLANS[state.planId];
         const cfg = SERVICES[plan.service];
-        $('#ckKicker', drawer).textContent = cfg.name;
+        $('#ckPath', term).textContent = plan.service;
 
-        drawer.querySelectorAll('#ckSteps li').forEach((li, i) => {
+        const pct = state.step >= 4 ? 100 : Math.round(((state.step - 1) / 3) * 100 + 12);
+        $('#ckMeter', term).style.width = pct + '%';
+        $('#ckPct', term).textContent = pct + '%';
+        term.querySelectorAll('#ckSteps li').forEach((li, i) => {
             li.classList.toggle('is-done', i + 1 < state.step);
             li.classList.toggle('is-current', i + 1 === state.step);
             if (i + 1 === state.step) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
@@ -249,53 +358,54 @@
         else if (state.step === 3) body.innerHTML = stepConfirm(plan, cfg);
         else body.innerHTML = stepDone(plan, cfg);
 
+        term.classList.toggle('is-done', state.step === 4);
         foot.hidden = state.step === 4;
-        $('.ck-total', drawer).hidden = state.step === 3; // el resumen ya muestra el total
         btnBack.hidden = state.step === 1;
-        btnBack.parentElement.style.gridTemplateColumns = state.step === 1 ? '1fr' : '';
-        btnNext.innerHTML = state.step === 3 ? '<span>Enviar solicitud →</span>' : '<span>Siguiente →</span>';
-        updateTotal();
+        btnNext.innerHTML = state.step === 3 ? '<span>Enviar solicitud ⏎</span>' : '<span>Siguiente →</span>';
+        renderReceipt(false);
         store.set(state);
 
         body.scrollTop = 0;
+        const typed = $('.ck-type', body);
+        if (typed) typeInto(typed, typed.dataset.text);
         if (focus) {
             const title = $('.ck-step-title', body);
             if (title) title.focus({ preventScroll: true });
         }
     }
 
-    function updateTotal() {
-        const [main, extra] = totalParts(totals());
-        $('#ckTotal', drawer).innerHTML = esc(main) + (extra ? `<small>${esc(extra)}</small>` : '');
-    }
+    const stepTitle = (cmd, text) =>
+        `<p class="ck-cmd" aria-hidden="true"><span>dht@checkout:~$</span> ${esc(cmd)}</p>
+         <h2 class="ck-step-title" id="ckTitle" tabindex="-1" aria-label="${esc(text)}"><span class="ck-prompt" aria-hidden="true">&gt;</span> <span class="ck-type" aria-hidden="true" data-text="${esc(text)}"></span><span class="ck-caret" aria-hidden="true"></span></h2>`;
 
     function stepPlan(plan, cfg) {
-        const [price, unit] = planPriceLabel(plan);
-        const others = plansOf(plan.service);
+        const plans = plansOf(plan.service);
         return `<div class="ck-step">
-            <h2 class="ck-step-title" id="ckTitle" tabindex="-1">Tu plan</h2>
-            <p class="ck-step-sub">Revisa lo que incluye y añade lo que necesites. Puedes cambiar de plan aquí mismo.</p>
-            <div class="ck-plan">
-                <div class="ck-plan-row">
-                    <div>
-                        <div class="ck-plan-tier">${esc(plan.tier)}</div>
-                        <div class="ck-plan-name">${esc(plan.name)}</div>
-                    </div>
-                    <div class="ck-plan-price">${esc(price)}<small>${esc(unit)}</small></div>
-                </div>
-                <ul class="ck-plan-feats">${plan.feats.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
-            </div>
-            <div class="ck-switch" role="group" aria-label="Cambiar de plan">
-                ${others.map(p => `<button type="button" data-switch="${esc(p.id)}" aria-pressed="${p.id === plan.id}">${esc(p.name)}</button>`).join('')}
+            ${stepTitle('./seleccionar --plan', 'Elige tu plan')}
+            <p class="ck-step-sub">Cambia de plan cuando quieras y añade extras: el ticket se actualiza al momento.</p>
+            <div class="ck-plans" role="radiogroup" aria-label="Plan">
+                ${plans.map(p => {
+                    const on = p.id === plan.id;
+                    const [pr, unit] = planPriceLabel(p);
+                    return `<button type="button" class="ck-planrow${on ? ' is-on' : ''}" role="radio" aria-checked="${on}" data-switch="${esc(p.id)}">
+                        <span class="ck-radio" aria-hidden="true">${on ? '[•]' : '[ ]'}</span>
+                        <span class="ck-planrow-main">
+                            <span class="ck-planrow-tier">${esc(p.tier)}${p.popular ? ' · MÁS ELEGIDO' : ''}</span>
+                            <span class="ck-planrow-name">${esc(p.name)}</span>
+                        </span>
+                        <span class="ck-planrow-price">${esc(pr)}<small>${esc(unit)}</small></span>
+                        ${on ? `<span class="ck-planrow-feats">${p.feats.map(f => `<span>✓ ${esc(f)}</span>`).join('')}</span>` : ''}
+                    </button>`;
+                }).join('')}
             </div>
             <fieldset class="ck-field">
-                <legend class="ck-label">Extras opcionales</legend>
+                <legend class="ck-label">// extras opcionales</legend>
                 <div class="ck-options">
                     ${cfg.extras.map(e => `
                     <label class="ck-option">
                         <input type="checkbox" name="extra" value="${esc(e.id)}"${state.extras.includes(e.id) ? ' checked' : ''}>
                         <span class="ck-option-box">
-                            <span class="ck-option-main"><span class="ck-tick" aria-hidden="true">✓</span>
+                            <span class="ck-option-main"><span class="ck-tick" aria-hidden="true"></span>
                                 <span>${esc(e.label)}${e.desc ? `<span class="ck-option-desc">${esc(e.desc)}</span>` : ''}</span>
                             </span>
                             <span class="ck-option-price">+${money(e.price)}${PERIOD[e.period]}</span>
@@ -311,7 +421,7 @@
         const val = state.answers[q.id];
         const isOn = o => (Array.isArray(val) ? val.includes(o) : val === o);
         return `<fieldset class="ck-field">
-            <legend class="ck-label">${esc(q.label)}${q.type === 'multi' ? ' <span class="ck-hint">(varias)</span>' : ''}</legend>
+            <legend class="ck-label">// ${esc(q.label)}${q.type === 'multi' ? ' <span class="ck-hint">(varias)</span>' : ''}</legend>
             <div class="ck-options ck-options--pills">
                 ${q.options.map(o => `
                 <label class="ck-option">
@@ -324,75 +434,42 @@
 
     function stepProject(cfg) {
         return `<div class="ck-step">
-            <h2 class="ck-step-title" id="ckTitle" tabindex="-1">Tu proyecto</h2>
+            ${stepTitle('./briefing --rapido', 'Cuéntanos tu proyecto')}
             <p class="ck-step-sub">Un par de clics y llegamos a la primera llamada con los deberes hechos. Todo es opcional.</p>
             ${cfg.questions.map(optionGroup).join('')}
             ${optionGroup(TIMING)}
             <div class="ck-field">
-                <label class="ck-label" for="ckNotes">Cuéntanos en una frase (opcional)</label>
+                <label class="ck-label" for="ckNotes">// en una frase (opcional)</label>
                 <textarea class="ck-input" id="ckNotes" maxlength="1500" placeholder="Ej: clínica dental en Madrid, queremos reservas online">${esc(state.notes)}</textarea>
             </div>
-        </div>`;
-    }
-
-    function summaryHtml(plan, cfg) {
-        const t = totals();
-        const [price] = planPriceLabel(plan);
-        const planPrice = (plan.mode === 'from' ? 'desde ' : '') + price + (plan.mode === 'month' ? '/mes' : '');
-        const lines = [`<div class="ck-summary-line"><span>${esc(plan.name)}</span><span>${esc(planPrice)}</span></div>`];
-        cfg.extras.filter(e => state.extras.includes(e.id)).forEach(e => {
-            lines.push(`<div class="ck-summary-line"><span>+ ${esc(e.label)}</span><span>${money(e.price)}${PERIOD[e.period]}</span></div>`);
-        });
-        const [main, extra] = totalParts(t);
-        const notes = cfg.notes.slice();
-        if (cfg.installments && t.once && !t.quote) {
-            notes.push(`Pago en 2 plazos: ${money(t.once / 2)} al empezar y ${money(t.once / 2)} a la entrega.`);
-        }
-        if ((t.from || t.quote) && !cfg.notes.some(n => /presupuesto|precio/i.test(n))) {
-            notes.push('El precio final se confirma al revisar tu proyecto.');
-        }
-        return `<div class="ck-summary">
-            ${lines.join('')}
-            <div class="ck-summary-total"><span>Total estimado</span><strong>${esc(main)}</strong></div>
-            ${extra ? `<div class="ck-summary-line"><span></span><span>${esc(extra)}</span></div>` : ''}
-            ${notes.length ? `<p class="ck-summary-note">${notes.map(esc).join(' ')}</p>` : ''}
-            <p class="ck-summary-note"><button type="button" class="ck-summary-edit" data-goto="1">Editar plan y extras</button> <span aria-hidden="true">·</span> <span>Sin pagos por adelantado: primero hablamos.</span></p>
         </div>`;
     }
 
     function stepConfirm(plan, cfg) {
         const c = state.contact;
         const pref = ['Email', 'Llamada', 'Videollamada'];
+        const field = (id, label, attrs, val) => `
+            <div class="ck-field ck-tfield">
+                <label class="ck-label" for="${id}">${label}</label>
+                <div class="ck-input-wrap"><span aria-hidden="true">&gt;</span><input class="ck-input" id="${id}" ${attrs} value="${esc(val)}"></div>
+            </div>`;
         return `<div class="ck-step">
-            <h2 class="ck-step-title" id="ckTitle" tabindex="-1">Confirmar</h2>
-            <p class="ck-step-sub">Revisa el resumen y dinos cómo contactarte. Te enviamos la propuesta en menos de 24 h.</p>
-            ${summaryHtml(plan, cfg)}
+            ${stepTitle('./confirmar --enviar', '¿A quién enviamos la propuesta?')}
+            <p class="ck-step-sub">Revisa el ticket y dinos cómo contactarte. Te enviamos la propuesta en menos de 24 h.</p>
             <div class="ck-row">
-                <div class="ck-field">
-                    <label class="ck-label" for="ckName">Nombre *</label>
-                    <input class="ck-input" id="ckName" name="name" autocomplete="name" required value="${esc(c.name)}">
-                </div>
-                <div class="ck-field">
-                    <label class="ck-label" for="ckEmail">Email *</label>
-                    <input class="ck-input" id="ckEmail" name="email" type="email" autocomplete="email" required value="${esc(c.email)}">
-                </div>
-                <div class="ck-field">
-                    <label class="ck-label" for="ckPhone">Teléfono</label>
-                    <input class="ck-input" id="ckPhone" name="phone" type="tel" autocomplete="tel" placeholder="(opcional)" value="${esc(c.phone)}">
-                </div>
-                <div class="ck-field">
-                    <label class="ck-label" for="ckCompany">Empresa</label>
-                    <input class="ck-input" id="ckCompany" name="company" autocomplete="organization" placeholder="(opcional)" value="${esc(c.company)}">
-                </div>
+                ${field('ckName', 'nombre *', 'name="name" autocomplete="name" required', c.name)}
+                ${field('ckEmail', 'email *', 'name="email" type="email" autocomplete="email" required', c.email)}
+                ${field('ckPhone', 'teléfono', 'name="phone" type="tel" autocomplete="tel" placeholder="(opcional)"', c.phone)}
+                ${field('ckCompany', 'empresa', 'name="company" autocomplete="organization" placeholder="(opcional)"', c.company)}
             </div>
             <fieldset class="ck-field">
-                <legend class="ck-label">¿Cómo prefieres que te contactemos?</legend>
+                <legend class="ck-label">// ¿cómo prefieres que te contactemos?</legend>
                 <div class="ck-options ck-options--pills">
                     ${pref.map(p => `<label class="ck-option"><input type="radio" name="pref" value="${p}"${c.pref === p ? ' checked' : ''}><span class="ck-option-box">${p}</span></label>`).join('')}
                 </div>
             </fieldset>
             ${BOOKING_URL ? `<p class="ck-hint">¿Prefieres elegir tú la hora? <a class="ck-link" href="${esc(BOOKING_URL)}" target="_blank" rel="noopener">Reserva una llamada ↗</a></p>` : ''}
-            <p class="ck-hint">Usaremos tus datos solo para responder a esta solicitud.</p>
+            <p class="ck-hint">Usaremos tus datos solo para responder a esta solicitud. <button type="button" class="ck-summary-edit" data-goto="1">Editar plan y extras</button></p>
             <p class="ck-error" id="ckError" role="alert"></p>
         </div>`;
     }
@@ -400,15 +477,18 @@
     function stepDone(plan, cfg) {
         const name = state.contact.name.split(' ')[0];
         return `<div class="ck-step ck-done">
-            <div class="ck-done-mark" aria-hidden="true">✓</div>
-            <h2 class="ck-step-title" id="ckTitle" tabindex="-1">¡Solicitud enviada${name ? ', ' + esc(name) : ''}!</h2>
-            <p class="ck-step-sub">Hemos recibido tu solicitud de <strong>${esc(plan.name)}</strong> (${esc(cfg.name)}).</p>
+            <p class="ck-cmd" aria-hidden="true"><span>dht@checkout:~$</span> ./enviar --solicitud #${esc(ticketId)}</p>
+            <pre class="ck-done-log" aria-hidden="true">[ OK ] Cifrando solicitud
+[ OK ] Transmitiendo a D.H.T
+[ OK ] Recibido por el equipo</pre>
+            <h2 class="ck-step-title ck-done-title" id="ckTitle" tabindex="-1" data-text="TRANSMISIÓN COMPLETA">TRANSMISIÓN COMPLETA</h2>
+            <p class="ck-step-sub">${name ? esc(name) + ', hemos' : 'Hemos'} recibido tu solicitud de <strong>${esc(plan.name)}</strong> (${esc(cfg.name)}). Guarda tu ticket: <strong>#${esc(ticketId)}</strong>.</p>
             <ol class="ck-next">
                 <li>Revisamos tu proyecto y las respuestas que nos has dado.</li>
                 <li>Te contactamos por ${esc(state.contact.pref.toLowerCase())} en menos de 24 h con una propuesta cerrada.</li>
                 <li>Si te encaja, arrancamos. No pagas nada hasta entonces.</li>
             </ol>
-            <button type="button" class="ck-btn" id="ckDoneClose"><span>Volver a la web</span></button>
+            <button type="button" class="ck-btn ck-btn--primary" id="ckDoneClose"><span>Volver a la web</span></button>
         </div>`;
     }
 
@@ -435,7 +515,7 @@
             el.classList.add('is-invalid');
             el.setAttribute('aria-invalid', 'true');
             el.focus();
-            err.textContent = msg;
+            err.textContent = '[ ERROR ] ' + msg;
             return false;
         };
         body.querySelectorAll('.is-invalid').forEach(el => { el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid'); });
@@ -453,6 +533,7 @@
         const qs = cfg.questions.concat(TIMING);
         const extras = cfg.extras.filter(e => state.extras.includes(e.id));
         return [
+            `TICKET: #${ticketId}`,
             `SERVICIO: ${cfg.name}`,
             `PLAN: ${plan.name} (${plan.tier}) — ${plan.mode === 'from' ? 'desde ' : ''}${price}${plan.mode === 'month' ? '/mes' : ''}`,
             `EXTRAS: ${extras.length ? extras.map(e => `${e.label} (+${money(e.price)}${PERIOD[e.period]})`).join(', ') : 'ninguno'}`,
@@ -480,7 +561,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
                 body: JSON.stringify({
-                    _subject: `Solicitud: ${plan.name} — ${cfg.name} (${c.name})`,
+                    _subject: `Solicitud #${ticketId}: ${plan.name} — ${cfg.name} (${c.name})`,
                     _template: 'table',
                     name: c.name, email: c.email, phone: c.phone, company: c.company,
                     message,
@@ -489,10 +570,11 @@
             if (!res.ok) throw new Error('server');
             state.step = 4;
             render();
+            if (rainFx) rainFx.burst();
             store.set({ contact: state.contact }); // el siguiente pedido empieza limpio, con los datos de contacto
         } catch {
             const mail = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Solicitud: ' + plan.name)}&body=${encodeURIComponent(message + '\n\n' + c.name + ' · ' + c.email + (c.phone ? ' · ' + c.phone : ''))}`;
-            $('#ckError', body).innerHTML = `No se ha podido enviar. <a class="ck-link" href="${mail}">Envíanoslo por email</a> y te respondemos igual.`;
+            $('#ckError', body).innerHTML = `[ ERROR ] No se ha podido enviar. <a class="ck-link" href="${mail}">Envíanoslo por email</a> y te respondemos igual.`;
         } finally {
             btnNext.disabled = false; btnBack.disabled = false;
             btnNext.classList.remove('is-loading');
@@ -503,6 +585,7 @@
     function go(step) {
         readStep();
         state.step = step;
+        setReceiptOpen(false);
         render();
     }
 
@@ -513,11 +596,18 @@
     });
     btnBack.addEventListener('click', () => { if (state.step > 1) go(state.step - 1); });
 
+    function setReceiptOpen(open) {
+        term.classList.toggle('receipt-open', open);
+        mobileTotal.setAttribute('aria-expanded', String(open));
+        $('em', mobileTotal).textContent = open ? 'Ocultar ticket ▾' : 'Ver ticket ▴';
+    }
+    mobileTotal.addEventListener('click', () => setReceiptOpen(!term.classList.contains('receipt-open')));
+
     body.addEventListener('change', e => {
         const el = e.target;
         if (el.name === 'extra') {
             state.extras = Array.from(body.querySelectorAll('input[name="extra"]:checked')).map(i => i.value);
-            updateTotal();
+            renderReceipt(true);
             store.set(state);
         } else if (el.dataset.q) {
             const q = el.dataset.q;
@@ -531,15 +621,29 @@
     body.addEventListener('click', e => {
         const sw = e.target.closest('[data-switch]');
         if (sw) {
+            if (sw.dataset.switch === state.planId) return;
             state.planId = sw.dataset.switch;
+            const scroll = body.scrollTop;
             render(false);
+            body.scrollTop = scroll;
             const pressed = $(`[data-switch="${CSS.escape(state.planId)}"]`, body);
-            if (pressed) pressed.focus();
+            if (pressed) pressed.focus({ preventScroll: true });
             return;
         }
         const goto = e.target.closest('[data-goto]');
         if (goto) return go(Number(goto.dataset.goto));
         if (e.target.closest('#ckDoneClose')) close();
+    });
+
+    // flechas ↑/↓ dentro del selector de plan
+    body.addEventListener('keydown', e => {
+        const row = e.target.closest('.ck-planrow');
+        if (!row || !['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft'].includes(e.key)) return;
+        e.preventDefault();
+        const rows = Array.from(body.querySelectorAll('.ck-planrow'));
+        const i = rows.indexOf(row) + (e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : -1);
+        const next = rows[(i + rows.length) % rows.length];
+        next.click();
     });
 
     body.addEventListener('input', e => {
@@ -561,38 +665,45 @@
         } else {
             state = freshState(planId, saved);
         }
+        ticketId = 'DHT-' + Date.now().toString(36).toUpperCase().slice(-6);
+        lastMain = '';
         opener = trigger || document.activeElement;
-        overlay.hidden = false; drawer.hidden = false;
+        overlay.hidden = false; term.hidden = false;
         document.body.classList.add('ck-locked');
+        setReceiptOpen(false);
+        if (rainFx) rainFx.start();
         requestAnimationFrame(() => {
             overlay.classList.add('is-open');
-            drawer.classList.add('is-open');
+            term.classList.add('is-open');
         });
         render();
     }
 
     function close() {
-        if (drawer.hidden) return;
+        if (term.hidden) return;
         if (state && state.step < 4) readStep();
         overlay.classList.remove('is-open');
-        drawer.classList.remove('is-open');
+        term.classList.remove('is-open');
         document.body.classList.remove('ck-locked');
-        setTimeout(() => { overlay.hidden = true; drawer.hidden = true; }, 450);
+        setTimeout(() => {
+            overlay.hidden = true; term.hidden = true;
+            if (rainFx) rainFx.stop();
+        }, 450);
         if (opener && opener.focus) opener.focus({ preventScroll: true });
         if (new URLSearchParams(location.search).has('plan')) {
             history.replaceState(null, '', location.pathname + location.hash);
         }
     }
 
-    $('#ckClose', drawer).addEventListener('click', close);
+    $('#ckClose', term).addEventListener('click', close);
     overlay.addEventListener('click', close);
 
     document.addEventListener('keydown', e => {
-        if (drawer.hidden) return;
+        if (term.hidden) return;
         if (e.key === 'Escape') { e.preventDefault(); close(); return; }
         if (e.key !== 'Tab') return;
-        // atrapa el foco dentro del panel
-        const items = Array.from(drawer.querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'))
+        // atrapa el foco dentro del terminal
+        const items = Array.from(term.querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'))
             .filter(el => !el.disabled && !el.closest('[hidden]') && el.offsetParent !== null);
         if (!items.length) return;
         const first = items[0], last = items[items.length - 1];
