@@ -1,10 +1,10 @@
 'use strict';
 
 // ============================================================================
-// H. — HERO 3D: motor de partículas con proyección perspectiva real
+// D.H.T — HERO 3D: motor de partículas con proyección perspectiva real
 //
 // Miles de partículas en un espacio 3D que se transforman en ciclo:
-//   "H."  →  esfera  →  nudo tórico  →  galaxia espiral  →  ...
+//   "D.H.T"  →  esfera  →  nudo tórico  →  galaxia espiral  →  ...
 //
 // - Rotación 3D continua + inclinación que sigue al ratón
 // - Repulsión de partículas alrededor del cursor
@@ -69,10 +69,10 @@
         off.width = 360; off.height = 200;
         const oc = off.getContext('2d');
         oc.fillStyle = '#fff';
-        oc.font = '900 170px "Bebas Neue", "Arial Black", sans-serif';
+        oc.font = '900 150px "Bebas Neue", "Arial Black", sans-serif';
         oc.textAlign = 'center';
         oc.textBaseline = 'middle';
-        oc.fillText('H.', 180, 108);
+        oc.fillText('D.H.T', 180, 108);
         const data = oc.getImageData(0, 0, 360, 200).data;
         const pts = [];
         for (let y = 0; y < 200; y += 2) {
@@ -146,12 +146,12 @@
         shapes[3] = shapeGalaxy();
     }
     buildShapes();
-    // re-muestrea la "H." cuando cargue Bebas Neue para el trazo exacto
+    // re-muestrea el "D.H.T" cuando cargue Bebas Neue para el trazo exacto
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => { shapes[0] = shapeText(); });
     }
 
-    // arranque: partículas dispersas que convergen en la "H."
+    // arranque: partículas dispersas que convergen en el "D.H.T"
     for (let i = 0; i < MAX * 3; i++) {
         from[i] = (Math.random() - 0.5) * 7;
         cur[i] = from[i];

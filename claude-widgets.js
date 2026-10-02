@@ -1,9 +1,9 @@
 'use strict';
 
 // ============================================================================
-// H. — Integraciones IA (Claude Fable 5)
-//   1. H.BOT — chat flotante con streaming
-//   2. H.BRIEF — generador de brief de proyecto (salida estructurada)
+// D.H.T — Integraciones IA (Claude Fable 5)
+//   1. D.H.T BOT — chat flotante con streaming
+//   2. D.H.T BRIEF — generador de brief de proyecto (salida estructurada)
 //
 // Habla con /api/claude (función serverless). Si el backend no está desplegado
 // (p. ej. GitHub Pages sin Vercel), entra en MODO DEMO con respuestas locales
@@ -76,7 +76,7 @@
         { match: /rgpd|legal|cookie|privacidad/i, reply: 'Todas nuestras webs salen 100% conformes con RGPD y la normativa de cookies europea: banner correcto, política de privacidad, registro de tratamientos... Y también auditamos webs existentes. La AEPD ha subido las inspecciones un 34% este año — mejor prevenir.' },
         { match: /seo|google|posicion|trafico|tráfico/i, reply: 'Hacemos SEO técnico + contenidos + Google Ads. Nuestro caso favorito: +180% de consultas online en 60 días para un cliente de servicios. El SEO bien hecho es la inversión digital con mejor ROI a medio plazo.' },
         { match: /contact|hablar|llamar|email|whatsapp|telefono|teléfono/i, reply: 'Puedes escribirnos a hodeione41@gmail.com, llamarnos o mandarnos un WhatsApp al +34 668 524 968 (Lun–Vie 09:00–18:00), o usar el formulario de contacto aquí abajo. Respondemos en menos de 24h.' },
-        { match: /hola|buenas|hey|hi\b/i, reply: '¡Hola! Soy H.BOT, el asistente IA de la agencia. Puedo contarte qué hacemos, precios orientativos, plazos o cómo trabajamos. ¿Qué necesitas?' },
+        { match: /hola|buenas|hey|hi\b/i, reply: '¡Hola! Soy D.H.T BOT, el asistente IA de la agencia. Puedo contarte qué hacemos, precios orientativos, plazos o cómo trabajamos. ¿Qué necesitas?' },
     ];
     const DEMO_DEFAULT = 'Buena pregunta. Hacemos webs, software a medida, automatización con IA, apps móviles, SEO y cumplimiento RGPD. Si me das algo más de contexto sobre tu proyecto te oriento mejor — o escríbenos directamente desde el formulario de contacto.';
 
@@ -86,7 +86,7 @@
     }
 
     // ════════════════════════════════════════════════════════════════════════
-    // 1. H.BOT — CHAT FLOTANTE
+    // 1. D.H.T BOT — CHAT FLOTANTE
     // ════════════════════════════════════════════════════════════════════════
     const history = [];
 
@@ -94,14 +94,14 @@
         const fab = el('button', 'ai-chat-fab');
         fab.id = 'aiChatFab';
         fab.setAttribute('aria-label', 'Abrir asistente IA');
-        fab.innerHTML = '<span class="ai-fab-icon">H<i>.</i></span><span class="ai-fab-pulse"></span>';
+        fab.innerHTML = '<span class="ai-fab-icon">D.H<i>.</i>T</span><span class="ai-fab-pulse"></span>';
 
         const panel = el('div', 'ai-chat-panel');
         panel.id = 'aiChatPanel';
         panel.innerHTML = `
             <div class="ai-chat-header">
                 <div>
-                    <div class="ai-chat-title">H.BOT</div>
+                    <div class="ai-chat-title">D.H.T BOT</div>
                     <div class="ai-chat-sub"><span class="ai-status-dot"></span>IA · CLAUDE FABLE 5</div>
                 </div>
                 <button class="ai-chat-close" id="aiChatClose" aria-label="Cerrar chat">×</button>
@@ -189,7 +189,7 @@
             fab.classList.toggle('open', open);
             if (open) {
                 if (!messagesBox.children.length) {
-                    addMessage('bot', 'Hola 👋 Soy H.BOT, el asistente IA de la agencia. Pregúntame por servicios, precios, plazos o lo que necesites para tu proyecto.');
+                    addMessage('bot', 'Hola 👋 Soy D.H.T BOT, el asistente IA de la agencia. Pregúntame por servicios, precios, plazos o lo que necesites para tu proyecto.');
                 }
                 setTimeout(() => input.focus(), 250);
             }
@@ -200,7 +200,7 @@
     }
 
     // ════════════════════════════════════════════════════════════════════════
-    // 2. H.BRIEF — GENERADOR DE BRIEF
+    // 2. D.H.T BRIEF — GENERADOR DE BRIEF
     // ════════════════════════════════════════════════════════════════════════
     function demoBrief(idea) {
         const lower = idea.toLowerCase();
@@ -380,7 +380,7 @@
     }
 
     // ════════════════════════════════════════════════════════════════════════
-    // 3. H.SCAN — AUDITORÍA WEB (URL) + REVISIÓN DE DISEÑO (VISIÓN)
+    // 3. D.H.T SCAN — AUDITORÍA WEB (URL) + REVISIÓN DE DISEÑO (VISIÓN)
     // ════════════════════════════════════════════════════════════════════════
     function demoAudit(url) {
         // puntuaciones pseudoaleatorias pero estables por URL

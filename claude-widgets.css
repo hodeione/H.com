@@ -173,7 +173,7 @@
 }
 .ai-brief-cta:hover { background: var(--acid-yellow); color: var(--black); box-shadow: var(--glow-sm); }
 
-/* ============ H.BOT CHAT FLOTANTE ============ */
+/* ============ D.H.T BOT CHAT FLOTANTE ============ */
 .ai-chat-fab {
     position: fixed; bottom: 6.2rem; right: 2rem; z-index: 9990;
     width: 56px; height: 56px;
@@ -308,7 +308,7 @@
     .ai-chat-panel { bottom: 5.4rem; right: 1rem; }
 }
 
-/* ============ H.SCAN — AUDITORÍA EXPRESS ============ */
+/* ============ D.H.T SCAN — AUDITORÍA EXPRESS ============ */
 .ai-scan {
     max-width: 1400px;
     margin: 2.5rem auto 0;

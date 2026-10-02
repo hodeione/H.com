@@ -1,4 +1,4 @@
-# H. Digital Agency — Sitio Web Profesional
+# DH Technology — Sitio Web Profesional
 
 ## 📋 Descripción
 Sitio web de una agencia digital española con estética brutalista, diseñado para presentar servicios de web design, software, IA, legal compliance, apps móviles y SEO/marketing digital.
@@ -7,10 +7,10 @@ Sitio web de una agencia digital española con estética brutalista, diseñado p
 
 El sitio incluye cuatro integraciones reales con la API de Claude, usando el modelo `claude-fable-5` con fallback automático del servidor a `claude-opus-4-8`:
 
-1. **H.BOT** — Chat flotante con streaming en tiempo real, disponible en **todas las páginas**. Conoce los servicios, precios y procesos de la agencia y orienta a los visitantes hacia el contacto.
-2. **H.BRIEF** — Generador de brief de proyecto (sección "IA EN VIVO"). El visitante describe su idea y la IA devuelve un brief estructurado (salida JSON con schema garantizado): servicios recomendados, stack, fases, plazo y rango de presupuesto. Un clic lo lleva al formulario de contacto.
-3. **H.SCAN / Auditoría URL** — El visitante pega la URL de su web; el servidor la visita, recorta el HTML y Claude la audita: puntuaciones 0-100 de SEO, RGPD, contenido y técnica, hallazgos con severidad y quick wins.
-4. **H.SCAN / Revisión de diseño (visión)** — El visitante arrastra una captura de su web; Claude la analiza con visión como un director de arte: puntuación, fortalezas, mejoras accionables y un consejo pro. La imagen se redimensiona en el navegador antes de enviarse.
+1. **D.H.T BOT** — Chat flotante con streaming en tiempo real, disponible en **todas las páginas**. Conoce los servicios, precios y procesos de la agencia y orienta a los visitantes hacia el contacto.
+2. **D.H.T BRIEF** — Generador de brief de proyecto (sección "IA EN VIVO"). El visitante describe su idea y la IA devuelve un brief estructurado (salida JSON con schema garantizado): servicios recomendados, stack, fases, plazo y rango de presupuesto. Un clic lo lleva al formulario de contacto.
+3. **D.H.T SCAN / Auditoría URL** — El visitante pega la URL de su web; el servidor la visita, recorta el HTML y Claude la audita: puntuaciones 0-100 de SEO, RGPD, contenido y técnica, hallazgos con severidad y quick wins.
+4. **D.H.T SCAN / Revisión de diseño (visión)** — El visitante arrastra una captura de su web; Claude la analiza con visión como un director de arte: puntuación, fortalezas, mejoras accionables y un consejo pro. La imagen se redimensiona en el navegador antes de enviarse.
 
 ### Arquitectura
 
@@ -44,7 +44,7 @@ Todo está ya configurado. El único paso pendiente es añadir tu clave de API:
    - Environments: Production (y Preview si quieres)
 3. **Redeploy** (Deployments → ⋯ → Redeploy).
 
-Listo: H.BOT y H.BRIEF dejarán el modo demo y responderán con Claude Fable 5 en tiempo real.
+Listo: D.H.T BOT y D.H.T BRIEF dejarán el modo demo y responderán con Claude Fable 5 en tiempo real.
 
 <details>
 <summary>Alternativa por terminal (Vercel CLI)</summary>
@@ -77,7 +77,7 @@ Si el backend vive en otro dominio, define el endpoint antes de cargar `claude-w
 - **seo-marketing.html** — SEO y marketing digital
 
 ### Recursos Multimedia
-- **logopng.png** — Logo de H.
+- **logopng.png** — Logo de D.H.T
 - **75b658b9-7631-4d36-a604-e0ba8a9c7337_0.mp4** — Video del logo H. rotando
 
 ## 🚀 Cómo Ejecutar
@@ -202,4 +202,4 @@ H.com/
 
 ---
 
-**H. Digital Agency © 2025 — Hecho en Madrid**
+**DH Technology © 2025 — Hecho en Madrid**

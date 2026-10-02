@@ -1,7 +1,7 @@
 'use strict';
 
 // ============================================================================
-// H. — FX EXTREME: el paquete de locuras visuales
+// D.H.T — FX EXTREME: el paquete de locuras visuales
 //
 //   1. LIQUID HOVER  — distorsión líquida WebGL con aberración cromática
 //                      en las imágenes del portfolio (shader propio)
@@ -303,7 +303,7 @@
     (function () {
         const wipe = document.createElement('div');
         wipe.className = 'fx-wipe';
-        wipe.innerHTML = '<span class="fx-wipe-logo">H.</span>';
+        wipe.innerHTML = '<span class="fx-wipe-logo">D.H.T</span>';
         document.body.appendChild(wipe);
 
         // entrada: si venimos de otra página con cortinilla, descúbrela

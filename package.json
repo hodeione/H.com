@@ -2,7 +2,7 @@
   "name": "h-digital-agency",
   "version": "1.0.0",
   "private": true,
-  "description": "H. Digital Agency — sitio estático + funciones serverless de IA (Claude Fable 5)",
+  "description": "DH Technology — sitio estático + funciones serverless de IA (Claude Fable 5)",
   "dependencies": {
     "@anthropic-ai/sdk": ">=0.88.0"
   }

@@ -1,7 +1,7 @@
 'use strict';
 
 // ============================================================================
-// H. — FX: animaciones avanzadas
+// D.H.T — FX: animaciones avanzadas
 //   1. Scramble/decode de títulos al entrar en viewport
 //   2. Glitch bursts en el hero
 //   3. Botones magnéticos
