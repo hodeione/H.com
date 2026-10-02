@@ -150,6 +150,49 @@
         if (cmdObserver) cmdObserver.observe(line); else line.querySelector('.mx-cmd-text').textContent = cmd;
     });
 
+    // ── 3b. Ventanas de terminal alrededor de cada bloque principal ─────────
+    // [selector, ruta, etiqueta]. La ruta null = se deriva del título de la sección.
+    const WINDOWS = [
+        ['.services-grid', 'servicios', '6 módulos'],
+        ['.portfolio-grid', 'portfolio', 'casos reales'],
+        ['.stats-grid', 'stats', 'en directo'],
+        ['.identity-inner', 'whoami', 'perfil'],
+        ['.process-steps', 'proceso.sh', 'pipeline'],
+        ['.tech-grid', 'stack.json', '12 tecnologías'],
+        ['.testimonials-grid', 'clientes', 'verificado'],
+        ['.blog-slider-wrapper', 'blog.log', 'feed'],
+        ['.faq-list', 'faq', 'man dht'],
+        ['.contact-inner', 'contacto', 'canal seguro'],
+        ['.pricing-grid', 'planes.json', 'precios'],
+        ['.compare-scroll', 'comparativa', 'diff'],
+        ['.content-grid', null, 'listo'],
+        ['.features-list', null, 'listo'],
+    ];
+    WINDOWS.forEach(([sel, path, meta]) => {
+        document.querySelectorAll(sel).forEach(el => {
+            const section = el.closest('section');
+            if (!section || section.style.display === 'none' || el.closest('.tw')) return;
+            const title = section.querySelector('.section-title');
+            const p = path || (title ? slug(title.textContent) : 'sistema');
+            const win = document.createElement('div');
+            win.className = 'tw';
+            win.innerHTML = `<div class="tw-bar" aria-hidden="true"><span class="tw-dots"><i></i><i></i><i></i></span><span class="tw-path">dht@madrid:~/<b>${p}</b>$</span><span class="tw-meta">${meta}</span></div><div class="tw-body"></div>`;
+            el.before(win);
+            win.lastElementChild.appendChild(el);
+        });
+    });
+    // los carruseles (blog) midieron su ancho antes de entrar en la ventana: que recalculen
+    window.dispatchEvent(new Event('resize'));
+
+    // Cursor parpadeante tras cada título con cabecera (> TÍTULO▌)
+    document.querySelectorAll('.section-header .section-title').forEach(title => {
+        if (title.nextElementSibling && title.nextElementSibling.classList.contains('tw-caret')) return;
+        const caret = document.createElement('span');
+        caret.className = 'tw-caret';
+        caret.setAttribute('aria-hidden', 'true');
+        title.after(caret);
+    });
+
     // ── 4. Arranque de sistema en la pantalla de carga ──────────────────────
     const preloader = document.getElementById('preloader');
     if (preloader && !preloader.classList.contains('hidden')) {

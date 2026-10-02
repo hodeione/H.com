@@ -1,0 +1,211 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   D.H.T — TEMA TERMINAL
+   El lenguaje visual de la compra (checkout) aplicado a toda la web:
+   fondo negro verdoso, ventanas de terminal con barra de título, paneles con
+   borde ácido, prompts ">", marcadores [ ] y brillo fósforo.
+   Las ventanas (.tw) las crea matrix.js alrededor de cada bloque principal.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --black: #050704;
+    --dark-gray: #070a05;
+    --mid-gray: #0c1008;
+    --card-bg: #0b0e07;
+    --border: rgba(200,255,0,.14);
+    --border-yellow: rgba(200,255,0,.35);
+    --white: #f1fbe4;
+    --concrete-gray: #8f9b7d;
+    --term-text: #e9ffd0;
+    --term-muted: rgba(233,255,208,.6);
+    --term-line: rgba(200,255,0,.15);
+    --term-line-strong: rgba(200,255,0,.45);
+}
+
+body {
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,255,0,.05), transparent 70%),
+        #050704;
+    color: var(--term-text);
+}
+
+/* ── Ventana de terminal ─────────────────────────────────────────────────── */
+.tw {
+    position: relative;
+    width: 100%; max-width: 1240px; margin: 0 auto;
+    background: rgba(5,7,4,.9);
+    border: 1px solid var(--term-line-strong);
+    box-shadow:
+        0 0 0 1px rgba(200,255,0,.06),
+        0 0 60px rgba(200,255,0,.1),
+        0 30px 80px rgba(0,0,0,.6),
+        inset 0 0 80px rgba(200,255,0,.035);
+}
+.tw::after { /* líneas de escaneo */
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.14) 3px, transparent 4px);
+    mix-blend-mode: multiply;
+}
+.tw-bar {
+    display: flex; align-items: center; gap: 1rem;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid rgba(200,255,0,.25);
+    background: linear-gradient(180deg, rgba(200,255,0,.08), rgba(200,255,0,.02));
+    font-family: 'DM Mono', monospace;
+}
+.tw-dots { display: flex; gap: .4rem; flex-shrink: 0; }
+.tw-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(200,255,0,.25); }
+.tw-dots i:first-child { background: var(--acid-yellow); box-shadow: 0 0 8px var(--acid-yellow); }
+.tw-path { flex: 1; min-width: 0; font-size: .72rem; color: rgba(200,255,0,.7); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tw-path b { color: var(--acid-yellow); font-weight: 400; }
+.tw-meta { flex-shrink: 0; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--acid-yellow); }
+.tw-meta::before { content: '● '; animation: mxBlink 1.6s steps(1) infinite; }
+.tw-body { position: relative; padding: clamp(1rem, 2.4vw, 2rem); }
+.tw-body > * { margin-left: 0; margin-right: 0; max-width: none; }
+@media (max-width: 600px) {
+    .tw-meta { display: none; }
+    .tw-body { padding: .9rem; }
+}
+
+/* ── Cabecera ────────────────────────────────────────────────────────────── */
+header {
+    background: rgba(5,7,4,.88);
+    border-bottom: 1px solid rgba(200,255,0,.25);
+    box-shadow: 0 1px 0 rgba(200,255,0,.05), 0 10px 40px rgba(0,0,0,.4);
+}
+header nav a::before { content: './'; color: rgba(200,255,0,.45); }
+header nav a:hover::before { color: var(--acid-yellow); }
+.logo { text-shadow: 0 0 18px rgba(200,255,0,.45); }
+
+/* ── Títulos de sección: > TÍTULO▌ ───────────────────────────────────────── */
+.section-title::before, .service-hero h1::before { content: '> '; color: var(--acid-yellow); text-shadow: 0 0 16px rgba(200,255,0,.6); }
+.section-title { color: #fff; text-shadow: 0 0 24px rgba(200,255,0,.22); }
+.tw-caret {
+    display: inline-block; flex-shrink: 0;
+    width: .42em; height: .7em; align-self: center;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    background: var(--acid-yellow); box-shadow: 0 0 14px rgba(200,255,0,.6);
+    animation: mxBlink 1s steps(1) infinite;
+}
+.section-line { height: 6px; background: repeating-linear-gradient(90deg, rgba(200,255,0,.35) 0 6px, transparent 6px 9px); opacity: .5; }
+.section-number { color: var(--acid-yellow); }
+
+/* ── Botones ─────────────────────────────────────────────────────────────── */
+.btn-primary, .contact-submit, .header-cta:hover, .cta-btn:hover, .newsletter-btn {
+    box-shadow: 0 0 24px rgba(200,255,0,.35);
+}
+.btn-secondary { border-color: rgba(200,255,0,.35) !important; color: var(--term-text); }
+.btn-secondary:hover { border-color: var(--acid-yellow) !important; color: var(--acid-yellow); }
+.btn-primary span::after, .contact-submit span::after { content: ' →'; }
+
+/* ── Paneles (tarjetas) — mismo lenguaje que las filas de plan ───────────── */
+.service-card, .portfolio-card, .testimonial-card, .blog-card, .process-step,
+.identity-block, .stat-item, .content-item, .pc, .client-logo-link {
+    background: linear-gradient(180deg, rgba(200,255,0,.035), rgba(200,255,0,.008)) !important;
+    border-color: var(--term-line) !important;
+}
+.service-card { border: 1px solid var(--term-line) !important; box-shadow: none; }
+.service-card:hover, .portfolio-card:hover, .testimonial-card:hover, .blog-card:hover,
+.process-step:hover, .identity-block:hover, .content-item:hover, .pc:hover, .client-logo-link:hover {
+    border-color: var(--term-line-strong) !important;
+    background: linear-gradient(90deg, rgba(200,255,0,.1), rgba(200,255,0,.025)) !important;
+    box-shadow: 0 0 24px rgba(200,255,0,.15), inset 3px 0 0 var(--acid-yellow) !important;
+}
+.service-card-bg { opacity: .25; }
+.service-name, .pc-name { color: #fff; }
+.service-desc, .portfolio-cat, .blog-excerpt, .testimonial-quote, .process-desc, .identity-block-content, .content-item-desc, .feature-desc, .pc-desc {
+    color: var(--term-muted);
+}
+.service-tags span::before, .pricing-trust li::before { content: '['; margin-right: .25em; color: rgba(200,255,0,.55); }
+.service-tags span::after { content: ']'; margin-left: .25em; color: rgba(200,255,0,.55); }
+.service-tags span { border-color: rgba(200,255,0,.15); color: rgba(233,255,208,.55); }
+.sc-num-bg { color: var(--acid-yellow); opacity: .05; }
+
+/* Contadores y números grandes con brillo fósforo */
+.stat-number, .process-number, .pc-amount, .ct-price { text-shadow: 0 0 20px rgba(200,255,0,.35); }
+.stat-number { color: var(--acid-yellow); }
+.testimonial-stars { color: var(--acid-yellow); text-shadow: 0 0 10px rgba(200,255,0,.5); }
+
+/* ── Tarjetas de plan (páginas de servicio) ──────────────────────────────── */
+.pc { border: 1px solid var(--term-line) !important; }
+.pc--popular {
+    border-color: var(--acid-yellow) !important;
+    background: linear-gradient(180deg, rgba(200,255,0,.12), rgba(200,255,0,.03)) !important;
+    box-shadow: 0 0 30px rgba(200,255,0,.18), inset 3px 0 0 var(--acid-yellow) !important;
+}
+.pc::before { display: none; }
+.pc-tier::before { content: '[ ] '; color: rgba(200,255,0,.55); }
+.pc--popular .pc-tier::before { content: '[•] '; color: var(--acid-yellow); }
+.pc-price { border-bottom: 1px dashed rgba(200,255,0,.25) !important; }
+.pc-badge { box-shadow: 0 0 16px rgba(200,255,0,.5); }
+@media (max-width: 760px) {
+    .pc-badge { position: static; align-self: flex-start; margin-bottom: 1rem; }
+}
+.pc-cta--primary, .ct-cta--primary { box-shadow: 0 0 24px rgba(200,255,0,.35); }
+.pricing-intro, .pricing-foot { color: var(--term-muted); }
+.pricing-trust li::before { content: '['; }
+.pricing-trust span { display: none; }
+.pricing-trust li::after { content: '✓]'; order: -1; color: var(--acid-yellow); margin-right: .4em; }
+.pricing-trust li::before { content: '['; order: -2; margin-right: 0; }
+
+/* Comparativa */
+.compare-scroll { border-color: var(--term-line); }
+.tw .compare-scroll { border: 0; }
+.compare-table th, .compare-table td { border-bottom-color: rgba(200,255,0,.1); }
+.compare-table thead th, .compare-table tfoot td, .compare-table tfoot th, .compare-table thead .ct-corner { background: #070a05; }
+.compare-table thead th { border-bottom-color: rgba(200,255,0,.35); }
+.compare-table tbody th[scope="row"] { background: #050704; color: var(--term-text); }
+.compare-table th.is-popular { background: linear-gradient(180deg, rgba(200,255,0,.14), #070a05); }
+
+/* ── Proceso, identidad, FAQ ─────────────────────────────────────────────── */
+.process-steps, .faq-list { border-color: var(--term-line); }
+.faq-item { border-bottom: 1px dashed rgba(200,255,0,.2) !important; }
+.faq-question-text::before { content: '[+] '; color: var(--acid-yellow); }
+.faq-item.open .faq-question-text::before { content: '[-] '; }
+.faq-answer-text { color: var(--term-muted); }
+.faq-item.open .faq-question-text { color: var(--acid-yellow); text-shadow: 0 0 12px rgba(200,255,0,.35); }
+
+/* ── Formulario de contacto: campos con prompt ───────────────────────────── */
+.contact-form { border-color: var(--term-line) !important; background: rgba(200,255,0,.015); }
+.form-field { border-color: rgba(200,255,0,.12) !important; }
+.form-label { color: rgba(200,255,0,.7); letter-spacing: .12em; text-transform: none; font-size: .64rem; }
+.form-label::before { content: '// '; }
+.contact-input { color: #fff; caret-color: var(--acid-yellow); }
+.form-field { position: relative; }
+.form-field::after {
+    content: '>'; position: absolute; left: .7rem; top: 2.75rem;
+    color: var(--acid-yellow); font-family: 'DM Mono', monospace; font-size: .85rem; pointer-events: none;
+}
+.form-field:focus-within { background: rgba(200,255,0,.05); box-shadow: inset 3px 0 0 var(--acid-yellow); }
+.contact-input::placeholder { color: rgba(233,255,208,.28); }
+.newsletter-input { border-color: rgba(200,255,0,.25); }
+
+/* ── Páginas de servicio ─────────────────────────────────────────────────── */
+.service-section { border-top-color: rgba(200,255,0,.25) !important; }
+.service-hero p { color: var(--term-muted); }
+.content-item { border: 1px solid var(--term-line) !important; border-left: 3px solid var(--acid-yellow) !important; }
+.feature { border-bottom: 1px dashed rgba(200,255,0,.2) !important; }
+.feature-icon { text-shadow: 0 0 14px rgba(200,255,0,.6); }
+.back-link::before { content: '$ '; color: var(--acid-yellow); }
+
+/* ── Stack ───────────────────────────────────────────────────────────────── */
+.tech-item { background: linear-gradient(180deg, #0b0f07 0%, #070a05 100%) !important; }
+.tfx .tech-item.is-linked { background: #0f1409 !important; }
+.tech-item:hover { background: #0f1409 !important; }
+
+/* ── Blog: cabeceras de tarjeta en la paleta de terminal ─────────────────── */
+.blog-card .blog-img-bg {
+    background:
+        radial-gradient(ellipse at 80% 100%, rgba(200,255,0,.22), transparent 60%),
+        linear-gradient(135deg, #050704 0%, #0b1206 60%, #10190a 100%) !important;
+}
+.blog-img-deco { color: var(--acid-yellow) !important; opacity: .55; text-shadow: 0 0 24px rgba(200,255,0,.45); }
+.blog-card:hover .blog-img-deco { opacity: .9; }
+
+/* ── Pie ─────────────────────────────────────────────────────────────────── */
+footer { border-top: 1px solid rgba(200,255,0,.25) !important; background: #050704 !important; }
+.footer-copy::before, .footer-left::before { content: '$ '; color: var(--acid-yellow); }
+.ticker { border-color: rgba(200,255,0,.25) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    .tw-caret, .tw-meta::before { animation: none; }
+}
