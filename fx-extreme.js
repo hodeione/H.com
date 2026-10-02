@@ -19,6 +19,8 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) return;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
+    // Modo ligero en táctil / pantallas pequeñas: sin gelatina, túnel ni bucle continuo
+    const lite = !finePointer || window.innerWidth < 900;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     // velocidad de scroll compartida entre efectos
@@ -33,7 +35,7 @@
     // ════════════════════════════════════════════════════════════════════════
     const liquidInstances = [];
 
-    if (finePointer) {
+    if (finePointer && !lite) {
         const VERT = `
             attribute vec2 aPos;
             varying vec2 vUv;
@@ -158,7 +160,7 @@
     // ════════════════════════════════════════════════════════════════════════
     // 2. JELLY SCROLL — deformación elástica de la página
     // ════════════════════════════════════════════════════════════════════════
-    const jellyTargets = Array.from(document.querySelectorAll(
+    const jellyTargets = lite ? [] : Array.from(document.querySelectorAll(
         '.services-grid, .portfolio-grid, .testimonials-grid, .process-steps, ' +
         '.tech-grid, .stats-grid, .faq-list, .blog-slider-wrapper, .identity-inner'
     ));
@@ -170,7 +172,7 @@
     let tunnel = null;
     (function () {
         const host = document.querySelector('.process');
-        if (!host) return;
+        if (!host || lite) return;
         const canvas = document.createElement('canvas');
         canvas.className = 'fx-tunnel';
         canvas.setAttribute('aria-hidden', 'true');
@@ -258,7 +260,7 @@
     // ════════════════════════════════════════════════════════════════════════
     // BUCLE COMPARTIDO (jelly + tunnel + liquid)
     // ════════════════════════════════════════════════════════════════════════
-    (function loop(now) {
+    if (!lite) (function loop(now) {
         const t = now * 0.001;
 
         // jelly: decaimiento elástico

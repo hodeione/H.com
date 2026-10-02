@@ -1568,7 +1568,7 @@ footer {
     .identity-block { border-right: none; border-bottom: 1px solid var(--border); }
     .identity-block:last-child { border-bottom: none; }
 
-    nav { display: none; }
+    header nav { display: none; }
     .hamburger { display: flex; }
     .header-cta { display: none; }
 

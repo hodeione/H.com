@@ -90,17 +90,25 @@
     window.DHTMatrix = { rain, reduce };
 
     // ── 2. Capa global: lluvia + CRT ────────────────────────────────────────
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const layer = document.createElement('canvas');
-    layer.className = 'mx-rain';
-    layer.setAttribute('aria-hidden', 'true');
+    // En móvil / táctil no hay lluvia animada a pantalla completa: se sustituye
+    // por una textura estática (CSS) para que la página vaya fluida y no gaste batería.
+    const lite = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+    window.DHTMatrix.lite = lite;
     const crt = document.createElement('div');
     crt.className = 'mx-crt';
     crt.setAttribute('aria-hidden', 'true');
-    document.body.append(layer, crt);
-    const pageRain = rain(layer, { size: isMobile ? 14 : 16, density: isMobile ? 0.35 : 0.5, fps: 24, fade: 0.07 });
-    pageRain.start();
-    window.DHTMatrix.page = pageRain;
+    document.body.append(crt);
+    if (!lite) {
+        const layer = document.createElement('canvas');
+        layer.className = 'mx-rain';
+        layer.setAttribute('aria-hidden', 'true');
+        document.body.append(layer);
+        const pageRain = rain(layer, { size: 16, density: 0.5, fps: 24, fade: 0.07 });
+        pageRain.start();
+        window.DHTMatrix.page = pageRain;
+    } else {
+        document.documentElement.classList.add('mx-lite');
+    }
 
     // ── 3. Comandos de terminal sobre cada sección ──────────────────────────
     const COMMANDS = {
@@ -167,11 +175,13 @@
         ['.compare-scroll', 'comparativa', 'diff'],
         ['.content-grid', null, 'listo'],
         ['.features-list', null, 'listo'],
+        ['.blog-grid', 'blog', 'artículos'],
+        ['.article-body', 'blog/' + (location.pathname.split('/').pop().replace(/\.html$/, '') || 'articulo') + '.md', 'lectura'],
     ];
     WINDOWS.forEach(([sel, path, meta]) => {
         document.querySelectorAll(sel).forEach(el => {
-            const section = el.closest('section');
-            if (!section || section.style.display === 'none' || el.closest('.tw')) return;
+            const section = el.closest('section, article, main') || document.body;
+            if (section.style.display === 'none' || el.closest('.tw')) return;
             const title = section.querySelector('.section-title');
             const p = path || (title ? slug(title.textContent) : 'sistema');
             const win = document.createElement('div');

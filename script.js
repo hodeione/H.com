@@ -122,7 +122,8 @@ document.querySelectorAll('.mobile-nav-link').forEach(link => {
     });
 });
 
-document.getElementById('headerCta')?.addEventListener('click', () => {
+document.getElementById('headerCta')?.addEventListener('click', e => {
+    e.preventDefault();
     document.querySelector('#contacto').scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -368,18 +369,8 @@ onEnter('#faqList', el => {
     });
 }, { threshold: 0.04 });
 
-// ============ MAGNETIC BUTTONS ============
-document.querySelectorAll('.btn-primary, .btn-secondary, .header-cta').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width  / 2;
-        const y = e.clientY - r.top  - r.height / 2;
-        anime({ targets: btn, translateX: x * 0.14, translateY: y * 0.28, duration: 350, easing: 'easeOutExpo' });
-    });
-    btn.addEventListener('mouseleave', () => {
-        anime({ targets: btn, translateX: 0, translateY: 0, duration: 700, easing: 'easeOutElastic(1, .5)' });
-    });
-});
+// (Botones magnéticos: los gestiona fx.js. Aquí había un segundo efecto que
+// competía con aquel y hacía que el primer clic se perdiera.)
 
 // ============ PORTFOLIO CARDS ============
 document.querySelectorAll('.portfolio-card').forEach(card => {

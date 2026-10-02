@@ -204,6 +204,6 @@
     .tech-pop-list a, .tech-pop-list .tp-item { opacity: 1; transform: none; animation: none !important; }
 }
 @media (hover: none) {
-    .tech-hint-text { font-size: 0; }
+    .tech-hint-text { font-size: 0; text-align: left; }
     .tech-hint-text::after { content: 'Toca una tecnología para ver dónde la hemos usado'; font-size: .62rem; }
 }

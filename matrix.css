@@ -75,3 +75,14 @@ html { scrollbar-color: rgba(200,255,0,.55) #060608; scrollbar-width: thin; }
 @media (prefers-reduced-motion: reduce) {
     .mx-crt, .mx-caret, .ck-caret { animation: none; }
 }
+
+/* ── Modo ligero (móvil / táctil): misma estética, sin coste de GPU ──────── */
+.mx-lite .mx-crt {
+    animation: none;
+    background: repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.12) 3px, transparent 4px);
+}
+/* textura estática de "código" en lugar de la lluvia animada */
+.mx-lite body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(200,255,0,.035) 0 1px, transparent 1px 22px);
+}

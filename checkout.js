@@ -238,7 +238,11 @@
     const btnNext = $('#ckNext', term);
     const mobileTotal = $('#ckMobileTotal', term);
 
-    const rainFx = window.DHTMatrix ? window.DHTMatrix.rain($('.ck-rain', overlay), { size: 17, density: 0.75, fps: 30, fade: 0.1 }) : null;
+    const rainFx = window.DHTMatrix
+        ? window.DHTMatrix.rain($('.ck-rain', overlay), window.DHTMatrix.lite
+            ? { size: 15, density: 0.35, fps: 18, fade: 0.12 }
+            : { size: 17, density: 0.75, fps: 30, fade: 0.1 })
+        : null;
     let ticketId = '';
     let lastMain = '';
 

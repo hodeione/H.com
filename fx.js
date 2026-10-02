@@ -22,6 +22,9 @@
     function loadVideo() {
         // si la escena 3D de partículas está activa, el vídeo no hace falta
         if (window.__H3D) return;
+        // nunca en móvil ni con datos limitados: son 81 MB
+        const conn = navigator.connection || {};
+        if (window.innerWidth < 900 || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')) return;
         const source = video.querySelector('source[data-src]');
         if (!source) return;
         source.src = source.dataset.src;
@@ -96,8 +99,9 @@
     // 3. BOTONES MAGNÉTICOS
     // ════════════════════════════════════════════════════════════════════════
     if (finePointer) {
-        const MAGNETIC = '.btn-primary, .btn-secondary, .header-cta, .contact-submit, .ai-brief-btn, .blog-arrow, .back-to-top, .newsletter-btn';
-        const STRENGTH = 0.32, RANGE = 90;
+        // Sin .header-cta: un botón pequeño que se mueve bajo el cursor pierde clics.
+        const MAGNETIC = '.btn-primary, .btn-secondary, .contact-submit, .ai-brief-btn, .blog-arrow, .back-to-top, .newsletter-btn';
+        const STRENGTH = 0.22, RANGE = 90;
 
         document.querySelectorAll(MAGNETIC).forEach(btn => {
             btn.classList.add('fx-magnetic');
