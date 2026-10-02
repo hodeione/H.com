@@ -769,6 +769,22 @@ nav a:hover::after { width: 100%; }
 }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; }
 
+/* Servicio preseleccionado desde una página de servicio (?servicio=…) */
+.form-interest {
+    display: flex; align-items: center; gap: .8rem;
+    padding: .9rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(200,255,0,.06);
+    font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+}
+.form-interest span { color: var(--concrete-gray); }
+.form-interest strong { color: var(--acid-yellow); font-weight: 400; flex: 1; }
+.form-interest button {
+    background: none; border: 1px solid var(--border); color: var(--concrete-gray);
+    width: 26px; height: 26px; cursor: pointer; font-size: .9rem; line-height: 1;
+}
+.form-interest button:hover { color: var(--acid-yellow); border-color: var(--acid-yellow); }
+
 .form-field {
     position: relative;
     border-bottom: 1px solid var(--border);

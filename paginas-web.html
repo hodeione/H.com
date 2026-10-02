@@ -385,6 +385,7 @@
     </style>
     <link rel="stylesheet" href="claude-widgets.css">
     <link rel="stylesheet" href="fx.css">
+    <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -408,105 +409,85 @@
         <p>Diseñamos y desarrollamos sitios web de alto rendimiento que atraen clientes y generan resultados. Desde landing pages hasta e-commerce complejos, construimos la presencia digital que tu negocio merece.</p>
     </section>
 
-    <!-- PRICING TOP -->
-    <section class="service-section" style="background:#060608;">
+    <!-- PRICING — tarjetas de plan; el botón abre el panel de compra (checkout.js) -->
+    <section class="service-section pricing" id="planes">
         <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
-        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Sin sorpresas. Sin letra pequeña. Elige el plan que encaja con tu proyecto y empieza hoy.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1200px;width:100%;">
-
-            <!-- BÁSICO -->
-            <div style="background:#0d0d10;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.06),transparent);"></div>
-                <div style="font-size:.6rem;color:#8C8C7A;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">BÁSICO</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB BÁSICA</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Tu primera presencia online en menos de una semana.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">500</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>1-2 secciones</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño responsive</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Entrega en 7 días</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>SSL + Hosting incluido</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS / panel de edición</li>
+        <p class="pricing-intro">Sin sorpresas. Sin letra pequeña. Elige el plan que encaja con tu proyecto y empieza hoy.</p>
+        <div class="pricing-grid">
+            <article class="pc" data-plan-id="paginas-web:web-basica" data-service="paginas-web" data-tier="BÁSICO" data-name="WEB BÁSICA" data-price="500" data-price-mode="once">
+                <div class="pc-tier">BÁSICO</div>
+                <h3 class="pc-name">WEB BÁSICA</h3>
+                <p class="pc-desc">Tu primera presencia online en menos de una semana.</p>
+                <div class="pc-price"><span class="pc-currency">€</span><span class="pc-amount">500</span><span class="pc-suffix">pago único</span></div>
+                <ul class="pc-features">
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>1-2 secciones</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Diseño responsive</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Formulario de contacto</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Entrega en 7 días</li>
+                    <li class="is-out"><span class="pc-check" aria-hidden="true">×</span><span class="sr-only">No incluye: </span>SSL + Hosting incluido</li>
+                    <li class="is-out"><span class="pc-check" aria-hidden="true">×</span><span class="sr-only">No incluye: </span>CMS / panel de edición</li>
                 </ul>
-                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid rgba(200,255,0,.4);color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">EMPEZAR →</a>
-            </div>
+                <button type="button" class="pc-cta" data-checkout="paginas-web:web-basica">ELEGIR PLAN <span aria-hidden="true">→</span></button>
+            </article>
 
-            <!-- STARTER -->
-            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">LANDING PRO</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para validar tu negocio con una presencia web de impacto.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">799</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño landing page a medida</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Responsive móvil y desktop</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO básico integrado</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SSL + Hosting 1 año</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS para edición propia</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>E-Commerce</li>
+            <article class="pc" data-plan-id="paginas-web:landing-pro" data-service="paginas-web" data-tier="STARTER" data-name="LANDING PRO" data-price="799" data-price-mode="once">
+                <div class="pc-tier">STARTER</div>
+                <h3 class="pc-name">LANDING PRO</h3>
+                <p class="pc-desc">Para validar tu negocio con una presencia web de impacto.</p>
+                <div class="pc-price"><span class="pc-currency">€</span><span class="pc-amount">799</span><span class="pc-suffix">pago único</span></div>
+                <ul class="pc-features">
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Diseño landing page a medida</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Responsive móvil y desktop</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>SEO básico integrado</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Formulario de contacto</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>SSL + Hosting 1 año</li>
+                    <li class="is-out"><span class="pc-check" aria-hidden="true">×</span><span class="sr-only">No incluye: </span>CMS para edición propia</li>
+                    <li class="is-out"><span class="pc-check" aria-hidden="true">×</span><span class="sr-only">No incluye: </span>E-Commerce</li>
                 </ul>
-                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
-            </div>
+                <button type="button" class="pc-cta" data-checkout="paginas-web:landing-pro">ELEGIR PLAN <span aria-hidden="true">→</span></button>
+            </article>
 
-            <!-- PRO (popular) -->
-            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
-                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB COMPLETA</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La solución más elegida para negocios que quieren crecer.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">1.499</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Starter</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>CMS para edición propia</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 10 páginas</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Blog integrado</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + Google Search Console</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte técnico 3 meses</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Tienda online / E-Commerce</li>
+            <article class="pc pc--popular" data-plan-id="paginas-web:web-completa" data-service="paginas-web" data-tier="PRO" data-name="WEB COMPLETA" data-price="1499" data-price-mode="once">
+                <div class="pc-badge">MÁS ELEGIDO</div>
+                <div class="pc-tier">PRO</div>
+                <h3 class="pc-name">WEB COMPLETA</h3>
+                <p class="pc-desc">La solución más elegida para negocios que quieren crecer.</p>
+                <div class="pc-price"><span class="pc-currency">€</span><span class="pc-amount">1.499</span><span class="pc-suffix">pago único</span></div>
+                <ul class="pc-features">
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Todo lo del plan Starter</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>CMS para edición propia</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Hasta 10 páginas</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Blog integrado</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Analytics + Google Search Console</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Soporte técnico 3 meses</li>
+                    <li class="is-out"><span class="pc-check" aria-hidden="true">×</span><span class="sr-only">No incluye: </span>Tienda online / E-Commerce</li>
                 </ul>
-                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
-            </div>
+                <button type="button" class="pc-cta pc-cta--primary" data-checkout="paginas-web:web-completa">ELEGIR PLAN <span aria-hidden="true">→</span></button>
+            </article>
 
-            <!-- VIP -->
-            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">VIP</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">E-COMMERCE TOTAL</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para vender online con una tienda potente y estrategia SEO.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">2.999</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Tienda online completa</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pasarela de pago (Stripe/PayPal)</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Gestión de inventario</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO avanzado + contenido</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte prioritario 6 meses</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Integración con ERP/CRM</li>
+            <article class="pc" data-plan-id="paginas-web:e-commerce-total" data-service="paginas-web" data-tier="VIP" data-name="E-COMMERCE TOTAL" data-price="2999" data-price-mode="once">
+                <div class="pc-tier">VIP</div>
+                <h3 class="pc-name">E-COMMERCE TOTAL</h3>
+                <p class="pc-desc">Para vender online con una tienda potente y estrategia SEO.</p>
+                <div class="pc-price"><span class="pc-currency">€</span><span class="pc-amount">2.999</span><span class="pc-suffix">pago único</span></div>
+                <ul class="pc-features">
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Todo lo del plan Pro</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Tienda online completa</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Pasarela de pago (Stripe/PayPal)</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Gestión de inventario</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>SEO avanzado + contenido</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Soporte prioritario 6 meses</li>
+                    <li class="is-in"><span class="pc-check" aria-hidden="true">✓</span>Integración con ERP/CRM</li>
                 </ul>
-                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">QUIERO EL VIP</a>
-            </div>
+                <button type="button" class="pc-cta" data-checkout="paginas-web:e-commerce-total">ELEGIR PLAN <span aria-hidden="true">→</span></button>
+            </article>
         </div>
-        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Todos los planes incluyen IVA. Pago en 2 plazos disponible. ¿Necesitas algo diferente? <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Hablemos.</a></p>
+        <ul class="pricing-trust">
+            <li><span aria-hidden="true">✓</span>Respuesta en menos de 24 h</li>
+            <li><span aria-hidden="true">✓</span>Sin compromiso</li>
+        </ul>
+        <p class="pricing-foot">Todos los planes incluyen IVA. Pago en 2 plazos disponible. ¿Necesitas algo diferente? <a href="index.html?servicio=paginas-web#contacto">Hablemos.</a></p>
+        <a class="pricing-compare-link" href="#comparativa">Comparar los planes en detalle <span aria-hidden="true">↓</span></a>
     </section>
 
     <!-- DESCRIPTION -->
@@ -608,91 +589,45 @@
         </div>
     </section>
 
-    <!-- PRICING SECTION -->
-    <section class="service-section" style="background:#060608;display:none;">
-        <h2 class="section-title">PLANES Y <span class="accent">PRECIOS</span></h2>
-        <p style="font-size:.82rem;color:#8C8C7A;margin-bottom:3rem;max-width:600px;line-height:1.8;">Sin sorpresas. Sin letra pequeña. Elige el plan que encaja con tu proyecto y empieza hoy.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;width:100%;">
-
-            <!-- STARTER -->
-            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);"></div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">STARTER</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">LANDING PRO</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para validar tu negocio con una presencia web de impacto.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">799</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Diseño landing page a medida</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Responsive móvil y desktop</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO básico integrado</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Formulario de contacto</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SSL + Hosting 1 año</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>CMS para edición propia</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>E-Commerce</li>
-                </ul>
-                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">SOLICITAR AHORA</a>
-            </div>
-
-            <!-- PRO (popular) -->
-            <div style="background:linear-gradient(180deg,rgba(200,255,0,.07) 0%,#111115 100%);border:1px solid rgba(200,255,0,.4);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 30px 80px rgba(0,0,0,.6)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.4)'">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C8FF00;box-shadow:0 0 20px rgba(200,255,0,.5);"></div>
-                <div style="position:absolute;top:1.4rem;right:1.4rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;background:#C8FF00;color:#060608;padding:.3rem .85rem;font-family:'DM Mono',monospace;">MÁS POPULAR</div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">PRO</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">WEB COMPLETA</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">La solución más elegida para negocios que quieren crecer.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(200,255,0,.15);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">1.499</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Starter</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>CMS para edición propia</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Hasta 10 páginas</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Blog integrado</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Analytics + Google Search Console</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte técnico 3 meses</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.25);"><span style="color:rgba(255,255,255,.2);flex-shrink:0;">×</span>Tienda online / E-Commerce</li>
-                </ul>
-                <a href="index.html#contacto" style="display:block;background:#C8FF00;border:1px solid #C8FF00;color:#060608;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;font-weight:600;" onmouseover="this.style.background='#060608';this.style.color='#C8FF00'" onmouseout="this.style.background='#C8FF00';this.style.color='#060608'">EMPEZAR AHORA</a>
-            </div>
-
-            <!-- VIP -->
-            <div style="background:#111115;border:1px solid rgba(255,255,255,.06);padding:2.8rem 2.2rem;display:flex;flex-direction:column;position:relative;transition:transform .4s,box-shadow .4s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.5),transparent);"></div>
-                <div style="font-size:.6rem;color:#C8FF00;letter-spacing:.38em;text-transform:uppercase;margin-bottom:1.2rem;">VIP</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:.3rem;">E-COMMERCE TOTAL</div>
-                <div style="font-size:.75rem;color:#8C8C7A;margin-bottom:2.2rem;line-height:1.5;">Para vender online con una tienda potente y estrategia SEO.</div>
-                <div style="display:flex;align-items:flex-start;gap:.2rem;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#C8FF00;margin-top:.5rem;">€</span>
-                    <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;letter-spacing:-.02em;">2.999</span>
-                    <span style="font-size:.6rem;color:#8C8C7A;letter-spacing:.15em;text-transform:uppercase;align-self:flex-end;padding-bottom:.5rem;margin-left:.3rem;">pago único</span>
-                </div>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:.9rem;flex:1;margin-bottom:2.2rem;">
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Todo lo del plan Pro</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Tienda online completa</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Pasarela de pago (Stripe/PayPal)</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Gestión de inventario</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>SEO avanzado + contenido</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Soporte prioritario 6 meses</li>
-                    <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.77rem;color:rgba(255,255,255,.75);"><span style="color:#C8FF00;flex-shrink:0;">✓</span>Integración con ERP/CRM</li>
-                </ul>
-                <a href="index.html#contacto" style="display:block;background:transparent;border:1px solid #C8FF00;color:#C8FF00;padding:1.1rem 2rem;text-transform:uppercase;font-size:.72rem;letter-spacing:.22em;text-align:center;text-decoration:none;transition:all .4s;font-family:'DM Mono',monospace;" onmouseover="this.style.background='#C8FF00';this.style.color='#060608'" onmouseout="this.style.background='transparent';this.style.color='#C8FF00'">QUIERO EL VIP</a>
-            </div>
+    <!-- COMPARATIVA — tabla de planes -->
+    <section class="service-section compare" id="comparativa">
+        <h2 class="section-title">COMPARA LOS <span class="accent">PLANES</span></h2>
+        <p class="pricing-intro">Lo que incluye cada plan, punto por punto.</p>
+        <div class="compare-scroll" role="region" aria-label="Comparativa de planes" tabindex="0">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="ct-corner"><span class="sr-only">Característica</span></th>
+                        <th scope="col"><span class="ct-tier">BÁSICO</span><span class="ct-name">WEB BÁSICA</span><span class="ct-price">500 €<small>pago único</small></span></th>
+                        <th scope="col"><span class="ct-tier">STARTER</span><span class="ct-name">LANDING PRO</span><span class="ct-price">799 €<small>pago único</small></span></th>
+                        <th scope="col" class="is-popular"><span class="ct-tier">PRO</span><span class="ct-name">WEB COMPLETA</span><span class="ct-price">1.499 €<small>pago único</small></span></th>
+                        <th scope="col"><span class="ct-tier">VIP</span><span class="ct-name">E-COMMERCE TOTAL</span><span class="ct-price">2.999 €<small>pago único</small></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Tamaño</th><td class="is-text">1-2 secciones</td><td class="is-text">Landing a medida</td><td class="is-text">Hasta 10 páginas</td><td class="is-text">Hasta 10 páginas + tienda</td></tr>
+                    <tr><th scope="row">Diseño responsive</th><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td></tr>
+                    <tr><th scope="row">Formulario de contacto</th><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td></tr>
+                    <tr><th scope="row">SSL + hosting</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-text">1 año</td><td class="is-text">1 año</td><td class="is-text">1 año</td></tr>
+                    <tr><th scope="row">SEO</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-text">Básico</td><td class="is-text">Básico + Analytics y Search Console</td><td class="is-text">Avanzado + contenido</td></tr>
+                    <tr><th scope="row">CMS y blog</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td></tr>
+                    <tr><th scope="row">Tienda online + pasarela de pago</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td></tr>
+                    <tr><th scope="row">Inventario e integración ERP/CRM</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluido</span></td></tr>
+                    <tr><th scope="row">Soporte técnico</th><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-no"><span aria-hidden="true">—</span><span class="sr-only">No incluido</span></td><td class="is-text">3 meses</td><td class="is-text">6 meses prioritario</td></tr>
+                </tbody>
+                <tfoot>
+                    <tr><th scope="row"><span class="sr-only">Elegir plan</span></th><td><button type="button" class="ct-cta" data-checkout="paginas-web:web-basica">ELEGIR</button></td><td><button type="button" class="ct-cta" data-checkout="paginas-web:landing-pro">ELEGIR</button></td><td><button type="button" class="ct-cta ct-cta--primary" data-checkout="paginas-web:web-completa">ELEGIR</button></td><td><button type="button" class="ct-cta" data-checkout="paginas-web:e-commerce-total">ELEGIR</button></td></tr>
+                </tfoot>
+            </table>
         </div>
-        <p style="font-size:.65rem;color:#8C8C7A;letter-spacing:.12em;margin-top:2rem;text-align:center;">Todos los planes incluyen IVA. Pago en 2 plazos disponible. ¿Necesitas algo diferente? <a href="index.html#contacto" style="color:#C8FF00;text-decoration:none;">Hablemos.</a></p>
     </section>
 
     <!-- CTA SECTION -->
     <section class="service-cta">
         <h2>¿LISTO PARA CONSTRUIR?</h2>
         <div class="cta-buttons">
-            <a href="index.html#contacto" class="btn-primary">COMENCEMOS</a>
-            <a href="index.html#contacto" class="btn-secondary">CONTÁCTANOS</a>
+            <a href="#planes" class="btn-primary">COMENCEMOS</a>
+            <a href="index.html?servicio=paginas-web#contacto" class="btn-secondary">CONTÁCTANOS</a>
         </div>
     </section>
 
@@ -701,6 +636,7 @@
         <div class="footer-left">D.H.T © 2025</div>
         <div class="footer-right">HECHO EN MADRID</div>
     </footer>
+    <script src="checkout.js"></script>
     <script src="claude-widgets.js"></script>
     <script src="fx.js"></script>
     <script src="fx-extreme.js"></script>

@@ -228,6 +228,29 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+// ============ CONTACT FORM — servicio preseleccionado (?servicio=…) ============
+const SERVICE_NAMES = {
+    'paginas-web': 'Páginas Web',
+    'legal-rgpd': 'Cumplimiento Legal RGPD',
+    'software-medida': 'Software a Medida',
+    'ia-automation': 'Automatización con IA',
+    'apps-moviles': 'Apps Móviles',
+    'seo-marketing': 'SEO & Marketing Digital',
+};
+let contactInterest = '';
+(function prefillContactService() {
+    const name = SERVICE_NAMES[new URLSearchParams(location.search).get('servicio')];
+    const form = document.getElementById('contactForm');
+    if (!name || !form) return;
+    contactInterest = name;
+    const chip = document.createElement('div');
+    chip.className = 'form-interest';
+    chip.innerHTML = '<span>Me interesa</span><strong></strong><button type="button" aria-label="Quitar servicio">×</button>';
+    chip.querySelector('strong').textContent = name;
+    chip.querySelector('button').addEventListener('click', () => { contactInterest = ''; chip.remove(); });
+    form.prepend(chip);
+})();
+
 // ============ CONTACT FORM ============
 async function handleContact(event) {
     event.preventDefault();
@@ -255,7 +278,12 @@ async function handleContact(event) {
             const res = await fetch(FORMSPREE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({ name, email, _subject: `Nuevo proyecto de ${name}`, message, phone, company }),
+                body: JSON.stringify({
+                    name, email,
+                    _subject: contactInterest ? `Nuevo proyecto de ${name} — ${contactInterest}` : `Nuevo proyecto de ${name}`,
+                    message: contactInterest ? `SERVICIO: ${contactInterest}\n\n${message}` : message,
+                    phone, company,
+                }),
             });
             if (!res.ok) throw new Error('server');
         }
