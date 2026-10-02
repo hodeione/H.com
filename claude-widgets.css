@@ -173,10 +173,26 @@
 }
 .ai-brief-cta:hover { background: var(--acid-yellow); color: var(--black); box-shadow: var(--glow-sm); }
 
+/* ============ PILA DE BOTONES FLOTANTES ============
+   De abajo arriba: volver arriba → WhatsApp → chat. Mismo tamaño y eje.
+   En páginas sin WhatsApp (servicios) el chat se queda abajo del todo. */
+:root {
+    --float-size: 52px;
+    --float-gap: 12px;
+    --float-right: 2rem;
+    --float-bottom: 2rem;
+    --float-step: calc(var(--float-size) + var(--float-gap));
+    --chat-fab-bottom: var(--float-bottom);
+}
+body:has(.whatsapp-float) { --chat-fab-bottom: calc(var(--float-bottom) + 2 * var(--float-step)); }
+@media (max-width: 768px) {
+    :root { --float-size: 48px; --float-gap: 10px; --float-right: 1rem; --float-bottom: 1rem; }
+}
+
 /* ============ D.H.T BOT CHAT FLOTANTE ============ */
 .ai-chat-fab {
-    position: fixed; bottom: 6.2rem; right: 2rem; z-index: 9990;
-    width: 56px; height: 56px;
+    position: fixed; bottom: var(--chat-fab-bottom); right: var(--float-right); z-index: 9990;
+    width: var(--float-size); height: var(--float-size);
     background: var(--black);
     border: 1px solid var(--acid-yellow);
     color: var(--acid-yellow);
@@ -205,9 +221,9 @@
 .ai-chat-fab.open .ai-fab-pulse { display: none; }
 
 .ai-chat-panel {
-    position: fixed; bottom: 6.2rem; right: 2rem; z-index: 9991;
+    position: fixed; bottom: calc(var(--chat-fab-bottom) + var(--float-step)); right: var(--float-right); z-index: 9991;
     width: min(380px, calc(100vw - 2rem));
-    height: min(540px, calc(100vh - 8rem));
+    height: min(540px, calc(100vh - var(--chat-fab-bottom) - var(--float-step) - 6rem));
     background: var(--card-bg);
     border: 1px solid var(--border-yellow);
     display: flex; flex-direction: column;
@@ -304,8 +320,6 @@
 @media (max-width: 968px) {
     .ai-lab { padding: 5rem 1.5rem; }
     .ai-lab-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .ai-chat-fab { bottom: 5.4rem; right: 1rem; width: 50px; height: 50px; }
-    .ai-chat-panel { bottom: 5.4rem; right: 1rem; }
 }
 
 /* ============ D.H.T SCAN — AUDITORÍA EXPRESS ============ */

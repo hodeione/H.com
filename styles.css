@@ -908,8 +908,9 @@ footer {
 
 /* ============ BACK TO TOP ============ */
 .back-to-top {
-    position: fixed; bottom: 2rem; right: 2rem;
-    width: 46px; height: 46px;
+    /* posición en la pila flotante: ver claude-widgets.css */
+    position: fixed; bottom: var(--float-bottom); right: var(--float-right);
+    width: var(--float-size); height: var(--float-size);
     background: var(--black); border: 1px solid var(--acid-yellow);
     color: var(--acid-yellow); cursor: pointer;
     opacity: 0; visibility: hidden;
@@ -1504,8 +1505,8 @@ footer {
 
 /* ============ WHATSAPP ============ */
 .whatsapp-float {
-    position: fixed; bottom: 5.5rem; right: 2rem;
-    width: 52px; height: 52px;
+    position: fixed; bottom: calc(var(--float-bottom) + var(--float-step)); right: var(--float-right);
+    width: var(--float-size); height: var(--float-size);
     background: #25D366; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     z-index: 990; cursor: pointer; opacity: 0; visibility: hidden;
@@ -1610,7 +1611,6 @@ footer {
 
     .tech-section, .faq-section { padding: 5.5rem 1.5rem; }
     .tech-grid { grid-template-columns: repeat(3, 1fr); }
-    .whatsapp-float { bottom: 5rem; right: 1.5rem; }
 
     .newsletter { padding: 3.5rem 1.5rem; }
     .newsletter-inner { flex-direction: column; align-items: stretch; }
@@ -1638,7 +1638,6 @@ footer {
     .stat-item:last-child { border-bottom: none; }
 
     .tech-grid { grid-template-columns: repeat(2, 1fr); }
-    .back-to-top { bottom: 1rem; right: 1rem; }
 
     .blog-card { flex: 0 0 92%; }
 
