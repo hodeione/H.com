@@ -7,7 +7,7 @@
 //
 // Los planes se leen del HTML (.pc[data-plan-id]); aquí solo se configuran
 // los extras y las preguntas de cada servicio.
-// Enlace directo a un plan: servicio.html?plan=<data-plan-id>
+// Enlace directo a un plan: /servicio?plan=<data-plan-id>
 // ═══════════════════════════════════════════════════════════════════════════
 (function () {
     'use strict';

@@ -324,7 +324,13 @@
             const href = a.getAttribute('href') || '';
             if (a.target === '_blank' || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
             if (a.host && a.host !== location.host) return;
-            if (!/\.html(?:[?#].*)?$/.test(a.pathname || href) && !/\.html$/.test(href)) return;
+            // solo navegación a otra página del sitio (URLs limpias: /blog, /paginas-web…);
+            // ni anclas de la misma página ni archivos (pdf, imágenes…)
+            const path = a.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+            const here = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+            if (path === here) return;
+            if (/\.[a-z0-9]{2,5}$/i.test(path)) return;
+            if (a.hasAttribute('download') || a.closest('[data-checkout]')) return;
 
             e.preventDefault();
             sessionStorage.setItem('fxWipe', '1');
