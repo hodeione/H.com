@@ -1746,3 +1746,82 @@ footer {
 }
 .projects-more:hover { background: var(--acid-yellow); color: #000; }
 @media (max-width: 768px) { .projects-more { width: 100%; text-align: center; } }
+
+/* ============ PÁGINA DE PROYECTOS (/proyectos) ============ */
+.pp-cabecera { padding-top: 11rem; }
+.pp-cabecera .project-card { margin-top: 3rem; }
+.pp-filtros { width: 100%; max-width: 1200px; display: flex; flex-wrap: wrap; gap: .5rem; }
+.pp-filtros button, .pp-vistas button {
+    background: transparent; color: var(--white); border: 1px solid rgba(200,255,0,.25);
+    font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .18em; padding: .65rem 1rem;
+    cursor: pointer; transition: background .25s, color .25s, border-color .25s;
+}
+.pp-filtros button:hover, .pp-vistas button:hover { border-color: var(--acid-yellow); color: var(--acid-yellow); }
+.pp-filtros button[aria-pressed="true"], .pp-vistas button[aria-pressed="true"] { background: var(--acid-yellow); color: #000; border-color: var(--acid-yellow); }
+.pp-cifras { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(200,255,0,.15); }
+.pp-cifras div { padding: .9rem .8rem; border-right: 1px solid rgba(200,255,0,.15); }
+.pp-cifras div:last-child { border-right: 0; }
+.pp-cifras b { display: block; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 2.2rem; line-height: 1; color: var(--acid-yellow); }
+.pp-cifras span { font-size: .6rem; letter-spacing: .14em; color: var(--concrete-gray); }
+
+.pp-probar-grid { width: 100%; max-width: 1200px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4rem; align-items: center;
+    border: 1px solid rgba(200,255,0,.15); background: var(--card-bg); padding: 3rem; }
+.pp-telefono { width: 300px; height: 620px; padding: 11px; border-radius: 44px; background: #141412;
+    box-shadow: 0 0 0 1px rgba(200,255,0,.35), 0 0 60px rgba(200,255,0,.12), 0 40px 80px rgba(0,0,0,.6); position: relative; }
+.pp-telefono::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 22px; border-radius: 12px; background: #000; z-index: 2; }
+.pp-pantalla { width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #f6f1e8; }
+/* La demo se carga a 375 px (un móvil real) y se reduce para caber en el marco. */
+.pp-pantalla iframe { width: 375px; height: 747px; border: 0; transform: scale(.7413); transform-origin: 0 0; }
+.pp-probar-texto { display: flex; flex-direction: column; gap: 1.4rem; }
+.pp-vistas { display: grid; gap: .5rem; }
+.pp-vistas button { text-align: left; font-size: .78rem; padding: 1rem 1.2rem; }
+.pp-vistas button b { color: var(--acid-yellow); margin-right: .8rem; font-weight: 400; }
+.pp-vistas button[aria-pressed="true"] b { color: #000; }
+.pp-nota { font-size: .75rem; color: var(--concrete-gray); }
+.pp-probar-texto .projects-more { align-self: flex-start; margin-top: 0; }
+
+.pp-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pp-rejilla .tool-card:nth-child(odd) { border-left: none; }
+.pp-rejilla .tool-card:nth-child(n+3) { border-top: 1px solid rgba(200,255,0,.15); }
+.pp-img, .tool-img { width: calc(100% + 5rem); max-width: none; margin: -2.5rem -2.5rem .4rem; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: top; display: block;
+    border-bottom: 1px solid rgba(200,255,0,.15); filter: saturate(.9); transition: filter .4s; }
+.tool-card:hover .pp-img, .tool-card:hover .tool-img { filter: saturate(1.05); }
+
+.pp-cierre { text-align: left; }
+.pp-cierre-botones { width: 100%; max-width: 1200px; display: flex; flex-wrap: wrap; gap: 1rem; }
+.pp-btn { padding: 1.1rem 2rem; border: 2px solid var(--acid-yellow); color: var(--acid-yellow); font-size: .75rem; letter-spacing: .2em; text-decoration: none; transition: background .3s, color .3s; }
+.pp-btn:hover, .pp-btn-1 { background: var(--acid-yellow); color: #000; }
+.pp-btn-1:hover { background: transparent; color: var(--acid-yellow); }
+[hidden].pp-item { display: none !important; }
+
+@media (max-width: 1024px) {
+    .pp-probar-grid { grid-template-columns: 1fr; justify-items: center; gap: 2.5rem; }
+    .pp-rejilla { grid-template-columns: 1fr; }
+    .pp-rejilla .tool-card + .tool-card { border-top: 1px solid rgba(200,255,0,.15); }
+}
+@media (max-width: 768px) {
+    .pp-cabecera { padding-top: 8rem; }
+    .pp-cifras { grid-template-columns: 1fr 1fr; }
+    .pp-cifras div:nth-child(2) { border-right: 0; }
+    .pp-cifras div:nth-child(-n+2) { border-bottom: 1px solid rgba(200,255,0,.15); }
+    .pp-probar-grid { padding: 1.5rem; }
+    .pp-telefono { width: 270px; height: 558px; }
+    .pp-pantalla iframe { transform: scale(.664); height: 807px; }
+    .pp-img, .tool-img { width: calc(100% + 3.5rem); margin: -1.75rem -1.75rem .4rem; }
+    .pp-btn { width: 100%; text-align: center; }
+}
+
+/* ============ HERRAMIENTAS: capturas y detalles ============ */
+.tool-media { position: relative; display: block; margin: -2.5rem -2.5rem .4rem; overflow: hidden; border-bottom: 1px solid rgba(200,255,0,.15); }
+.tool-media .tool-img { width: 100%; margin: 0; border: 0; transition: transform .6s, filter .4s; }
+.tool-card:hover .tool-media .tool-img { transform: scale(1.04); }
+.tool-free { position: absolute; top: 1rem; left: 1rem; background: var(--acid-yellow); color: #000; font-size: .62rem; letter-spacing: .22em; font-weight: 700; padding: .35rem .6rem; }
+.tool-num { color: var(--white); font-weight: 400; margin-right: .5rem; opacity: .6; }
+.tools-garantias { width: 100%; max-width: 1200px; list-style: none; display: flex; flex-wrap: wrap; gap: .6rem 2rem; margin: -1.5rem 0 2.5rem; padding: 0; font-size: .75rem; letter-spacing: .08em; color: var(--concrete-gray); }
+.tools-garantias b { color: var(--acid-yellow); font-weight: 400; margin-right: .35rem; }
+.tools-mas { width: 100%; max-width: 1200px; margin-top: 2rem; font-size: .85rem; color: var(--concrete-gray); }
+.tools-mas a { color: var(--acid-yellow); text-decoration: none; border-bottom: 1px solid currentColor; }
+@media (max-width: 768px) {
+    .tool-media { margin: -1.75rem -1.75rem .4rem; }
+    .tools-garantias { margin-top: -1rem; }
+}
