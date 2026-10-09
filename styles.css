@@ -1702,3 +1702,40 @@ footer {
     .tool-card { padding: 1.75rem; }
     .tool-card + .tool-card { border-left: none; border-top: 1px solid rgba(200,255,0,.15); }
 }
+
+/* ============ PROYECTOS ============ */
+.projects {
+    padding: 9rem 4rem; background: var(--black);
+    display: flex; flex-direction: column; align-items: center;
+    border-top: 1px solid rgba(200,255,0,.08);
+}
+.project-card {
+    width: 100%; max-width: 1200px;
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    border: 1px solid rgba(200,255,0,.15); background: var(--card-bg);
+}
+.project-media { position: relative; display: block; overflow: hidden; background: #000; min-height: 320px; }
+.project-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; }
+.project-media:hover img { transform: scale(1.03); }
+.project-badge {
+    position: absolute; top: 1.2rem; left: 1.2rem; padding: .45rem .8rem;
+    background: var(--acid-yellow); color: #000; font-size: .65rem; letter-spacing: .22em; font-weight: 700;
+}
+.project-body { display: flex; flex-direction: column; gap: 1.1rem; padding: 2.5rem; color: var(--white); }
+.project-views { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(200,255,0,.15); border: 1px solid rgba(200,255,0,.15); margin-top: .4rem; }
+.project-views a { display: flex; flex-direction: column; gap: .25rem; padding: .9rem 1rem; background: var(--card-bg); color: var(--white); text-decoration: none; transition: background .25s; }
+.project-views a:hover { background: var(--mid-gray); }
+.project-views b { font-size: .85rem; letter-spacing: .04em; }
+.project-views b::after { content: ' ↗'; color: var(--acid-yellow); }
+.project-views span { font-size: .72rem; color: var(--concrete-gray); }
+.project-body .tool-cta { text-decoration: none; }
+@media (max-width: 1024px) {
+    .project-card { grid-template-columns: 1fr; }
+    .project-media { min-height: 0; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 768px) {
+    .projects { padding: 5rem 1.25rem; }
+    .project-body { padding: 1.75rem; }
+    .project-views { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) { .projects .tools-intro { margin-top: 0; } }
