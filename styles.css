@@ -1665,7 +1665,7 @@ footer {
 }
 .tools-grid {
     width: 100%; max-width: 1200px;
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
     border: 1px solid rgba(200,255,0,.15);
 }
 .tool-card {
@@ -1690,6 +1690,10 @@ footer {
 .tool-cta {
     margin-top: auto; padding-top: .8rem;
     font-size: .72rem; letter-spacing: .2em; color: var(--acid-yellow);
+}
+@media (max-width: 1024px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .tool-card + .tool-card { border-left: none; border-top: 1px solid rgba(200,255,0,.15); }
 }
 @media (max-width: 768px) {
     .tools { padding: 5rem 1.25rem; }
