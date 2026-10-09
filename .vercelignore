@@ -1,1 +1,5 @@
 tests
+.next
+tsconfig.tsbuildinfo
+take-screenshots.js
+fix-service-pages.js
