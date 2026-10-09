@@ -39,6 +39,10 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mode: 'chat', messages }),
         });
+        if (resp.status === 429) {
+            const data = await resp.json().catch(() => null);
+            throw Object.assign(new Error((data && data.error) || 'Demasiadas consultas seguidas. Espera unos minutos.'), { rateLimited: true });
+        }
         if (!resp.ok || !resp.body) throw new Error('endpoint no disponible (' + resp.status + ')');
 
         const reader = resp.body.getReader();
@@ -167,6 +171,15 @@
                     scrollBottom();
                 });
             } catch (err) {
+                if (err && err.rateLimited) {
+                    // Límite de uso: avisamos sin pasar al modo demo para siempre.
+                    bubble.classList.remove('thinking');
+                    bubble.textContent = err.message;
+                    history.pop();
+                    busy = false;
+                    scrollBottom();
+                    return;
+                }
                 demoMode = true;
                 setDemoBadge();
                 reply = demoReply(text);
@@ -353,6 +366,11 @@
                         body: JSON.stringify({ mode: 'brief', idea }),
                     });
                     const data = await resp.json().catch(() => null);
+                    if ((resp.status === 400 || resp.status === 429) && data && data.error) {
+                        status.textContent = '> ' + data.error;
+                        status.className = 'ai-brief-status error';
+                        return;
+                    }
                     if (!resp.ok || !data || (!data.brief && !data.refusal)) throw new Error('endpoint no disponible');
                     if (data.refusal) {
                         status.textContent = '> No puedo generar un brief para esa idea. Prueba con otra descripción.';
@@ -594,7 +612,7 @@
                         body: JSON.stringify({ mode: 'audit', url }),
                     });
                     const data = await resp.json().catch(() => null);
-                    if (resp.status === 400 && data && data.error) { setStatus(data.error, 'error'); return; }
+                    if ((resp.status === 400 || resp.status === 429) && data && data.error) { setStatus(data.error, 'error'); return; }
                     if (!resp.ok || !data || (!data.audit && !data.refusal)) throw new Error('endpoint no disponible');
                     if (data.refusal) { setStatus('No puedo auditar esa web. Prueba con otra URL.', 'error'); return; }
                     audit = data.audit;
@@ -636,7 +654,7 @@
                         body: JSON.stringify({ mode: 'vision', image }),
                     });
                     const data = await resp.json().catch(() => null);
-                    if (resp.status === 400 && data && data.error) { setStatus(data.error, 'error'); return; }
+                    if ((resp.status === 400 || resp.status === 429) && data && data.error) { setStatus(data.error, 'error'); return; }
                     if (!resp.ok || !data || (!data.review && !data.refusal)) throw new Error('endpoint no disponible');
                     if (data.refusal) { setStatus('No puedo analizar esa imagen. Prueba con otra captura.', 'error'); return; }
                     review = data.review;

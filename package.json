@@ -5,5 +5,8 @@
   "description": "DH Technology — sitio estático + funciones serverless de IA (Claude Fable 5)",
   "dependencies": {
     "@anthropic-ai/sdk": ">=0.88.0"
+  },
+  "scripts": {
+    "test": "node --test tests/guard.test.js tests/handler.test.js"
   }
 }

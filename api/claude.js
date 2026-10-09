@@ -14,6 +14,7 @@
 // ============================================================================
 
 const Anthropic = require('@anthropic-ai/sdk');
+const { originAllowed, RateLimiter, clientIp, fetchPublicPage } = require('./_guard');
 
 const client = new Anthropic(); // lee ANTHROPIC_API_KEY del entorno
 
@@ -163,8 +164,7 @@ const VISION_SCHEMA = {
 };
 
 // ── Fetch seguro del sitio a auditar ────────────────────────────────────────
-const PRIVATE_HOST = /^(localhost|127\.|10\.|192\.168\.|169\.254\.|0\.|\[?::1)/i;
-
+// Solo webs públicas: se revalida cada redirección y se corta la descarga.
 async function fetchSite(rawUrl) {
     let url;
     try {
@@ -172,34 +172,18 @@ async function fetchSite(rawUrl) {
     } catch {
         throw Object.assign(new Error('URL no válida.'), { code: 'bad_url' });
     }
-    if (!/^https?:$/.test(url.protocol) || PRIVATE_HOST.test(url.hostname)) {
-        throw Object.assign(new Error('URL no permitida.'), { code: 'bad_url' });
-    }
-
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 10000);
     try {
-        const resp = await fetch(url.href, {
-            signal: ctrl.signal,
-            redirect: 'follow',
-            headers: { 'User-Agent': 'Mozilla/5.0 (compatible; H-Audit-Bot/1.0)' },
-        });
-        if (!resp.ok) {
-            throw Object.assign(new Error(`La web respondió ${resp.status}.`), { code: 'fetch_fail' });
-        }
-        let html = await resp.text();
+        const page = await fetchPublicPage(url);
         // recorta scripts/estilos para ahorrar tokens; el <head> y el contenido se conservan
-        html = html
+        const html = page.html
             .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '<script></script>')
             .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '<style></style>')
             .replace(/<!--[\s\S]*?-->/g, '')
             .replace(/[ \t]+/g, ' ');
-        return { finalUrl: resp.url || url.href, html: html.slice(0, 30000) };
+        return { finalUrl: page.finalUrl, html: html.slice(0, 30000) };
     } catch (err) {
-        if (err.code) throw err;
-        throw Object.assign(new Error('No se pudo acceder a esa web (¿existe y es pública?).'), { code: 'fetch_fail' });
-    } finally {
-        clearTimeout(timer);
+        const known = /^(URL no permitida|Esa web|La web|Esa dirección|Demasiadas)/.test(err.message);
+        throw Object.assign(new Error(known ? err.message : 'No se pudo acceder a esa web (¿existe y es pública?).'), { code: 'fetch_fail' });
     }
 }
 
@@ -350,24 +334,49 @@ async function handleBrief(req, res) {
     return res.status(200).json({ brief: JSON.parse(textBlock.text) });
 }
 
+// ── Límites de uso por IP (por instancia) ──────────────────────────────────
+const limiter = new RateLimiter(
+    {
+        chat: [30, 10 * 60_000],   // 30 mensajes cada 10 min
+        brief: [5, 10 * 60_000],   // 5 briefs cada 10 min
+        audit: [5, 10 * 60_000],   // 5 auditorías cada 10 min
+        vision: [5, 10 * 60_000],  // 5 revisiones de diseño cada 10 min
+    },
+    300, 60 * 60_000,              // tope global: 300 peticiones por hora
+);
+
 // ── Entry point ─────────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') return res.status(204).end();
+    const origin = req.headers.origin;
+    const allowed = originAllowed(origin, req.headers.host);
+    if (allowed) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Vary', 'Origin');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    }
+    if (req.method === 'OPTIONS') return res.status(allowed ? 204 : 403).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
+    if (!allowed) return res.status(403).json({ error: 'Origen no permitido.' });
     if (!process.env.ANTHROPIC_API_KEY) {
         return res.status(503).json({ error: 'IA no configurada en este despliegue.' });
     }
 
     const mode = req.body && req.body.mode;
+    if (!['chat', 'brief', 'audit', 'vision'].includes(mode)) {
+        return res.status(400).json({ error: 'mode debe ser "chat", "brief", "audit" o "vision"' });
+    }
+    const rl = limiter.check(mode, clientIp(req));
+    if (!rl.ok) {
+        res.setHeader('Retry-After', String(rl.retryAfterSec));
+        return res.status(429).json({ error: `Has hecho muchas consultas seguidas. Vuelve a intentarlo en ${Math.ceil(rl.retryAfterSec / 60)} min.` });
+    }
+
     try {
         if (mode === 'chat') return await handleChat(req, res);
         if (mode === 'brief') return await handleBrief(req, res);
         if (mode === 'audit') return await handleAudit(req, res);
-        if (mode === 'vision') return await handleVision(req, res);
-        return res.status(400).json({ error: 'mode debe ser "chat", "brief", "audit" o "vision"' });
+        return await handleVision(req, res);
     } catch (err) {
         console.error('claude api error:', err);
         if (!res.headersSent) {
@@ -377,3 +386,5 @@ module.exports = async function handler(req, res) {
         res.end();
     }
 };
+
+module.exports.config = { maxDuration: 60 };
