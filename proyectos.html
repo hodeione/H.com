@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos y demos — DH Technology</title>
+    <meta name="description" content="Proyectos reales de DH Technology que puedes probar: restaurante automatizado con carta 3D y realidad aumentada, transcriptor con IA en el navegador y herramientas para negocios locales.">
+    <meta property="og:title" content="Proyectos y demos — DH Technology">
+    <meta property="og:description" content="Pruébalos tú mismo: carta 3D con realidad aumentada, reservas por plano de mesas y diez automatizaciones con n8n.">
+    <meta property="og:image" content="https://h-com-bay.vercel.app/img-proyecto-taberna.webp">
+    <link rel="icon" href="logopng.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #080808; --card: #0f0f0d; --mid: #171714; --white: #ffffff; --acid: #C8FF00; --gray: #8C8C7A; --line: rgba(200,255,0,.15); --t: .35s ease; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.6; overflow-x: hidden; }
+        a { color: inherit; }
+        header { position: fixed; inset: 0 0 auto; background: var(--black); border-bottom: 1px solid var(--acid); z-index: 1000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--acid); letter-spacing: .2em; text-decoration: none; }
+        nav { display: flex; gap: 2.5rem; }
+        nav a { font-size: .75rem; letter-spacing: .15em; text-decoration: none; transition: color var(--t); }
+        nav a:hover, nav a[aria-current] { color: var(--acid); }
+        .cta-btn { border: 2px solid var(--acid); color: var(--acid); padding: .7rem 1.4rem; font-size: .75rem; letter-spacing: .15em; text-decoration: none; transition: all var(--t); }
+        .cta-btn:hover { background: var(--acid); color: var(--black); }
+
+        .hero { padding: 150px 2rem 4rem; max-width: 1200px; margin: 0 auto; }
+        .prompt { color: var(--acid); font-size: .8rem; opacity: .8; }
+        .hero h1 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(3rem, 9vw, 7rem); line-height: .9; margin: 1rem 0 1.5rem; }
+        .hero h1 span { color: var(--acid); }
+        .hero p { color: var(--gray); max-width: 720px; font-size: 1rem; }
+        .filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2.5rem; }
+        .filtros button { background: none; border: 1px solid var(--line); color: var(--white); font: inherit; font-size: .72rem; letter-spacing: .15em; padding: .55rem 1rem; cursor: pointer; transition: all var(--t); }
+        .filtros button:hover { border-color: var(--acid); }
+        .filtros button[aria-pressed="true"] { background: var(--acid); color: var(--black); border-color: var(--acid); }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 6rem; display: grid; gap: 2rem; }
+        .tag { font-size: .65rem; letter-spacing: .22em; color: var(--acid); }
+        .titulo { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; }
+        .desc { color: var(--gray); font-size: .9rem; line-height: 1.75; }
+        .puntos { list-style: none; display: grid; gap: .5rem; font-size: .82rem; }
+        .puntos li::before { content: '▸ '; color: var(--acid); }
+
+        /* Proyecto destacado */
+        .destacado { border: 1px solid var(--line); background: var(--card); display: grid; grid-template-columns: minmax(0, 1fr) 360px; }
+        .destacado .cuerpo { padding: 3rem; display: flex; flex-direction: column; gap: 1.25rem; }
+        .badge { display: inline-flex; align-items: center; gap: .5rem; align-self: flex-start; background: var(--acid); color: var(--black); font-size: .65rem; letter-spacing: .22em; font-weight: 700; padding: .4rem .7rem; }
+        .badge::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: var(--black); animation: latido 1.4s infinite; }
+        @keyframes latido { 50% { opacity: .2; } }
+        .vistas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+        .vistas a { background: var(--card); padding: 1rem 1.1rem; text-decoration: none; display: flex; flex-direction: column; gap: .3rem; transition: background var(--t); }
+        .vistas a:hover { background: var(--mid); }
+        .vistas b { font-size: .85rem; }
+        .vistas b::after { content: ' ↗'; color: var(--acid); }
+        .vistas span { font-size: .72rem; color: var(--gray); }
+        .galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+        .galeria figure { border: 1px solid var(--line); overflow: hidden; }
+        .galeria img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+        .galeria figcaption { font-size: .68rem; color: var(--gray); padding: .5rem .6rem; letter-spacing: .05em; }
+        .telefono-col { border-left: 1px solid var(--line); padding: 2.5rem 2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; background: radial-gradient(circle at 50% 30%, rgba(200,255,0,.08), transparent 70%); }
+        .telefono { width: 290px; height: 600px; border-radius: 42px; padding: 10px; background: #1b1b18; box-shadow: 0 0 0 2px #2c2c27, 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(200,255,0,.08); position: relative; }
+        .telefono::before { content: ''; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 80px; height: 22px; border-radius: 12px; background: #000; z-index: 2; }
+        .telefono .pantalla { width: 100%; height: 100%; border-radius: 32px; overflow: hidden; background: #f6f1e8; }
+        /* La demo se carga a 375 px (un móvil real) y se reduce para caber en el marco. */
+        .telefono iframe { width: 375px; height: 806px; border: 0; transform: scale(.72); transform-origin: 0 0; }
+        .telefono-col p { font-size: .7rem; color: var(--gray); text-align: center; max-width: 260px; }
+        .telefono-col .cambiar { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: center; }
+        .telefono-col .cambiar button { background: none; border: 1px solid var(--line); color: var(--white); font: inherit; font-size: .65rem; letter-spacing: .12em; padding: .4rem .6rem; cursor: pointer; }
+        .telefono-col .cambiar button[aria-pressed="true"] { border-color: var(--acid); color: var(--acid); }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+        .stats div { padding: 1rem; border-right: 1px solid var(--line); }
+        .stats div:last-child { border-right: 0; }
+        .stats b { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; font-weight: 400; color: var(--acid); line-height: 1; }
+        .stats span { font-size: .68rem; color: var(--gray); }
+        .acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .5rem; }
+        .btn { padding: .9rem 1.6rem; font-size: .75rem; letter-spacing: .15em; text-decoration: none; font-weight: 700; border: 2px solid var(--acid); transition: all var(--t); }
+        .btn-1 { background: var(--acid); color: var(--black); }
+        .btn-1:hover { background: var(--black); color: var(--acid); }
+        .btn-2 { color: var(--acid); }
+        .btn-2:hover { background: var(--acid); color: var(--black); }
+
+        /* Resto de proyectos */
+        .rejilla { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .proyecto { border: 1px solid var(--line); background: var(--card); display: flex; flex-direction: column; text-decoration: none; transition: box-shadow var(--t), background var(--t); }
+        .proyecto:hover { background: var(--mid); box-shadow: inset 0 0 0 1px var(--acid); }
+        .proyecto img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; border-bottom: 1px solid var(--line); }
+        .proyecto .cuerpo { padding: 2rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+        .proyecto .titulo { font-size: 2.2rem; }
+        .enlaces { margin-top: auto; display: flex; gap: 1.5rem; font-size: .72rem; letter-spacing: .18em; color: var(--acid); }
+        .enlaces a { text-decoration: none; }
+        .enlaces a:hover { text-decoration: underline; }
+        [hidden] { display: none !important; }
+
+        .cierre { border-top: 1px solid var(--acid); padding: 6rem 2rem; text-align: center; }
+        .cierre h2 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1; margin-bottom: 1rem; }
+        .cierre p { color: var(--gray); max-width: 640px; margin: 0 auto 2.5rem; }
+        footer { border-top: 1px solid var(--acid); padding: 2rem; display: flex; justify-content: space-between; font-size: .75rem; color: var(--gray); letter-spacing: .1em; }
+
+        @media (max-width: 1000px) {
+            .destacado { grid-template-columns: 1fr; }
+            .telefono-col { display: none; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.25rem; }
+            nav { display: none; }
+            .hero { padding: 110px 1.25rem 2.5rem; }
+            main { padding: 0 1.25rem 4rem; }
+            .destacado .cuerpo, .proyecto .cuerpo { padding: 1.5rem; }
+            .vistas, .rejilla { grid-template-columns: 1fr; }
+            .galeria { grid-template-columns: 1fr 1fr; }
+            .galeria figure:last-child { display: none; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .stats div:nth-child(2) { border-right: 0; }
+            .stats div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+            .btn { width: 100%; text-align: center; }
+            footer { flex-direction: column; gap: .5rem; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) { .badge::before { animation: none; } html { scroll-behavior: auto; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">D.H.T</a>
+        <nav aria-label="Principal">
+            <a href="/#servicios">SERVICIOS</a>
+            <a href="/#portfolio">PORTFOLIO</a>
+            <a href="/proyectos" aria-current="page">PROYECTOS</a>
+            <a href="/#herramientas">HERRAMIENTAS</a>
+            <a href="/blog">BLOG</a>
+            <a href="/#contacto">CONTACTO</a>
+        </nav>
+        <a href="/#contacto" class="cta-btn">EMPEZAR</a>
+    </header>
+
+    <section class="hero">
+        <p class="prompt">dht@madrid:~$ ls ./proyectos --demos</p>
+        <h1>PROYECTOS QUE<br>PUEDES <span>PROBAR.</span></h1>
+        <p>No son maquetas ni capturas: son proyectos reales y funcionando. Entra, úsalos como lo haría un cliente o el dueño del negocio, y mira por dentro lo que automatizan. Si te encaja algo, lo adaptamos a tu negocio.</p>
+        <div class="filtros" role="group" aria-label="Filtrar proyectos">
+            <button type="button" aria-pressed="true" data-filtro="todos">TODOS</button>
+            <button type="button" aria-pressed="false" data-filtro="automatizacion">AUTOMATIZACIÓN</button>
+            <button type="button" aria-pressed="false" data-filtro="ia">IA</button>
+            <button type="button" aria-pressed="false" data-filtro="3d">3D Y REALIDAD AUMENTADA</button>
+            <button type="button" aria-pressed="false" data-filtro="negocio-local">NEGOCIO LOCAL</button>
+            <button type="button" aria-pressed="false" data-filtro="desarrollo">DESARROLLO</button>
+        </div>
+    </section>
+
+    <main>
+        <!-- Proyecto destacado: Taberna Luna -->
+        <article class="destacado" data-categorias="automatizacion 3d negocio-local ia">
+            <div class="cuerpo">
+                <span class="badge">DEMO EN VIVO</span>
+                <span class="tag">RESTAURANTES · N8N · 3D · REALIDAD AUMENTADA</span>
+                <h2 class="titulo">Taberna Luna: el restaurante que se gestiona solo</h2>
+                <p class="desc">Web de restaurante con reservas eligiendo mesa en el plano, carta con platos reales escaneados en 3D y un panel sin código para el dueño. Detrás, diez automatizaciones de n8n hacen el trabajo que hoy se hace a mano.</p>
+                <div class="stats">
+                    <div><b>19</b><span>platos reales en 3D</span></div>
+                    <div><b>10</b><span>automatizaciones</span></div>
+                    <div><b>0</b><span>líneas de código para el dueño</span></div>
+                    <div><b>79</b><span>pruebas automáticas</span></div>
+                </div>
+                <ul class="puntos">
+                    <li>Apunta el móvil a un plato vacío y te sirve encima el plato de la carta</li>
+                    <li>El cliente reserva eligiendo su mesa; la mesa cancelada pasa sola a la lista de espera</li>
+                    <li>Si va a llover, las reservas de terraza pasan al salón y se avisa a cada cliente</li>
+                    <li>Hoja de cocina con alergias y cumpleaños antes de cada servicio</li>
+                </ul>
+                <div class="vistas">
+                    <a href="https://taberna-luna-dht.vercel.app/" target="_blank" rel="noopener"><b>Vista del cliente</b><span>Web y reserva con plano de mesas</span></a>
+                    <a href="https://taberna-luna-dht.vercel.app/carta" target="_blank" rel="noopener"><b>Carta 3D</b><span>Platos reales y realidad aumentada</span></a>
+                    <a href="https://taberna-luna-dht.vercel.app/admin" target="_blank" rel="noopener"><b>Panel del restaurante</b><span>Sala en vivo, plano, carta y horarios</span></a>
+                    <a href="https://taberna-luna-dht.vercel.app/admin/automatizaciones" target="_blank" rel="noopener"><b>Automatizaciones</b><span>Lánzalas y lee los emails que envían</span></a>
+                </div>
+                <div class="galeria">
+                    <figure><img src="img-proyecto-taberna.webp" alt="Pulpo en 3D servido sobre un plato real" loading="lazy" width="960" height="540"><figcaption>Realidad aumentada sobre un plato real</figcaption></figure>
+                    <figure><img src="proyectos-img/taberna-ra-madera.webp" alt="Tarta de higos en 3D sobre un plato real en una mesa de madera" loading="lazy" width="960" height="540"><figcaption>Tarta de higos sobre un plato real</figcaption></figure>
+                    <figure><img src="proyectos-img/taberna-plano.webp" alt="Editor del plano de mesas del restaurante" loading="lazy" width="960" height="540"><figcaption>El dueño dibuja su local arrastrando mesas</figcaption></figure>
+                </div>
+                <div class="acciones">
+                    <a class="btn btn-1" href="https://taberna-luna-dht.vercel.app" target="_blank" rel="noopener">ABRIR LA DEMO →</a>
+                    <a class="btn btn-2" href="/?servicio=ia-automation#contacto">LO QUIERO PARA MI NEGOCIO</a>
+                </div>
+                <div class="enlaces"><a href="https://github.com/hodeione/reservas-n8n" target="_blank" rel="noopener">CÓDIGO EN GITHUB →</a></div>
+            </div>
+            <aside class="telefono-col" aria-label="Demo en un móvil">
+                <span class="tag">PRUÉBALA AQUÍ MISMO</span>
+                <div class="telefono">
+                    <div class="pantalla"><iframe id="movil" src="https://taberna-luna-dht.vercel.app/carta" title="Demo de Taberna Luna" loading="lazy" allow="camera; xr-spatial-tracking; fullscreen"></iframe></div>
+                </div>
+                <div class="cambiar" role="group" aria-label="Cambiar de vista">
+                    <button type="button" aria-pressed="true" data-ruta="/carta">CARTA</button>
+                    <button type="button" aria-pressed="false" data-ruta="/reservar">RESERVAR</button>
+                    <button type="button" aria-pressed="false" data-ruta="/admin">PANEL</button>
+                </div>
+                <p>Es la demo real dentro de un móvil. Toca un plato para verlo en 3D.</p>
+            </aside>
+        </article>
+
+        <!-- Resto de proyectos -->
+        <div class="rejilla">
+            <a class="proyecto" href="https://susurro-ia.vercel.app" target="_blank" rel="noopener" data-categorias="ia desarrollo">
+                <img src="proyectos-img/susurro.webp" alt="Susurro, transcriptor con IA" loading="lazy" width="960" height="540">
+                <div class="cuerpo">
+                    <span class="tag">IA · WHISPER · PRIVACIDAD</span>
+                    <h2 class="titulo">Susurro</h2>
+                    <p class="desc">Transcribe audio y vídeo con Whisper dentro del navegador: nada se sube a ningún servidor. Subtítulos SRT y VTT, traducción y texto en tiempo real.</p>
+                    <ul class="puntos">
+                        <li>Hasta 14 veces más rápido que el tiempo real con WebGPU</li>
+                        <li>Privado por diseño: el audio no sale del dispositivo</li>
+                    </ul>
+                    <div class="enlaces"><span>PROBAR →</span></div>
+                </div>
+            </a>
+            <a class="proyecto" href="https://hodeione.github.io/valida-es/" target="_blank" rel="noopener" data-categorias="desarrollo">
+                <img src="proyectos-img/valida-es.webp" alt="valida-es, librería de validación" loading="lazy" width="960" height="540">
+                <div class="cuerpo">
+                    <span class="tag">TYPESCRIPT · LIBRERÍA · OPEN SOURCE</span>
+                    <h2 class="titulo">valida-es</h2>
+                    <p class="desc">Librería sin dependencias que valida, formatea y genera identificadores españoles: DNI, NIE, CIF, IBAN, teléfonos y códigos postales.</p>
+                    <ul class="puntos">
+                        <li>Pruebas con propiedades y cobertura del 98&nbsp;%</li>
+                        <li>Lista para usar en cualquier formulario</li>
+                    </ul>
+                    <div class="enlaces"><span>VER LA DEMO →</span></div>
+                </div>
+            </a>
+            <a class="proyecto" href="https://dht-resenas.vercel.app" target="_blank" rel="noopener" data-categorias="negocio-local ia">
+                <img src="proyectos-img/dht-resenas.webp" alt="Kit de reseñas para Google" loading="lazy" width="960" height="540">
+                <div class="cuerpo">
+                    <span class="tag">GOOGLE · RESEÑAS · GRATIS</span>
+                    <h2 class="titulo">Kit de reseñas para Google</h2>
+                    <p class="desc">Carteles con QR, tarjetas de mesa, mensajes de WhatsApp y respuestas a reseñas con IA para que un negocio local consiga más valoraciones.</p>
+                    <div class="enlaces"><span>CREAR MI KIT →</span></div>
+                </div>
+            </a>
+            <a class="proyecto" href="https://dht-fotos.vercel.app" target="_blank" rel="noopener" data-categorias="negocio-local desarrollo">
+                <img src="proyectos-img/dht-fotos.webp" alt="Optimizador de fotos para negocios" loading="lazy" width="960" height="540">
+                <div class="cuerpo">
+                    <span class="tag">WEB · SEO · PRIVACIDAD</span>
+                    <h2 class="titulo">Optimizador de fotos</h2>
+                    <p class="desc">Reduce hasta un 90&nbsp;% el peso de las fotos de una web, convierte las del iPhone y borra su ubicación GPS. Todo en el navegador.</p>
+                    <div class="enlaces"><span>OPTIMIZAR FOTOS →</span></div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <section class="cierre">
+        <h2>¿TU NEGOCIO NECESITA ALGO ASÍ?</h2>
+        <p>Cada uno de estos proyectos se adapta a un negocio real: tu carta, tus mesas, tus horarios y tus procesos. Cuéntanos qué te quita tiempo y te enseñamos cómo automatizarlo.</p>
+        <div class="acciones" style="justify-content:center">
+            <a class="btn btn-1" href="/?servicio=ia-automation#contacto">HABLEMOS</a>
+            <a class="btn btn-2" href="/ia-automation">VER PLANES DE AUTOMATIZACIÓN</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>D.H.T © 2026</div>
+        <div>HECHO EN MADRID</div>
+    </footer>
+
+    <script>
+        // Filtros por categoría.
+        const botones = document.querySelectorAll('.filtros button');
+        const tarjetas = document.querySelectorAll('[data-categorias]');
+        botones.forEach((b) => b.addEventListener('click', () => {
+            botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+            const f = b.dataset.filtro;
+            tarjetas.forEach((t) => { t.hidden = f !== 'todos' && !t.dataset.categorias.split(' ').includes(f); });
+        }));
+        // Cambiar la vista del móvil de la demo.
+        const movil = document.getElementById('movil');
+        const vistas = document.querySelectorAll('.cambiar button');
+        vistas.forEach((b) => b.addEventListener('click', () => {
+            vistas.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+            movil.src = 'https://taberna-luna-dht.vercel.app' + b.dataset.ruta;
+        }));
+    </script>
+</body>
+</html>

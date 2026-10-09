@@ -1739,3 +1739,10 @@ footer {
     .project-views { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) { .projects .tools-intro { margin-top: 0; } }
+
+.projects-more {
+    margin-top: 2rem; padding: 1rem 2rem; border: 2px solid var(--acid-yellow); color: var(--acid-yellow);
+    font-size: .75rem; letter-spacing: .2em; text-decoration: none; transition: background .3s, color .3s;
+}
+.projects-more:hover { background: var(--acid-yellow); color: #000; }
+@media (max-width: 768px) { .projects-more { width: 100%; text-align: center; } }
