@@ -1825,3 +1825,6 @@ footer {
     .tool-media { margin: -1.75rem -1.75rem .4rem; }
     .tools-garantias { margin-top: -1rem; }
 }
+
+.pp-segundo { margin-top: 2rem; }
+@media (min-width: 1025px) { .pp-segundo .project-media { order: 2; } }
