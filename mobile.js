@@ -95,7 +95,7 @@
     if (hint) hint.textContent = 'Toca una tecnología para ver dónde la hemos usado';
 
     // ── Indicadores de los carruseles ───────────────────────────────────────
-    document.querySelectorAll('.portfolio-grid, .process-steps, .testimonials-grid').forEach(track => {
+    document.querySelectorAll('.portfolio-grid, .process-steps, .testimonials-grid, .tools-grid').forEach(track => {
         const slides = Array.from(track.children).filter(c => c.offsetParent !== null || c.getClientRects().length);
         if (slides.length < 2) return;
         const dots = document.createElement('div');

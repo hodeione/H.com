@@ -8,10 +8,10 @@
 
 :root {
     --m-gutter: 1rem;
-    --m-section: 3.25rem;
+    --m-section: 2.75rem;
     --m-dock: 64px;
 }
-html { font-size: 15px; }
+html { font-size: 13.5px; }
 body { padding-bottom: calc(var(--m-dock) + env(safe-area-inset-bottom)); }
 
 /* ── Cabecera compacta ───────────────────────────────────────────────────── */
@@ -44,7 +44,7 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 .tw-bar { padding: .45rem .65rem !important; gap: .6rem !important; }
 .tw-dots i { width: 7px !important; height: 7px !important; }
 .tw-path { font-size: .6rem !important; }
-.tw-body { padding: .65rem !important; }
+.tw-body { padding: .5rem !important; }
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 .hero { min-height: calc(100svh - var(--m-dock)) !important; padding: 5.5rem var(--m-gutter) 2.5rem !important; }
@@ -59,11 +59,11 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 
 /* ── Servicios: cuadrícula 2 × 3 tipo app ────────────────────────────────── */
 .services-grid { grid-template-columns: 1fr 1fr !important; gap: .55rem !important; }
-.service-card { min-height: 0 !important; padding: 1rem .9rem .9rem !important; }
+.service-card { min-height: 0 !important; padding: .85rem .75rem .75rem !important; }
 .service-card-arrow { top: .7rem !important; right: .7rem !important; width: 1.7rem !important; height: 1.7rem !important; font-size: .8rem !important; }
 .service-number { font-size: .5rem !important; letter-spacing: .2em !important; margin-bottom: .7rem !important; }
 .service-name { font-size: 1.05rem !important; line-height: 1.05 !important; margin-bottom: .45rem !important; padding-right: 1.6rem; }
-.service-desc { font-size: .66rem !important; line-height: 1.5 !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.service-desc { font-size: .64rem !important; line-height: 1.5 !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .service-tags, .sc-num-bg { display: none !important; }
 .service-card .service-cta { margin-top: .8rem !important; font-size: .55rem !important; letter-spacing: .16em !important; gap: .35rem !important; }
 
@@ -83,8 +83,8 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 .m-dots i.is-on { width: 24px; background: var(--acid-yellow); box-shadow: 0 0 8px rgba(200,255,0,.5); }
 
 /* Portfolio */
-.portfolio-img-wrap { aspect-ratio: 16 / 10; height: auto !important; }
-.portfolio-info { padding: .9rem 1rem 1rem !important; }
+.portfolio-img-wrap { aspect-ratio: 16 / 9; height: auto !important; }
+.portfolio-info { padding: .7rem .85rem .8rem !important; }
 .portfolio-meta { font-size: .52rem !important; margin-bottom: .35rem !important; }
 .portfolio-name { font-size: 1.05rem !important; }
 .portfolio-footer { margin-top: 1.4rem !important; flex-direction: column; gap: .8rem !important; }
@@ -92,13 +92,13 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 .portfolio-cta-title { font-size: 2rem !important; }
 
 /* Proceso */
-.process-step { padding: 1.2rem 1.1rem !important; }
+.process-step { padding: .95rem .9rem !important; }
 .process-number { font-size: .55rem !important; margin: .6rem 0 .35rem !important; }
 .process-name { font-size: 1.25rem !important; margin-bottom: .4rem !important; }
 .process-desc { font-size: .72rem !important; line-height: 1.55 !important; }
 
 /* Testimonios */
-.testimonial-card { padding: 1.3rem 1.1rem !important; }
+.testimonial-card { padding: 1rem .9rem !important; }
 .testimonial-stars { font-size: .7rem !important; margin-bottom: .7rem !important; }
 .testimonial-quote { font-size: .76rem !important; line-height: 1.6 !important; margin-bottom: 1rem !important; }
 .testimonial-avatar { width: 2.2rem !important; height: 2.2rem !important; font-size: .6rem !important; }
@@ -113,14 +113,14 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 
 /* ── Cifras: 2 × 2 ───────────────────────────────────────────────────────── */
 .stats-grid { grid-template-columns: 1fr 1fr !important; gap: .5rem !important; border: 0 !important; }
-.stat-item { padding: 1.1rem .6rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
-.stat-number { font-size: 2.3rem !important; }
-.stat-suffix { font-size: 1.1rem !important; }
+.stat-item { padding: .8rem .5rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
+.stat-number { font-size: 1.8rem !important; }
+.stat-suffix { font-size: .9rem !important; }
 .stat-label { font-size: .5rem !important; letter-spacing: .16em !important; margin-top: .4rem !important; }
 
 /* ── Identidad: 3 columnas ───────────────────────────────────────────────── */
 .identity-inner { grid-template-columns: repeat(3, 1fr) !important; gap: .4rem !important; }
-.identity-block { padding: 1.1rem .4rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
+.identity-block { padding: .8rem .4rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
 .identity-block-title { font-size: 1.05rem !important; line-height: 1 !important; }
 .identity-block-label, .identity-block-content { font-size: .46rem !important; letter-spacing: .12em !important; margin-top: .4rem !important; }
 
@@ -129,16 +129,16 @@ body > section, .service-section, section.service-cta, .newsletter, .faq-section
 .tech-hint-text { font-size: .52rem !important; text-align: left !important; }
 .tech-hint-text::after { content: none !important; }
 .tech-grid { grid-template-columns: repeat(3, 1fr) !important; }
-.tech-item { padding: 1rem .3rem !important; gap: .35rem !important; }
+.tech-item { padding: .8rem .3rem !important; gap: .35rem !important; }
 .tech-inner { gap: .35rem !important; }
 .tech-label { font-size: 1rem !important; }
 .tech-cat { font-size: .44rem !important; letter-spacing: .12em !important; }
 .tech-count { font-size: .38rem !important; padding: .12rem .3rem !important; top: .3rem !important; right: .3rem !important; }
 
 /* ── Blog (portada) ──────────────────────────────────────────────────────── */
-.blog-img-wrap { height: 120px !important; }
+.blog-img-wrap { height: 96px !important; }
 .blog-img-deco { font-size: 3.2rem !important; }
-.blog-body { padding: 1rem !important; }
+.blog-body { padding: .8rem !important; }
 .blog-meta { font-size: .52rem !important; }
 .blog-title { font-size: 1.1rem !important; }
 .blog-excerpt { font-size: .72rem !important; -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
@@ -180,12 +180,13 @@ footer { padding: 1.6rem var(--m-gutter) !important; gap: .8rem !important; font
 .service-hero h1 { font-size: 2.4rem !important; line-height: 1 !important; margin-bottom: .9rem !important; }
 .service-hero p { font-size: .8rem !important; line-height: 1.7 !important; }
 .pricing-intro { font-size: .74rem !important; margin: -.6rem 0 1.2rem !important; }
-.pc { padding: 1.5rem 1.15rem 1.2rem !important; }
-.pc-name { font-size: 1.55rem !important; }
+.pc { padding: 1.15rem .95rem 1rem !important; }
+.pc-name { font-size: 1.35rem !important; }
 .pc-desc { font-size: .68rem !important; min-height: 0 !important; margin-bottom: 1.1rem !important; }
 .pc-price { margin-bottom: 1.1rem !important; padding-bottom: 1.1rem !important; }
-.pc-amount { font-size: 2.9rem !important; }
-.pc-amount--text { font-size: 2rem !important; }
+.pc-amount { font-size: 2.25rem !important; }
+.pc-currency { font-size: 1.1rem !important; margin-top: .3rem !important; }
+.pc-amount--text { font-size: 1.6rem !important; }
 .pc-features { gap: .55rem !important; margin-bottom: 1.3rem !important; }
 .pc-features li { font-size: .7rem !important; }
 .pc-cta { padding: .95rem 1rem !important; font-size: .64rem !important; }
@@ -193,7 +194,7 @@ footer { padding: 1.6rem var(--m-gutter) !important; gap: .8rem !important; font
 .pricing-foot { font-size: .58rem !important; }
 .compare-table { font-size: .64rem !important; }
 .content-grid { grid-template-columns: 1fr !important; gap: .55rem !important; }
-.content-item { padding: 1rem 1rem !important; }
+.content-item { padding: .8rem .85rem !important; }
 .content-item-title { font-size: 1rem !important; margin-bottom: .4rem !important; }
 .content-item-desc { font-size: .72rem !important; }
 .feature { gap: .9rem !important; margin-bottom: 1rem !important; padding-bottom: 1rem !important; }
@@ -217,7 +218,7 @@ footer { padding: 1.6rem var(--m-gutter) !important; gap: .8rem !important; font
 .featured-card { grid-column: auto !important; }
 .blog-card-img { aspect-ratio: 16 / 7 !important; }
 .blog-card-icon, .featured-card .blog-card-icon { font-size: 3rem !important; }
-.blog-card-body { padding: 1rem !important; }
+.blog-card-body { padding: .8rem !important; }
 .blog-card-title, .featured-card .blog-card-title { font-size: 1.15rem !important; }
 .blog-card-excerpt { font-size: .72rem !important; margin-bottom: .8rem !important; }
 .newsletter-strip { padding: 2rem var(--m-gutter) !important; }
@@ -267,3 +268,63 @@ footer { padding: 1.6rem var(--m-gutter) !important; gap: .8rem !important; font
 .m-dock a:active { transform: scale(.94); }
 /* el panel de compra va por encima de la barra */
 body.ck-locked .m-dock { transform: translateY(110%); }
+
+/* ── Compra (checkout) en móvil: precios y total más contenidos ──────────── */
+.ck-planrow { padding: .75rem .8rem !important; gap: .7rem !important; }
+.ck-planrow-name { font-size: 1.2rem !important; }
+.ck-planrow-price { font-size: 1.2rem !important; }
+.ck-step-title { font-size: 1.7rem !important; }
+.ck-option-box { padding: .7rem .8rem !important; font-size: .7rem !important; }
+.rc-paper { padding: 1rem .9rem .8rem !important; }
+.rc-total strong { font-size: 2rem !important; }
+.rc-brand { font-size: 1.3rem !important; }
+.ck-mobile-total strong { font-size: 1.15rem !important; }
+.compare-table .ct-price { font-size: 1rem !important; }
+.ct-name { font-size: .95rem !important; }
+
+/* ── Mínimos de legibilidad (con la escala 13.5px, nada por debajo de ~7.5px) ── */
+.m-dock a { font-size: 9px !important; letter-spacing: .08em !important; }
+.m-dock a.m-dock-cta { font-size: 9.5px !important; }
+.tech-cat, .identity-block-label, .identity-block-content, .stat-label,
+.service-number, .client-logo-name, .clients-label, .portfolio-meta,
+.tech-hint, .tech-hint-text, .tw-path, .mx-cmd, .section-number,
+.pc-suffix, .ck-planrow-price small, .rc-meta, .rc-trust li, .blog-meta, .contact-info-label { font-size: max(.56rem, 7.5px) !important; }
+.tech-count { font-size: max(.45rem, 6.5px) !important; }
+
+/* ── Herramientas (portada y /proyectos): carrusel compacto ─────────────── */
+.tools-intro { font-size: .76rem !important; line-height: 1.6 !important; margin-bottom: .9rem !important; }
+.tools-garantias { font-size: max(.56rem, 7.5px) !important; gap: .3rem !important; margin-bottom: 1rem !important; }
+.tools-grid {
+    display: flex !important; gap: .6rem !important; grid-template-columns: none !important;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: .2rem;
+    border: 0 !important;
+}
+.tools-grid::-webkit-scrollbar { display: none; }
+.tool-card { flex: 0 0 86%; scroll-snap-align: start; padding: 1rem .95rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
+.tool-card + .tool-card { border-top: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
+.tool-media, .tool-img { max-height: 150px; object-fit: cover; }
+.tool-top { margin-bottom: .5rem !important; font-size: max(.56rem, 7.5px) !important; }
+.tool-title { font-size: 1.25rem !important; line-height: 1.05 !important; margin-bottom: .5rem !important; }
+.tool-desc { font-size: .72rem !important; line-height: 1.6 !important; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.tool-points { font-size: .66rem !important; margin: .6rem 0 !important; gap: .25rem !important; }
+.tool-card .tool-points { display: none !important; }
+.tool-cta { font-size: max(.58rem, 8px) !important; margin-top: .7rem !important; }
+.tools-mas, .projects-more { margin-top: 1rem !important; font-size: .72rem !important; }
+
+/* ── Proyectos: tarjetas compactas (en la portada, sin la lista de detalles) ── */
+.project-card { margin-bottom: .8rem !important; border: 1px solid var(--term-line, rgba(200,255,0,.15)) !important; }
+.project-media { max-height: 190px; overflow: hidden; }
+.project-media img { width: 100%; height: 190px; object-fit: cover; }
+.project-badge { font-size: max(.55rem, 7.5px) !important; padding: .3rem .55rem !important; }
+.project-body { padding: 1rem .95rem !important; }
+.project-body .tool-title { font-size: 1.3rem !important; }
+.project-body .tool-desc { -webkit-line-clamp: 5; }
+#proyectos .project-body .tool-points { display: none !important; }
+.project-body .tool-points { display: grid !important; }
+.project-views { gap: 0 !important; margin-top: .7rem !important; }
+.project-views a, .project-views > * { padding: .6rem .7rem !important; font-size: .7rem !important; }
+.pp-cifras { gap: .4rem !important; }
+.pp-cifras > * { padding: .7rem .6rem !important; }
+.pp-btn { padding: .9rem 1rem !important; font-size: max(.6rem, 8px) !important; }
+.tools .section-header, .projects .section-header { margin-bottom: 1rem !important; }
+.tools-intro { position: relative; margin-top: .3rem !important; clear: both; }
