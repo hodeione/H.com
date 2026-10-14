@@ -176,7 +176,7 @@
         ['.content-grid', null, 'listo'],
         ['.features-list', null, 'listo'],
         ['.blog-grid', 'blog', 'artículos'],
-        ['.article-body', 'blog/' + (location.pathname.split('/').pop().replace(/\.html$/, '') || 'articulo') + '.md', 'lectura'],
+        ['.article-body', (document.querySelector('.legal-body') ? 'legal/' : 'blog/') + (location.pathname.split('/').pop().replace(/\.html$/, '') || 'articulo') + '.md', 'lectura'],
     ];
     WINDOWS.forEach(([sel, path, meta]) => {
         document.querySelectorAll(sel).forEach(el => {

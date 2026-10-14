@@ -983,6 +983,10 @@
                             <textarea id="inputMessage" class="contact-input" placeholder="Cuéntanos tu proyecto..." required></textarea>
                         </div>
                     </div>
+                    <div class="form-consent-wrap">
+                        <label class="form-consent"><input type="checkbox" id="inputConsent"> <span>He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+                        <p class="form-legal-info">Responsable: Hodei Medina Escribano (DH Technology). Finalidad: responder a tu solicitud y, si la pides, enviarte una propuesta. No cedemos tus datos. Puedes ejercer tus derechos en hodeione41@gmail.com. <a href="/privacidad">Más información</a>.</p>
+                    </div>
                     <button type="submit" class="contact-submit" id="submitBtn">
                         <span>ENVIAR PROPUESTA</span>
                     </button>
@@ -1003,6 +1007,7 @@
                 <form class="newsletter-form" onsubmit="handleNewsletter(event)" novalidate>
                     <input type="email" class="newsletter-input" placeholder="tu@email.com" required>
                     <button type="submit" class="newsletter-btn">SUSCRIBIR</button>
+                    <label class="newsletter-consent"><input type="checkbox" name="consent"> <span>Acepto recibir la newsletter y la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>. Puedes darte de baja cuando quieras.</span></label>
                 </form>
                 <div class="newsletter-feedback" id="newsletterFeedback"></div>
             </div>
@@ -1020,7 +1025,7 @@
             </div>
         </div>
         <div class="footer-right">HECHO EN MADRID</div>
-    </footer>
+    <nav class="footer-legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></nav></footer>
 
     <!-- WHATSAPP FLOAT -->
     <a href="https://wa.me/34668524968?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20mi%20proyecto"
@@ -1041,6 +1046,7 @@
     <script src="tech-fx.js"></script>
     <script src="matrix.js"></script>
     <script src="mobile.js"></script>
+    <script src="newsletter.js"></script>
     <!-- claude-widgets.js (D.H.T BOT + IA LAB) desactivado: volver a añadir esta línea y
          <link rel="stylesheet" href="claude-widgets.css"> en <head> al integrar Claude. -->
     <script src="hero3d.js"></script>

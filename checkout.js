@@ -473,7 +473,8 @@
                 </div>
             </fieldset>
             ${BOOKING_URL ? `<p class="ck-hint">¿Prefieres elegir tú la hora? <a class="ck-link" href="${esc(BOOKING_URL)}" target="_blank" rel="noopener">Reserva una llamada ↗</a></p>` : ''}
-            <p class="ck-hint">Usaremos tus datos solo para responder a esta solicitud. <button type="button" class="ck-summary-edit" data-goto="1">Editar plan y extras</button></p>
+            <label class="ck-consent"><input type="checkbox" id="ckConsent"${c.consent ? ' checked' : ''}> <span>He leído y acepto la <a class="ck-link" href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+            <p class="ck-hint">Responsable: Hodei Medina Escribano (DH Technology). Finalidad: preparar tu presupuesto y contactarte. No cedemos tus datos. Derechos en hodeione41@gmail.com. <button type="button" class="ck-summary-edit" data-goto="1">Editar plan y extras</button></p>
             <p class="ck-error" id="ckError" role="alert"></p>
         </div>`;
     }
@@ -507,6 +508,7 @@
             state.contact = {
                 name: v('ckName'), email: v('ckEmail'), phone: v('ckPhone'), company: v('ckCompany'),
                 pref: $('input[name="pref"]:checked', body)?.value || 'Email',
+                consent: !!$('#ckConsent', body)?.checked,
             };
         }
         store.set(state);
@@ -526,6 +528,7 @@
         err.textContent = '';
         if (!state.contact.name) return fail('ckName', 'Dinos tu nombre.');
         if (!isEmail(state.contact.email)) return fail('ckEmail', 'Introduce un email válido.');
+        if (!state.contact.consent) return fail('ckConsent', 'Acepta la política de privacidad para enviar la solicitud.');
         return true;
     }
 
@@ -568,6 +571,7 @@
                     _subject: `Solicitud #${ticketId}: ${plan.name} — ${cfg.name} (${c.name})`,
                     _template: 'table',
                     name: c.name, email: c.email, phone: c.phone, company: c.company,
+                    privacidad: `Aceptada el ${new Date().toLocaleString('es-ES')}`,
                     message,
                 }),
             });

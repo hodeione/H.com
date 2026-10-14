@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso legal — DH Technology</title>
+    <link rel="canonical" href="https://h-com-bay.vercel.app/aviso-legal">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DH Technology">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Aviso legal — DH Technology">
+    <meta property="og:description" content="Aviso legal de DH Technology: datos del titular de la web, condiciones de uso, propiedad intelectual y legislación aplicable.">
+    <meta property="og:url" content="https://h-com-bay.vercel.app/aviso-legal">
+    <meta property="og:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aviso legal — DH Technology">
+    <meta name="twitter:description" content="Aviso legal de DH Technology: datos del titular de la web, condiciones de uso, propiedad intelectual y legislación aplicable.">
+    <meta name="twitter:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="description" content="Aviso legal de DH Technology: datos del titular de la web, condiciones de uso, propiedad intelectual y legislación aplicable.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='36'>D.H.T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #080808;
+            --white: #ffffff;
+            --acid: #C8FF00;
+            --gray: #8C8C7A;
+            --surface: #111111;
+        }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(8,8,8,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,255,0,0.2);
+            z-index: 100; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+
+        .article-hero {
+            padding: 120px 2rem 5rem;
+            max-width: 860px; margin: 0 auto;
+            border-bottom: 1px solid rgba(200,255,0,0.15);
+        }
+        .article-cat {
+            display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em;
+            color: var(--acid); text-transform: uppercase;
+            border: 1px solid var(--acid); padding: 0.3rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05; letter-spacing: -0.01em;
+            color: var(--white); margin-bottom: 1.5rem;
+        }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+
+        .article-body {
+            max-width: 860px; margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--white); margin: 3rem 0 1.2rem;
+            letter-spacing: 0.02em;
+        }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li {
+            font-size: 0.9rem; color: #ccc; padding: 0.6rem 0;
+            padding-left: 1.4rem; position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box {
+            border-left: 3px solid var(--acid);
+            background: rgba(200,255,0,0.04);
+            padding: 1.5rem 2rem; margin: 2.5rem 0;
+        }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .article-cta {
+            border-top: 1px solid rgba(200,255,0,0.2);
+            padding: 4rem 2rem; text-align: center;
+            background: var(--surface);
+        }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn {
+            display: inline-block; background: var(--acid); color: var(--black);
+            padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+            font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+            text-decoration: none; font-weight: 500; transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.85; }
+
+        .blog-nav-bottom {
+            max-width: 860px; margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+
+        @media (max-width: 640px) {
+            header { padding: 1rem; }
+            .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="fx.css">
+    <link rel="stylesheet" href="matrix.css">
+    <link rel="stylesheet" href="term.css">
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 760px)">
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">D.H.T</a>
+    <a href="/" class="back-link">← Volver a inicio</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">LEGAL</div>
+        <h1 class="article-title">Aviso legal</h1>
+        <div class="article-meta">ÚLTIMA ACTUALIZACIÓN: 14 DE OCTUBRE DE 2026 &nbsp;·&nbsp; <span>DH TECHNOLOGY (D.H.T)</span></div>
+    </div>
+
+    <div class="article-body legal-body">
+        <h2>01. <span class="accent">DATOS DEL TITULAR</span></h2>
+        <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web (https://h-com-bay.vercel.app):</p>
+        <ul>
+            <li><strong>Titular:</strong> Hodei Medina Escribano, profesional autónomo, que opera con el nombre comercial DH Technology (D.H.T)</li>
+            <li><strong>NIF:</strong> [[NIF]]</li>
+            <li><strong>Domicilio:</strong> [[DOMICILIO]]</li>
+            <li><strong>Email:</strong> <a href="mailto:hodeione41@gmail.com">hodeione41@gmail.com</a></li>
+            <li><strong>Teléfono:</strong> +34 668 524 968</li>
+        </ul>
+        <p>Actividad: servicios de diseño y desarrollo web, software a medida, automatización con inteligencia artificial, adaptación legal de sitios web (RGPD), aplicaciones móviles, SEO y marketing digital.</p>
+
+        <h2>02. <span class="accent">CONDICIONES DE USO</span></h2>
+        <p>El acceso a esta web es gratuito y atribuye la condición de usuario, que acepta este aviso legal. El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para actividades ilícitas, contrarias a la buena fe o que puedan dañar la web, sus sistemas o a terceros.</p>
+        <p>Los precios que aparecen en la web son orientativos e incluyen el IVA cuando así se indica. Enviar una solicitud desde la web no supone ninguna contratación ni obliga a pagar nada: el presupuesto definitivo se acuerda después por escrito.</p>
+
+        <h2>03. <span class="accent">PROPIEDAD INTELECTUAL</span></h2>
+        <p>Los textos, diseños, código, logotipos, imágenes y demás contenidos de esta web pertenecen a su titular o se usan con autorización de sus propietarios. Queda prohibida su reproducción, distribución o transformación sin permiso expreso, salvo para uso personal y privado.</p>
+        <p>Las capturas y nombres de proyectos de clientes se muestran como muestra de trabajos realizados. Las marcas de terceros mencionadas pertenecen a sus respectivos titulares.</p>
+
+        <h2>04. <span class="accent">RESPONSABILIDAD</span></h2>
+        <p>Cuidamos que la información de la web sea correcta y esté actualizada, pero no garantizamos la ausencia de errores ni la disponibilidad continua del sitio. No nos hacemos responsables de los daños derivados de un uso indebido de la web ni de interrupciones ajenas a nuestro control.</p>
+
+        <h2>05. <span class="accent">ENLACES EXTERNOS</span></h2>
+        <p>La web contiene enlaces a sitios de terceros (proyectos de clientes, demos y redes sociales). No controlamos su contenido ni sus políticas, por lo que no somos responsables de ellos. Recomendamos revisar sus condiciones antes de usarlos.</p>
+
+        <h2>06. <span class="accent">PROTECCIÓN DE DATOS Y COOKIES</span></h2>
+        <p>El tratamiento de los datos personales se explica en la <a href="/privacidad">política de privacidad</a> y el uso de almacenamiento en el navegador en la <a href="/cookies">política de cookies</a>.</p>
+
+        <h2>07. <span class="accent">LEGISLACIÓN Y JURISDICCIÓN</span></h2>
+        <p>Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que correspondan conforme a la normativa aplicable; cuando el usuario sea consumidor, los de su domicilio.</p>
+
+        <p class="legal-nav"><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Política de privacidad</a> · <a href="/cookies">Política de cookies</a></p>
+    </div>
+</article>
+
+<footer>D.H.T © <span data-year>2026</span> — MADRID, ESPAÑA<nav class="footer-legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></nav></footer>
+
+    <script src="matrix.js"></script>
+    <script src="mobile.js"></script>
+    <script src="fx.js"></script>
+    <script src="fx-extreme.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

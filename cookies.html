@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de cookies — DH Technology</title>
+    <link rel="canonical" href="https://h-com-bay.vercel.app/cookies">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DH Technology">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Política de cookies — DH Technology">
+    <meta property="og:description" content="Política de cookies de DH Technology: esta web no usa cookies de publicidad ni de seguimiento; solo almacenamiento técnico del navegador.">
+    <meta property="og:url" content="https://h-com-bay.vercel.app/cookies">
+    <meta property="og:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Política de cookies — DH Technology">
+    <meta name="twitter:description" content="Política de cookies de DH Technology: esta web no usa cookies de publicidad ni de seguimiento; solo almacenamiento técnico del navegador.">
+    <meta name="twitter:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="description" content="Política de cookies de DH Technology: esta web no usa cookies de publicidad ni de seguimiento; solo almacenamiento técnico del navegador.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='36'>D.H.T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #080808;
+            --white: #ffffff;
+            --acid: #C8FF00;
+            --gray: #8C8C7A;
+            --surface: #111111;
+        }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(8,8,8,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,255,0,0.2);
+            z-index: 100; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+
+        .article-hero {
+            padding: 120px 2rem 5rem;
+            max-width: 860px; margin: 0 auto;
+            border-bottom: 1px solid rgba(200,255,0,0.15);
+        }
+        .article-cat {
+            display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em;
+            color: var(--acid); text-transform: uppercase;
+            border: 1px solid var(--acid); padding: 0.3rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05; letter-spacing: -0.01em;
+            color: var(--white); margin-bottom: 1.5rem;
+        }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+
+        .article-body {
+            max-width: 860px; margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--white); margin: 3rem 0 1.2rem;
+            letter-spacing: 0.02em;
+        }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li {
+            font-size: 0.9rem; color: #ccc; padding: 0.6rem 0;
+            padding-left: 1.4rem; position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box {
+            border-left: 3px solid var(--acid);
+            background: rgba(200,255,0,0.04);
+            padding: 1.5rem 2rem; margin: 2.5rem 0;
+        }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .article-cta {
+            border-top: 1px solid rgba(200,255,0,0.2);
+            padding: 4rem 2rem; text-align: center;
+            background: var(--surface);
+        }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn {
+            display: inline-block; background: var(--acid); color: var(--black);
+            padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+            font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+            text-decoration: none; font-weight: 500; transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.85; }
+
+        .blog-nav-bottom {
+            max-width: 860px; margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+
+        @media (max-width: 640px) {
+            header { padding: 1rem; }
+            .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="fx.css">
+    <link rel="stylesheet" href="matrix.css">
+    <link rel="stylesheet" href="term.css">
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 760px)">
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">D.H.T</a>
+    <a href="/" class="back-link">← Volver a inicio</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">COOKIES</div>
+        <h1 class="article-title">Política de cookies</h1>
+        <div class="article-meta">ÚLTIMA ACTUALIZACIÓN: 14 DE OCTUBRE DE 2026 &nbsp;·&nbsp; <span>DH TECHNOLOGY (D.H.T)</span></div>
+    </div>
+
+    <div class="article-body legal-body">
+        <h2>01. <span class="accent">ESTA WEB NO USA COOKIES</span></h2>
+        <p>Las cookies son pequeños archivos que algunas webs guardan en tu navegador. <strong>Esta web no instala cookies propias ni de terceros</strong>: ni de publicidad, ni de seguimiento, ni de redes sociales. Por eso no te mostramos ningún banner pidiendo permiso.</p>
+
+        <h2>02. <span class="accent">ALMACENAMIENTO TÉCNICO DEL NAVEGADOR</span></h2>
+        <p>Para que algunas funciones vayan bien usamos el almacenamiento de sesión del navegador (<em>sessionStorage</em>), que se borra solo al cerrar la pestaña. Es técnico y necesario, por lo que está exento de consentimiento según el artículo 22.2 de la LSSI-CE:</p>
+        <ul>
+            <li><strong>dht-checkout</strong> — recuerda el plan, los extras y los datos que escribes en una solicitud, para que no los pierdas si cambias de página. Se borra al cerrar la pestaña.</li>
+            <li><strong>fxWipe</strong> — indica a la página siguiente que muestre la animación de transición. Se borra al instante.</li>
+        </ul>
+
+        <h2>03. <span class="accent">ESTADÍSTICAS SIN COOKIES</span></h2>
+        <p>Medimos las visitas con Vercel Web Analytics, que no usa cookies ni identifica a las personas: cuenta páginas vistas, país y tipo de dispositivo de forma agregada.</p>
+
+        <h2>04. <span class="accent">CONTENIDO DE TERCEROS</span></h2>
+        <p>Las tipografías se cargan desde Google Fonts, por lo que tu navegador se conecta a los servidores de Google, que recibe tu dirección IP. Los enlaces a otras webs (proyectos, demos, WhatsApp o redes sociales) llevan a sitios con sus propias políticas de cookies.</p>
+
+        <h2>05. <span class="accent">CÓMO GESTIONARLO</span></h2>
+        <p>Puedes borrar el almacenamiento y bloquear cookies desde la configuración de tu navegador (Chrome, Safari, Firefox o Edge, en el apartado de privacidad). Si cambiamos el uso de cookies, actualizaremos esta política y, si hace falta, te pediremos permiso antes.</p>
+
+        <p class="legal-nav"><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Política de privacidad</a> · <a href="/cookies">Política de cookies</a></p>
+    </div>
+</article>
+
+<footer>D.H.T © <span data-year>2026</span> — MADRID, ESPAÑA<nav class="footer-legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></nav></footer>
+
+    <script src="matrix.js"></script>
+    <script src="mobile.js"></script>
+    <script src="fx.js"></script>
+    <script src="fx-extreme.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

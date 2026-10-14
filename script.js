@@ -270,6 +270,7 @@ async function handleContact(event) {
     if (!name)                          return shakeError(feedback, 'Introduce tu nombre.', 'inputName');
     if (!email || !isValidEmail(email)) return shakeError(feedback, 'Introduce un email válido.', 'inputEmail');
     if (!message)                       return shakeError(feedback, 'Cuéntanos sobre tu proyecto.', 'inputMessage');
+    if (!document.getElementById('inputConsent')?.checked) return shakeError(feedback, 'Acepta la política de privacidad para enviar.', 'inputConsent');
 
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
@@ -284,6 +285,7 @@ async function handleContact(event) {
                     _subject: contactInterest ? `Nuevo proyecto de ${name} — ${contactInterest}` : `Nuevo proyecto de ${name}`,
                     message: contactInterest ? `SERVICIO: ${contactInterest}\n\n${message}` : message,
                     phone, company,
+                    privacidad: `Aceptada el ${new Date().toLocaleString('es-ES')}`,
                 }),
             });
             if (!res.ok) throw new Error('server');

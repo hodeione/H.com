@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de privacidad — DH Technology</title>
+    <link rel="canonical" href="https://h-com-bay.vercel.app/privacidad">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DH Technology">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Política de privacidad — DH Technology">
+    <meta property="og:description" content="Política de privacidad de DH Technology: qué datos tratamos, para qué, durante cuánto tiempo, con quién se comparten y cómo ejercer tus derechos.">
+    <meta property="og:url" content="https://h-com-bay.vercel.app/privacidad">
+    <meta property="og:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Política de privacidad — DH Technology">
+    <meta name="twitter:description" content="Política de privacidad de DH Technology: qué datos tratamos, para qué, durante cuánto tiempo, con quién se comparten y cómo ejercer tus derechos.">
+    <meta name="twitter:image" content="https://h-com-bay.vercel.app/og-image.png">
+    <meta name="description" content="Política de privacidad de DH Technology: qué datos tratamos, para qué, durante cuánto tiempo, con quién se comparten y cómo ejercer tus derechos.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='36'>D.H.T</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #080808;
+            --white: #ffffff;
+            --acid: #C8FF00;
+            --gray: #8C8C7A;
+            --surface: #111111;
+        }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(8,8,8,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,255,0,0.2);
+            z-index: 100; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--acid); letter-spacing: 0.2em; text-decoration: none; }
+        .back-link { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.3s; }
+        .back-link:hover { color: var(--acid); }
+
+        .article-hero {
+            padding: 120px 2rem 5rem;
+            max-width: 860px; margin: 0 auto;
+            border-bottom: 1px solid rgba(200,255,0,0.15);
+        }
+        .article-cat {
+            display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em;
+            color: var(--acid); text-transform: uppercase;
+            border: 1px solid var(--acid); padding: 0.3rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05; letter-spacing: -0.01em;
+            color: var(--white); margin-bottom: 1.5rem;
+        }
+        .article-meta { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+        .article-meta span { color: var(--acid); }
+
+        .article-body {
+            max-width: 860px; margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        .article-body p { font-size: 0.95rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.85; }
+        .article-body h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--white); margin: 3rem 0 1.2rem;
+            letter-spacing: 0.02em;
+        }
+        .article-body h2 .accent { color: var(--acid); }
+        .article-body ul { list-style: none; margin-bottom: 1.8rem; }
+        .article-body ul li {
+            font-size: 0.9rem; color: #ccc; padding: 0.6rem 0;
+            padding-left: 1.4rem; position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .article-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--acid); }
+        .highlight-box {
+            border-left: 3px solid var(--acid);
+            background: rgba(200,255,0,0.04);
+            padding: 1.5rem 2rem; margin: 2.5rem 0;
+        }
+        .highlight-box p { margin-bottom: 0; color: #ddd; font-style: italic; }
+        .article-cta {
+            border-top: 1px solid rgba(200,255,0,0.2);
+            padding: 4rem 2rem; text-align: center;
+            background: var(--surface);
+        }
+        .article-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
+        .article-cta p { color: var(--gray); font-size: 0.85rem; margin-bottom: 2rem; }
+        .btn {
+            display: inline-block; background: var(--acid); color: var(--black);
+            padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+            font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+            text-decoration: none; font-weight: 500; transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.85; }
+
+        .blog-nav-bottom {
+            max-width: 860px; margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .blog-nav-bottom a { font-size: 0.75rem; color: var(--gray); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .blog-nav-bottom a:hover { color: var(--acid); }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+
+        @media (max-width: 640px) {
+            header { padding: 1rem; }
+            .article-hero, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="fx.css">
+    <link rel="stylesheet" href="matrix.css">
+    <link rel="stylesheet" href="term.css">
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 760px)">
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">D.H.T</a>
+    <a href="/" class="back-link">← Volver a inicio</a>
+</header>
+
+<article>
+    <div class="article-hero">
+        <div class="article-cat">RGPD</div>
+        <h1 class="article-title">Política de privacidad</h1>
+        <div class="article-meta">ÚLTIMA ACTUALIZACIÓN: 14 DE OCTUBRE DE 2026 &nbsp;·&nbsp; <span>DH TECHNOLOGY (D.H.T)</span></div>
+    </div>
+
+    <div class="article-body legal-body">
+        <p>Esta política explica cómo tratamos tus datos personales conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+        <h2>01. <span class="accent">RESPONSABLE DEL TRATAMIENTO</span></h2>
+        <ul>
+            <li><strong>Titular:</strong> Hodei Medina Escribano, profesional autónomo, que opera con el nombre comercial DH Technology (D.H.T)</li>
+            <li><strong>NIF:</strong> [[NIF]]</li>
+            <li><strong>Domicilio:</strong> [[DOMICILIO]]</li>
+            <li><strong>Email:</strong> <a href="mailto:hodeione41@gmail.com">hodeione41@gmail.com</a></li>
+            <li><strong>Teléfono:</strong> +34 668 524 968</li>
+        </ul>
+
+        <h2>02. <span class="accent">QUÉ DATOS TRATAMOS Y PARA QUÉ</span></h2>
+        <p><strong>Formulario de contacto.</strong> Nombre, email, y si los indicas teléfono, empresa y la descripción de tu proyecto. Los usamos para responderte y, si lo pides, prepararte una propuesta.</p>
+        <p><strong>Solicitud de un plan</strong> (el proceso de compra de las páginas de servicio). Además de lo anterior, el plan y los extras que eliges, tus respuestas sobre el proyecto y cómo prefieres que te contactemos. Los usamos para preparar el presupuesto y contactarte. Enviar la solicitud no supone ningún pago ni contratación.</p>
+        <p><strong>Newsletter.</strong> Tu email, para enviarte novedades, artículos y ofertas de nuestros servicios. Puedes darte de baja en cualquier momento respondiendo a cualquier envío o escribiendo a hodeione41@gmail.com.</p>
+        <p><strong>Si nos escribes por WhatsApp o por email.</strong> Tu número o dirección y el contenido de la conversación, para atenderte.</p>
+        <p><strong>Clientes.</strong> Si contratas, los datos necesarios para prestar el servicio y facturarlo.</p>
+        <p>No tomamos decisiones automatizadas ni elaboramos perfiles con tus datos.</p>
+
+        <h2>03. <span class="accent">BASE LEGAL</span></h2>
+        <ul>
+            <li><strong>Contacto y solicitudes de plan:</strong> aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD) y tu consentimiento (art. 6.1.a).</li>
+            <li><strong>Newsletter:</strong> tu consentimiento (art. 6.1.a), que puedes retirar cuando quieras.</li>
+            <li><strong>Clientes:</strong> ejecución del contrato (art. 6.1.b) y cumplimiento de obligaciones legales fiscales y contables (art. 6.1.c).</li>
+        </ul>
+
+        <h2>04. <span class="accent">CUÁNTO TIEMPO LOS GUARDAMOS</span></h2>
+        <ul>
+            <li><strong>Contactos y solicitudes que no se convierten en cliente:</strong> 24 meses desde el último contacto, y después se eliminan.</li>
+            <li><strong>Newsletter:</strong> hasta que te des de baja.</li>
+            <li><strong>Clientes:</strong> mientras dure la relación y, después, durante los plazos que exige la ley (por ejemplo, la normativa fiscal y mercantil).</li>
+        </ul>
+
+        <h2>05. <span class="accent">CON QUIÉN SE COMPARTEN</span></h2>
+        <p>No vendemos ni cedemos tus datos a terceros. Para que la web funcione usamos proveedores que tratan datos por cuenta nuestra (encargados del tratamiento):</p>
+        <ul>
+            <li><strong>Vercel Inc.</strong> — alojamiento de la web y estadísticas de visitas sin cookies.</li>
+            <li><strong>FormSubmit (formsubmit.co)</strong> — reenvía a nuestro email los formularios de contacto, solicitud y newsletter.</li>
+            <li><strong>Google (Gmail)</strong> — correo electrónico donde recibimos y respondemos los mensajes.</li>
+            <li><strong>Google Fonts</strong> — tipografías de la web; tu navegador se conecta a sus servidores para descargarlas.</li>
+            <li><strong>Meta Platforms (WhatsApp)</strong> — solo si decides escribirnos por WhatsApp.</li>
+        </ul>
+        <p>Algunos de estos proveedores están en Estados Unidos o pueden acceder a los datos desde allí. Estas transferencias internacionales se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en las cláusulas contractuales tipo aprobadas por la Comisión Europea, según el proveedor.</p>
+        <p>Solo comunicaremos datos a autoridades cuando una ley nos obligue.</p>
+
+        <h2>06. <span class="accent">TUS DERECHOS</span></h2>
+        <p>Puedes ejercer en cualquier momento tus derechos de <strong>acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad</strong>, y <strong>retirar tu consentimiento</strong> sin que afecte a lo tratado antes. Escríbenos a <a href="mailto:hodeione41@gmail.com">hodeione41@gmail.com</a> indicando qué derecho quieres ejercer; te responderemos en el plazo máximo de un mes.</p>
+        <p>Si crees que no hemos tratado bien tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>
+
+        <h2>07. <span class="accent">SEGURIDAD Y MENORES</span></h2>
+        <p>Aplicamos medidas técnicas y organizativas para proteger tus datos: conexión cifrada (HTTPS), acceso restringido y proveedores con garantías de seguridad.</p>
+        <p>Esta web no está dirigida a menores de 14 años. Si eres menor de esa edad, no nos envíes datos personales.</p>
+
+        <h2>08. <span class="accent">CAMBIOS EN ESTA POLÍTICA</span></h2>
+        <p>Podemos actualizar esta política para adaptarla a cambios legales o de la web. La fecha de la última actualización figura al principio de la página.</p>
+
+        <p class="legal-nav"><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Política de privacidad</a> · <a href="/cookies">Política de cookies</a></p>
+    </div>
+</article>
+
+<footer>D.H.T © <span data-year>2026</span> — MADRID, ESPAÑA<nav class="footer-legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></nav></footer>
+
+    <script src="matrix.js"></script>
+    <script src="mobile.js"></script>
+    <script src="fx.js"></script>
+    <script src="fx-extreme.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
