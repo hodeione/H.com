@@ -6,6 +6,42 @@
    Las ventanas (.tw) las crea matrix.js alrededor de cada bloque principal.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Variables base (antes en claude-widgets.css, que ya no se carga mientras
+   el chatbot y el IA LAB estén apagados). :where = no pisa a las de cada página. */
+:where(:root) {
+    --black:           #060608;
+    --white:           #ffffff;
+    --acid-yellow:     #C8FF00;
+    --acid-yellow-dim: rgba(200,255,0,0.12);
+    --concrete-gray:   #8C8C7A;
+    --dark-gray:       #0d0d10;
+    --mid-gray:        #141418;
+    --card-bg:         #111115;
+    --border:          rgba(255,255,255,0.06);
+    --border-yellow:   rgba(200,255,0,0.18);
+    --glow-sm:         0 0 20px rgba(200,255,0,0.25);
+    --transition:      0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-fast: 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --expo:            cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============ PILA DE BOTONES FLOTANTES ============
+   De abajo arriba: volver arriba → WhatsApp → chat. Mismo tamaño y eje.
+   En páginas sin WhatsApp (servicios) el chat se queda abajo del todo. */
+:root {
+    --float-size: 52px;
+    --float-gap: 12px;
+    --float-right: 2rem;
+    --float-bottom: 2rem;
+    --float-step: calc(var(--float-size) + var(--float-gap));
+    --chat-fab-bottom: var(--float-bottom);
+}
+body:has(.whatsapp-float) { --chat-fab-bottom: calc(var(--float-bottom) + 2 * var(--float-step)); }
+@media (max-width: 768px) {
+    :root { --float-size: 48px; --float-gap: 10px; --float-right: 1rem; --float-bottom: 1rem; }
+}
+
+
 :root {
     --black: #050704;
     --dark-gray: #070a05;

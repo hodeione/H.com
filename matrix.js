@@ -203,6 +203,9 @@
         title.after(caret);
     });
 
+    // Año del pie siempre actual
+    document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
     // ── 4. Arranque de sistema en la pantalla de carga ──────────────────────
     const preloader = document.getElementById('preloader');
     if (preloader && !preloader.classList.contains('hidden')) {
